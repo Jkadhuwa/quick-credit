@@ -1,0 +1,125 @@
+.box {
+  border-radius: 0.25rem;
+  background: #ffffff;
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11),
+    0 5px 15px 0 rgba(0, 0, 0, 0.08);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  overflow: hidden;
+}
+form label {
+  font-weight: 600;
+}
+form span h3 {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 10px;
+}
+.loan-application {
+  margin-top: 30px;
+  width: 350px;
+}
+
+.input {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.input input {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-family: "Circular-Light";
+  font-size: 0.8rem;
+  border: 1px solid #c5cfd9;
+  background: #ffffff;
+}
+
+.loan {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+label.lbl-loan {
+  text-align: right;
+  margin-right: 4em;
+  margin-left: 5px;
+}
+.loan1 {
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+.apply-btn {
+  margin-top: 2rem;
+  margin-bottom: 2px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  background: rgb(25, 92, 92);
+  color: #f1f1f2;
+  padding: 0.8rem 1.2rem;
+  line-height: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  width: 10em;
+}
+
+@media only screen and (min-width: 64.063em) {
+  body {
+    overflow: hidden;
+  }
+  .side-nav {
+    width: 200px;
+    position: fixed !important;
+  }
+  .loan-application {
+    margin-top: 2.5em;
+    width: 650px;
+    height: 490px;
+  }
+  .loan input,
+  .loan select {
+    width: 15em;
+    font-family: "Circular-Light";
+    font-size: 0.8em;
+    float: right;
+    margin-right: 3.5em;
+  }
+  label.lbl-loan {
+    text-align: right;
+    margin-right: 2em;
+    margin-left: 4.5em;
+  }
+  .input {
+    display: block;
+    height: 30px;
+    padding: 2em;
+  }
+  .apply-btn {
+    margin-top: 3em;
+  }
+  .loan {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+  label.loan {
+    text-align: right;
+    margin-right: 4em;
+    margin-left: 5px;
+  }
+  form span h3 {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: -1%;
+  }
+}

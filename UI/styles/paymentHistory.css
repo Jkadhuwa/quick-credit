@@ -1,0 +1,61 @@
+table {
+  border-collapse: collapse;
+  width: 80%;
+  font-size: 16px;
+  text-align: center;
+  font-family: " Verdana";
+  margin-top: 50px;
+  overflow-x: scroll;
+}
+th {
+  color: white;
+  background-color: rgb(73, 70, 70);
+  padding: 10px;
+  width: 30px;
+}
+tr {
+  height: 40px;
+}
+tr:nth-child(even) {
+  background-color: white;
+}
+td {
+  color: #111;
+}
+table tr td a {
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  -moz-border-radius: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+  height: 20px;
+  color: white;
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .view-application {
+    margin-left: 2em;
+    width: 99%;
+  }
+  table {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  .view-application {
+    margin-left: 10em;
+    width: 80%;
+  }
+  table {
+    width: 100%;
+  }
+  .main-content {
+    height: calc(100vh - 15px);
+  }
+}

@@ -153,7 +153,21 @@ div.complete-profile.box {
   color: rgb(63, 61, 61);
   padding: 0;
 }
-
+.btn-danger {
+  background-color: #dc3545;
+}
+.btn-edit {
+  background-color: #ffc107;
+}
+.btn-view {
+  background-color: #17a2b8;
+}
+.btn-success {
+  background-color: #52a552;
+}
+.btn-warning {
+  background-color: #ffc107;
+}
 /* Media Queries */
 
 /* Smartphones (portrait and landscape) -----------*/
@@ -224,7 +238,6 @@ div.complete-profile.box {
     text-decoration: none;
   }
 }
-/* iPads (portrait and landscape)--------------------*/
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   button.dropdown-btn {

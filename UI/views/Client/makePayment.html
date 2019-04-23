@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../../styles/client_dashboard.css" />
+    <link rel="stylesheet" href="../../styles/payment.css" />
+    <title>QUICK CREDIT - ANDELA BOOTCAMP-KIGALI</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <!--===============================================================-->
+      <!--Start of Navbar-->
+      <!--===============================================================-->
+      <header class="header">
+        <a href="#" id="nav-trigger" class="nav-trigger">
+          <span><img src="../../assets/imgs/menu.svg"/></span>
+        </a>
+        <a class="navbar-brand" href="../../index.html">MKOPO</a>
+        <div class="navbar-top-right ">
+          <ul class="navbar-top-right">
+            <li class="nav-item">
+              <a id="user-img" class="user-img" href="#"
+                ><img class="user-img" src="../../assets/imgs/user.png"
+              /></a>
+              <div id="dropdown-menu" class="dropdown-menu drop-hidden">
+                <div class="user-name">
+                  <h5>Musinda Kadhuwa</h5>
+                </div>
+                <ul>
+                  <li>
+                    <a class="dropdown-item" href="./userProfile.html">
+                      <span><img src="../../assets/imgs/man-user.png"/></span>
+                      <span>Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span><img src="../../assets/imgs/power.png"/></span>
+                      <span>Logout</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!--===============================================================-->
+      <!--End of Navbar-->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Left sidebar -->
+      <!--===============================================================-->
+      <aside id="side-nav" class=" side-nav">
+        <ul>
+          <li>
+            <a href="./clientDashboard.html">
+              <span><img src="../../assets/imgs/user.png"/></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="./loanApplication.html">
+              <span><img src="../../assets/imgs/credit-card.png"/></span>
+              <span>New Application</span>
+            </a>
+          </li>
+          <li>
+            <a href="./viewApplication.html">
+              <span><img src="../../assets/imgs/text-book-view.png"/></span>
+              <span>View Application</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./makePayment.html">
+              <span><img src="../../assets/imgs/wallet.png"/></span>
+              <span>Make Payment</span>
+            </a>
+          </li>
+          <li>
+            <a href="./paymentHistory.html">
+              <span><img src="../../assets/imgs/document.png"/></span>
+              <span>Payment History</span>
+            </a>
+          </li>
+          <li>
+            <button class="dropdown-btn">
+              <img src="../../assets/imgs/gear.png" />
+              <span>Settings</span>
+              <img class="caret-down" src="../../assets/imgs/caret-down.png" />
+            </button>
+            <div class="settings-container">
+              <a href="./completeProfile.html">Complete Profile</a>
+            </div>
+          </li>
+        </ul>
+      </aside>
+      <!--===============================================================-->
+      <!--End of Left sidebar -->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Dashboard Content -->
+      <!--===============================================================-->
+
+      <main class="main-content ">
+        <div class="loan-application box">
+          <form action="/" method="POST">
+            <span><h3>Loan Payment</h3></span>
+            <div class="lineBorder"></div>
+            <div class="loan input">
+              <label class="loan " for="loanID">Loan ID</label>
+              <input
+                class="loan1"
+                type="number"
+                name="loanID"
+                placeholder="Loan ID"
+                readonly
+              />
+            </div>
+            <div class="loan input">
+              <label class="loan " for="loan-amount">Loan</label>
+              <input
+                class="loan1"
+                type="number"
+                name="loan-amount"
+                placeholder="Loan"
+                readonly
+              />
+            </div>
+            <div class="loan input">
+              <label class="loan " for="balance">Balance</label>
+              <input
+                class="loan1"
+                type="number"
+                name="balance"
+                placeholder="Balance"
+                readonly
+              />
+            </div>
+            <div class="loan input">
+              <label class="loan " for="amount"> Amount</label>
+              <input
+                class="loan1"
+                type="number"
+                name="amount"
+                placeholder="Amount You want to pay"
+              />
+            </div>
+
+            <div class="m2 input">
+              <a class="apply-btn " href="#">Send</a>
+            </div>
+          </form>
+        </div>
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+      </main>
+      <!--===============================================================-->
+      <!--End of Dashboard Content -->
+      <!--===============================================================-->
+    </div>
+    <script src="../../scripts/main.js"></script>
+  </body>
+</html>

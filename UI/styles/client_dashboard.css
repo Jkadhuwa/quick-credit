@@ -1,0 +1,334 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  border-radius: 0.25rem;
+  background: #ffffff;
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11),
+    0 5px 15px 0 rgba(0, 0, 0, 0.08);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.header {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(105, 103, 103);
+  z-index: 4;
+}
+header div.navbar-top-right {
+  display: none;
+}
+
+header a.navbar-brand {
+  text-decoration: none;
+  font-size: 20px;
+  font-family: "Courier New";
+  margin: 20px auto 20px 1em;
+  display: block;
+  color: white;
+  width: 60px;
+}
+
+header div ul li {
+  list-style: none;
+}
+
+.side-nav ul li.active,
+.side-nav ul li button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.nav-trigger {
+  float: right;
+  margin: 20px;
+}
+
+/*------------------ Start Sidebar ------------------*/
+.side-nav {
+  position: absolute;
+  width: 350px;
+  height: 100vh;
+  z-index: 3;
+  padding-top: 60px;
+  background-color: rgb(73, 70, 70);
+}
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav ul li {
+  padding: 15px 10px;
+}
+.side-nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: " Verdana";
+}
+aside nav ul li button.dropdown-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+aside.side-nav ul li:hover {
+  background-color: slategrey !important;
+  cursor: pointer;
+}
+aside.side-hidden {
+  margin-left: -350px;
+  transition: all 0.3s ease-out;
+}
+.side-active {
+  margin-left: 0px;
+  transition: all 0.3s ease-in;
+}
+img {
+  height: 20px;
+}
+.settings-container {
+  font-family: " Verdana";
+  margin-left: 25px;
+  padding-top: 10px;
+  padding-left: 4px;
+  display: none;
+}
+
+/*------------------ End Sidebar ------------------*/
+button.dropdown-btn {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 16px;
+  margin-left: 15px;
+  font-family: " Verdana";
+}
+button.dropdown-btn span {
+  margin-left: 20px;
+}
+button.dropdown-btn .caret-down {
+  width: 10px;
+  height: 10px;
+  margin-left: 30px;
+}
+
+/* Hide and show user name, profile and logout menus */
+.drop-hidden {
+  transform: translateY(-200%);
+  transition: all 0s ease-out;
+}
+.drop-active {
+  transform: translateY(0);
+  transition: all 0.1s ease-in;
+}
+
+.main-content {
+  padding: 70px;
+  height: 100vh;
+  background-color: #efeff6;
+}
+
+.main-content.cp {
+  width: 100vw;
+  height: 100vh;
+}
+div.complete-profile.box {
+  width: 300px;
+  margin-left: 50px;
+  height: 70vh;
+}
+.dash-content {
+  font-family: " Verdana";
+  text-align: center;
+  margin-top: 10rem;
+  color: rgb(63, 61, 61);
+  padding: 0;
+}
+
+/* Media Queries */
+
+/* Smartphones (portrait and landscape) -----------*/
+@media only screen and (max-width: 40em) {
+  .dash-content h3,
+  .dash-content h4 {
+    margin-left: 10px;
+    font-weight: 400;
+  }
+  .grid-container {
+    overflow: auto;
+  }
+
+  button.dropdown-btn {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    margin-left: -0.3em;
+    font-family: " Verdana";
+  }
+  button.dropdown-btn span {
+    margin-left: 0;
+  }
+  .dash-content {
+    margin-top: 5rem;
+    margin-left: -0.5em;
+    text-align: left;
+  }
+  .dash-content h2 {
+    text-align: center;
+  }
+  table {
+    width: 650px !important;
+    margin-top: 90px;
+    margin-left: -3em;
+  }
+  .main-content {
+    width: 100%;
+  }
+  .main-content.pay-hist,
+  .main-content.view-app {
+    width: 700px;
+  }
+
+  .loan-application {
+    margin-left: -3.7em !important;
+    margin-top: 0;
+    position: absolute;
+    width: 300px !important;
+  }
+  .apply-btn {
+    margin-top: 2rem;
+    margin-bottom: 2px;
+    margin-right: 40px;
+    margin-left: 40px;
+    text-align: center;
+    background: rgb(25, 92, 92);
+    color: #f1f1f2;
+    padding: 0.8rem 1.2rem;
+    line-height: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 10px;
+    display: block;
+    transition: all 0.5s ease;
+    text-decoration: none;
+  }
+}
+/* iPads (portrait and landscape)--------------------*/
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  button.dropdown-btn {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    margin-left: -0.4em;
+    font-family: " Verdana";
+  }
+  button.dropdown-btn span {
+    margin-left: -0.1em;
+  }
+  .settings-container {
+    font-family: " Verdana";
+    margin-left: 1.2em;
+    padding-top: 10px;
+    padding-left: 4px;
+    display: none;
+  }
+  .side-nav {
+    width: 200px;
+  }
+  table {
+    width: 100%;
+  }
+  .main-content.cp {
+    overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 64.063em) {
+  .nav-trigger {
+    display: none;
+  }
+  .side-nav {
+    width: 200px;
+    position: fixed;
+  }
+  header div.navbar-top-right {
+    display: block;
+    float: right;
+  }
+  header div ul li {
+    list-style: none;
+  }
+  .dropdown-menu .dropdown-item {
+    display: block;
+    text-decoration: none;
+  }
+  header div ul li div.dropdown-menu {
+    margin: -10% -1% 0 0;
+    min-width: 50px;
+    border: 2px solid aliceblue;
+    border-radius: 5px;
+    color: #111;
+  }
+  .header img.user-img {
+    float: right;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    margin-top: -30%;
+    margin-right: 30px;
+  }
+  header div ul li div div.user-name {
+    margin-top: -29px;
+    background-color: #5969ff;
+    height: 40px;
+  }
+  header div ul li div div h5 {
+    font-family: Verdana;
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+  header div ul li div ul {
+    background-color: aliceblue;
+  }
+  header div ul li div ul li img {
+    height: 15px;
+    width: 15px;
+    float: left;
+  }
+  header div ul li div ul li a {
+    color: #686972;
+    padding: 5px;
+  }
+  .settings-container {
+    margin-left: 1em;
+    padding-top: 10px;
+    padding-left: 4px;
+    display: none;
+  }
+  button.dropdown-btn {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    margin-left: -0.4em;
+    font-family: " Verdana";
+  }
+  button.dropdown-btn span {
+    margin-left: -0.1em;
+  }
+}

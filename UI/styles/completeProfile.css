@@ -1,0 +1,258 @@
+div.complete-profile.box {
+  width: 80%;
+  margin-left: -2.5em;
+  margin-top: 0;
+  height: fit-content;
+  position: absolute;
+}
+.profile-data {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  border: none;
+  width: 100%;
+  margin: 0 auto;
+}
+.bio-data {
+  grid-row: 1 / 2;
+  border-right: none;
+  text-align: center;
+}
+.residence {
+  grid-row: 3 / 4;
+  border-right: none;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.work-data {
+  grid-row: 5 / 6;
+  border-left: none;
+  text-align: center;
+  margin-top: 2em;
+  padding-top: 0.5em;
+}
+form h3 {
+  font-family: "Verdana";
+  text-align: center;
+  margin-top: 0;
+}
+img.user-image {
+  height: 100px;
+  width: 100px;
+}
+select {
+  margin: 0 auto;
+}
+input,
+select {
+  width: 15em;
+}
+.input,
+label,
+select {
+  display: grid;
+  text-align: center;
+}
+
+.input input,
+.input select {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  font-family: "Circular-Light";
+  font-size: 0.8rem;
+  border: 1px solid #c5cfd9;
+  background: #ffffff;
+}
+.input input.img,
+.input img.user-image {
+  margin: 0 auto;
+}
+.input input.img {
+  border: none;
+  width: 250px;
+  margin: 5px 6em;
+}
+.profile-Input {
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+form label {
+  font-weight: 500;
+}
+.profile {
+  padding-top: 15px;
+}
+.primary-btn.cp {
+  width: fit-content;
+  margin: 10px auto;
+  text-align: center;
+  background: rgb(25, 92, 92);
+  color: #f1f1f2;
+  padding: 0.8rem 1.2rem;
+  line-height: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.btn {
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  -moz-border-radius: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+  height: 20px;
+  color: white;
+  width: 70px;
+  text-align: center;
+}
+div.lineBorder > span {
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Media Queries */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .profile-data {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left center right";
+    height: 66vh;
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid #111;
+  }
+
+  .bio-data {
+    grid-area: left;
+    position: absolute;
+  }
+
+  .bio-data input,
+  .bio-data select {
+    float: right;
+    margin-top: -2em;
+    margin-right: 20em;
+  }
+  .bio-data label {
+    margin-right: 25em;
+    text-align: right;
+  }
+  .residence {
+    grid-area: center;
+    height: 40vh;
+    text-align: center;
+    margin-top: 0;
+    margin-left: 2em;
+  }
+
+  .work-data {
+    margin-top: 0;
+    grid-area: right;
+    height: 50vh;
+  }
+
+  input,
+  select {
+    width: 10em;
+  }
+  .input {
+    display: grid;
+    text-align: center;
+  }
+  .input,
+  label,
+  select {
+    display: grid;
+    text-align: center;
+  }
+  div.complete-profile.box {
+    width: 80vw;
+    margin-left: 10px;
+    height: 80vh;
+    padding-top: 1em;
+  }
+
+  .input input,
+  .input select {
+    align-content: center;
+  }
+  .input input.img,
+  .input img.user-image {
+    margin-right: 18em;
+  }
+  .input input.img {
+    border: none;
+    width: 40%;
+    margin-right: 7em;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  .profile-data {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left center right";
+    height: 66vh;
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid #111;
+  }
+
+  .bio-data {
+    grid-area: left;
+    position: absolute;
+  }
+
+  .bio-data input,
+  .bio-data select {
+    float: right;
+    margin-top: -2em;
+    margin-right: 11em;
+  }
+  .bio-data label {
+    margin-right: 23em;
+    text-align: right;
+  }
+  .residence {
+    grid-area: center;
+    height: 40vh;
+    text-align: center;
+    margin-top: 0;
+    margin-left: 1em;
+  }
+
+  .work-data {
+    margin-top: 0;
+    grid-area: right;
+    height: 50vh;
+  }
+
+  input,
+  select {
+    width: 14em;
+  }
+  .input {
+    display: grid;
+    text-align: center;
+  }
+
+  div.complete-profile.box {
+    width: 65vw;
+    margin-left: 13em;
+    height: 85vh;
+    padding-top: 1em;
+  }
+  .input input.img {
+    width: 60%;
+    margin-left: 6em;
+  }
+}

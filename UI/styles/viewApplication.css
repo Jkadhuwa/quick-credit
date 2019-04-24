@@ -5,6 +5,7 @@ table {
   font-size: 16px;
   text-align: center;
   margin-top: 90px;
+  overflow-x: scroll;
 }
 th {
   color: white;
@@ -48,6 +49,9 @@ table tr td a {
 }
 @media only screen and (min-width: 64.063em) {
   .view-application {
+    margin-left: 10em;
+  }
+  .view-application.admin {
     margin-left: 12em;
     width: 80vw;
   }

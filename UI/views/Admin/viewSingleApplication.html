@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../../styles/client_dashboard.css" />
+    <link rel="stylesheet" href="../../styles/viewSingleApp.css" />
+    
+    <title>QUICK CREDIT - ANDELA BOOTCAMP-KIGALI</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <!--===============================================================-->
+      <!--Start of Navbar-->
+      <!--===============================================================-->
+      <header class="header">
+        <a href="#" id="nav-trigger" class="nav-trigger">
+          <span><img src="../../assets/imgs/menu.svg"/></span>
+        </a>
+        <a class="navbar-brand" href="../../index.html">MKOPO</a>
+        <div class="navbar-top-right ">
+          <ul class="navbar-top-right">
+            <li class="nav-item">
+              <a id="user-img" class="user-img" href="#"
+                ><img class="user-img" src="../../assets/imgs/user.png"
+              /></a>
+              <div id="dropdown-menu" class="dropdown-menu drop-hidden">
+                <div class="user-name">
+                  <h5>Musinda Kadhuwa</h5>
+                </div>
+                <ul>
+                  <li>
+                    <a class="dropdown-item" href="./userProfile.html">
+                      <span><img src="../../assets/imgs/man-user.png"/></span>
+                      <span>Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span><img src="../../assets/imgs/power.png"/></span>
+                      <span>Logout</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!--===============================================================-->
+      <!--End of Navbar-->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Left sidebar -->
+      <!--===============================================================-->
+      <aside id ="side-nav" class=" side-nav">
+   
+          <ul>
+            <li>
+              <a href="./adminDashboard.html">
+                <span><img src="../../assets/imgs/user.png"/></span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="./viewAllApplications.html">
+                <span><img src="../../assets/imgs/document.png"/></span>
+                <span>View Applications</span>
+              </a>
+            </li>
+            <li >
+              <a href="./viewUsers.html">
+                <span><img src="../../assets/imgs/text-book-view.png"/></span>
+                <span>View Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="./viewCurrentLoans.html">
+                <span><img src="../../assets/imgs/loan.png"/></span>
+                <span>Current Loans</span>
+              </a>
+            </li>
+            <li>
+              <a href="./viewRepaidLoans.html">
+                <span><img src="../../assets/imgs/wallet.png"/></span>
+                <span>Repaid Loans</span>
+              </a>
+            </li>
+            <li>
+                <a href="./payLoan.html">
+                 <span><img src="../../assets/imgs/credit-card.png"/></span>
+                 <span>Pay Loan</span>
+                </a>
+            </li>
+            <li>
+              <button class="dropdown-btn">
+                <img src="../../assets/imgs/gear.png" />
+                <span>Settings</span>
+                <img
+                  class="caret-down"
+                  src="../../assets/imgs/caret-down.png"
+                />
+              </button>
+              <div class="settings-container">
+                <a href="./completeProfile.html">Complete Profile</a><br><br>
+                <a href="./Profile.html">View Profile</a><br><br>
+                <a href="./Profile.html">Blacklist</a>
+              </div>
+            </li>
+          </ul>
+   
+      </aside>
+      <!--===============================================================-->
+      <!--End of Left sidebar -->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Dashboard Content -->
+      <!--===============================================================-->
+
+      <main class="main-content cp">
+        <div class="complete-profile box">
+          <form action="/" method="POST">
+            <div class="form-header">
+            <span><h3>Loan Application</h3></span>
+          </div>
+
+<!--End of Form Header-->
+<!--Start of Bio-data  section-->
+           
+           <div class="profile-data"> 
+             <div class="grid-1">
+               <div class="column-1">
+             <div class="profile user-image input">
+                <img class="user-image" src="" id="image"></img>
+              </div>
+             </div>  
+            </div> 
+            <div class="grid-1" >  
+              <div class="column-2"> 
+              <div class="profile bio-data input">  
+                 
+               <div class="profile fullname">
+                <label class="fullname" for="name">Full Name</label>
+                <input class="profile-Input" type="text" name="name" placeholder="" readonly>
+               </div>
+                <div class="profile id">
+                  <label class="id" for="id">ID Number</label>
+                  <input class="profile-Input" type="text" name="id" placeholder="" readonly>
+                </div>
+                <div class="profile nationality">
+                  <label class="nationality" for="nationality">Nationality</label>
+                  <input class="profile-Input" type="text" name="nationality" placeholder="" readonly>
+                </div>
+                
+                <div class="profile telephone">
+                      <label class="telephone" for="telephone">Telephone</label>
+                      <input class="profile-Input" type="text" name="telephone" placeholder="" readonly>
+                 </div>
+                 <div class="profile curr_address">
+                    <label class="curr-address" for="current-address">Current Address</label>
+                    <input class="profile-Input" type="text" name="current-address" placeholder="" readonly>
+                  </div>
+             </div>
+            </div>
+<!--End of Bio-data  section-->
+
+           
+      <!--Start of  Info section-->
+           <div class="column-2">
+            <div class="profile money-data input">
+
+            <div class="profile amount">
+                <label class=" amount" for="amnt-applied">Amount Applied</label>
+                <input class="profile-Input" type="text" name="amnt-applied" placeholder="" readonly>
+            </div>
+            <div class="profile pay-period">
+                  <label class="pay-period" for="pay-period">Payment Period</label>
+                  <input class="profile-Input" type="text" name="pay-period" placeholder="" readonly>
+            </div>
+            <div class="profile intrst-rate">
+                    <label class="intrst-rate" for="interest-rate">Interest Rate</label>
+                    <input class="profile-Input" type="text" name="interest-rate" placeholder="" readonly>
+            </div>
+            <div class="profile amnt-pbl">
+                    <label class="amnt-pbl" for="amnt-pbl">Amount Payable</label>
+                    <input class="profile-Input" type="text" name="amnt-pbl" placeholder="" readonly>
+            </div>
+
+            <div class="profile dt-applied">
+                <label class="dt-applied" for="dt-applied">Date Applied</label>
+            <input class="profile-Input" type="text" name="dt-applied" placeholder="" readonly>
+             </div>
+            
+            </div>
+            </div>
+        </div>
+            
+
+      <!--End of work info section-->
+        
+        </div>
+            <div class="m2 input">
+                <button type="submit" class="btn btn-success">Approve</button>
+                <button type="submit" class="btn btn-warning">Reject</button>
+            </div>
+          </form>
+        </div>
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+      </main>
+      <!--===============================================================-->
+      <!--End of Dashboard Content -->
+      <!--===============================================================-->
+    </div>
+    <script src="../../scripts/main.js"></script>
+  </body>
+</html>

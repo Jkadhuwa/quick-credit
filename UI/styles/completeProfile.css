@@ -120,19 +120,18 @@ div.input a {
   width: 6em;
   margin: 10px auto;
   text-align: center;
-  padding: 1.4rem 1.2rem;
+  padding: 1.5rem 1.2rem;
   line-height: 5px;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 16px;
   border-radius: 10px;
   display: block;
-  text-decoration: none;
 }
 /* Media Queries */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
-  .profile-data {
+  .profile-data.cp {
     display: grid;
     grid-template-columns: 40% 30% 30%;
     grid-template-rows: 1fr;
@@ -189,7 +188,7 @@ div.input a {
   div.complete-profile.box {
     width: 80vw;
     margin-left: 10px;
-    height: calc(85vh - 30px);
+    height: calc(85vh - 40px);
     padding-top: 1em;
   }
 
@@ -206,14 +205,9 @@ div.input a {
     width: 40%;
     margin-right: 7em;
   }
-  div.input a {
-    margin: 5px auto;
-    padding: 1.3rem 1.2rem;
-    line-height: 5px;
-  }
 }
 @media only screen and (min-width: 64.063em) {
-  .profile-data {
+  .profile-data.cp {
     display: grid;
     grid-template-columns: 40% 30% 30%;
     grid-template-rows: 1fr;

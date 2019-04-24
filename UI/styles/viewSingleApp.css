@@ -1,0 +1,145 @@
+@import "./completeProfile.css";
+* {
+  box-sizing: border-box;
+}
+.m2.input {
+  display: inline;
+}
+
+.m2.input button {
+  margin: 10px 10%;
+  height: 30px;
+}
+.work-data {
+  margin-top: -5px;
+}
+button .btn-success {
+  margin-right: -10px;
+}
+div img.user-image {
+  margin: 0 auto !important;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .profile-data {
+    width: 100%;
+    margin-top: -1em;
+    height: 60vh;
+  }
+  .grid-1 {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center !important;
+  }
+  .column-1 {
+    margin: 5px 1% 0 1%;
+    width: 100px;
+    height: 100px;
+  }
+  .column-2 {
+    margin: 10px 1% 0 1%;
+    width: 45%;
+    height: 50vh;
+    justify-content: center;
+  }
+  .bio-data input {
+    margin-left: 10em;
+    float: left;
+  }
+  .bio-data label {
+    text-align: right;
+    float: left !important;
+    margin-left: -6em;
+    width: 200px !important;
+  }
+
+  .money-data label {
+    float: left !important;
+    margin-left: -5em;
+    width: 200px !important;
+    text-align: right;
+  }
+  .money-data input {
+    margin-left: 9em;
+    float: right;
+    margin-top: -25px;
+    width: 50%;
+  }
+  label,
+  input {
+    display: block;
+  }
+  input {
+    width: 25%;
+  }
+  .m2.input {
+    display: inline;
+    margin: 0 20% !important;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  .profile-data {
+    width: 100%;
+    margin-top: -1em;
+    height: 60vh;
+  }
+  .grid-1 {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center !important;
+  }
+  .column-1 {
+    margin: 5px 1% 0 1%;
+    width: 100px;
+    height: 100px;
+  }
+  .column-2 {
+    margin: 10px 1% 0 1%;
+    width: 45%;
+    height: 40vh;
+    justify-content: center;
+  }
+  .bio-data input {
+    margin-top: -4px;
+    margin-left: -25em;
+    float: left;
+  }
+  .bio-data label {
+    text-align: right;
+    float: left !important;
+    margin-left: -6em;
+    width: 200px !important;
+  }
+
+  .money-data label {
+    float: left !important;
+    margin-left: -3.5em;
+    width: 200px !important;
+    text-align: right;
+  }
+  .money-data input {
+    margin-left: 9em;
+    float: right;
+    margin-top: -25px;
+    width: 50%;
+  }
+  label,
+  input {
+    display: block;
+  }
+  input {
+    width: 35%;
+  }
+
+  button .btn-success {
+    padding: 2px 3px !important;
+  }
+
+  .m2 {
+    margin: 0 20% !important;
+    border: none;
+  }
+}

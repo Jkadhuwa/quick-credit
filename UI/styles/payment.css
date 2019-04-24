@@ -1,3 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 form label {
   font-weight: 500;
 }
@@ -13,12 +22,17 @@ form span h3 {
   height: fit-content;
   position: absolute;
 }
+.input select {
+  height: 3em;
+  border-radius: 8px;
+}
 
 .input {
   display: grid;
   grid-template-columns: 1fr;
 }
-.input input {
+.input input,
+.input select {
   padding-left: 1rem;
   padding-right: 1rem;
   font-family: "Circular-Light";
@@ -64,7 +78,8 @@ label.loan {
 }
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
-  .input input {
+  .input input,
+  .input select {
     width: 70%;
     min-width: 25em;
     max-width: 35em;
@@ -84,7 +99,8 @@ label.loan {
   }
 }
 @media only screen and (min-width: 64.063em) {
-  .input input {
+  .input input,
+  .input select {
     width: 50%;
     min-width: 25em;
     max-width: 35em;

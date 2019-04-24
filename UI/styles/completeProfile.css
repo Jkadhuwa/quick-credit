@@ -116,7 +116,19 @@ div.lineBorder > span {
   font-weight: 600;
   text-align: center;
 }
-
+div.input a {
+  width: 6em;
+  margin: 10px auto;
+  text-align: center;
+  padding: 1.4rem 1.2rem;
+  line-height: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+}
 /* Media Queries */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
@@ -177,7 +189,7 @@ div.lineBorder > span {
   div.complete-profile.box {
     width: 80vw;
     margin-left: 10px;
-    height: 80vh;
+    height: calc(85vh - 30px);
     padding-top: 1em;
   }
 
@@ -193,6 +205,11 @@ div.lineBorder > span {
     border: none;
     width: 40%;
     margin-right: 7em;
+  }
+  div.input a {
+    margin: 5px auto;
+    padding: 1.3rem 1.2rem;
+    line-height: 5px;
   }
 }
 @media only screen and (min-width: 64.063em) {
@@ -248,7 +265,7 @@ div.lineBorder > span {
   div.complete-profile.box {
     width: 65vw;
     margin-left: 13em;
-    height: 85vh;
+    height: calc(85vh - 25px);
     padding-top: 1em;
   }
   .input input.img {

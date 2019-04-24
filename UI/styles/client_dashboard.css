@@ -55,7 +55,7 @@ header div ul li {
 /*------------------ Start Sidebar ------------------*/
 .side-nav {
   position: absolute;
-  width: 350px;
+  width: 320px;
   height: 100vh;
   z-index: 3;
   padding-top: 60px;
@@ -146,6 +146,7 @@ div.complete-profile.box {
   margin-left: 50px;
   height: 70vh;
 }
+
 .dash-content {
   font-family: " Verdana";
   text-align: center;
@@ -153,11 +154,21 @@ div.complete-profile.box {
   color: rgb(63, 61, 61);
   padding: 0;
 }
+
+/*****************************Buttons ------------------------------------------*/
+
+div.input a {
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+}
 .btn-danger {
   background-color: #dc3545;
 }
 .btn-edit {
-  background-color: #ffc107;
+  color: #ffffff;
+  background-color: #006dcc;
+  *background-color: #0044cc;
 }
 .btn-view {
   background-color: #17a2b8;
@@ -208,17 +219,10 @@ div.complete-profile.box {
   .main-content {
     width: 100%;
   }
-  .main-content.pay-hist,
-  .main-content.view-app {
+  .main-content.pay-hist {
     width: 700px;
   }
 
-  .loan-application {
-    margin-left: -3.7em !important;
-    margin-top: 0;
-    position: absolute;
-    width: 300px !important;
-  }
   .apply-btn {
     margin-top: 2rem;
     margin-bottom: 2px;
@@ -238,6 +242,7 @@ div.complete-profile.box {
     text-decoration: none;
   }
 }
+/* iPads (portrait and landscape)--------------------*/
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   button.dropdown-btn {

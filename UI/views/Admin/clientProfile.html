@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../../styles/client_dashboard.css" />
+    <link rel="stylesheet" href="../../styles/completeProfile.css" />
+    
+    <title>QUICK CREDIT - ANDELA BOOTCAMP-KIGALI</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <!--===============================================================-->
+      <!--Start of Navbar-->
+      <!--===============================================================-->
+      <header class="header">
+        <a href="#" id="nav-trigger" class="nav-trigger">
+          <span><img src="../../assets/imgs/menu.svg"/></span>
+        </a>
+        <a class="navbar-brand" href="../../index.html">MKOPO</a>
+        <div class="navbar-top-right ">
+          <ul class="navbar-top-right">
+            <li class="nav-item">
+              <a id="user-img" class="user-img" href="#"
+                ><img class="user-img" src="../../assets/imgs/user.png"
+              /></a>
+              <div id="dropdown-menu" class="dropdown-menu drop-hidden">
+                <div class="user-name">
+                  <h5>Musinda Kadhuwa</h5>
+                </div>
+                <ul>
+                  <li>
+                    <a class="dropdown-item" href="./userProfile.html">
+                      <span><img src="../../assets/imgs/man-user.png"/></span>
+                      <span>Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span><img src="../../assets/imgs/power.png"/></span>
+                      <span>Logout</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!--===============================================================-->
+      <!--End of Navbar-->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Left sidebar -->
+      <!--===============================================================-->
+      <aside id ="side-nav" class=" side-nav">
+   
+          <ul>
+            <li>
+              <a href="./adminDashboard.html">
+                <span><img src="../../assets/imgs/user.png"/></span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="./viewAllApplications.html">
+                <span><img src="../../assets/imgs/document.png"/></span>
+                <span>View Applications</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="./viewUsers.html">
+                <span><img src="../../assets/imgs/text-book-view.png"/></span>
+                <span>View Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="./viewCurrentLoans.html">
+                <span><img src="../../assets/imgs/loan.png"/></span>
+                <span>Current Loans</span>
+              </a>
+            </li>
+            <li>
+              <a href="./viewRepaidLoans.html">
+                <span><img src="../../assets/imgs/wallet.png"/></span>
+                <span>Repaid Loans</span>
+              </a>
+            </li>
+            <li>
+                <a href="./payLoan.html">
+                 <span><img src="../../assets/imgs/credit-card.png"/></span>
+                 <span>Pay Loan</span>
+                </a>
+            </li>
+            <li>
+              <button class="dropdown-btn">
+                <img src="../../assets/imgs/gear.png" />
+                <span>Settings</span>
+                <img
+                  class="caret-down"
+                  src="../../assets/imgs/caret-down.png"
+                />
+              </button>
+              <div class="settings-container">
+                <a href="./completeProfile.html">Complete Profile</a><br><br>
+                <a href="./Profile.html">View Profile</a><br><br>
+                <a href="./Profile.html">Blacklist</a>
+              </div>
+            </li>
+          </ul>
+   
+      </aside>
+      <!--===============================================================-->
+      <!--End of Left sidebar -->
+      <!--===============================================================-->
+
+      <!--===============================================================-->
+      <!--Start of Dashboard Content -->
+      <!--===============================================================-->
+
+      <main class="main-content">
+        <div class="complete-profile client-profile box">
+          <form action="/" method="POST">
+            <div class="form-header">
+            <span><h3>User Profile</h3></span>
+          </div>
+
+<!--End of Form Header-->
+<!--Start of Bio-data  section-->
+           
+           <div class="profile-data">
+
+            <div class="profile bio-data input">
+                <div class="lineBorder"><span>Bio Data</span></div>
+              <img class="user-image" src="" id="image"></img>
+              
+              <div class="profile title">
+                <label class="gender " for="gender">Title</label>
+                <select class="profile-Input" name="gender" disabled="true">
+                    <option value="null">Select...</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+              </div>
+              <div class="profile fullname">
+                <label class="fullname" for="name">Full Name</label>
+                <input class="profile-Input" type="text" name="name" placeholder="" disabled="true">
+              </div>
+              <div class="profile id">
+                  <label class="id" for="id">ID Number</label>
+                  <input class="profile-Input" type="text" name="id" placeholder="" disabled="true">
+              </div>
+              <div class="profile nationality">
+                  <label class="nationality" for="nationality">nationality</label>
+                  <input class="profile-Input" type="text" name="nationality" placeholder="" disabled="true">
+              </div>
+                
+              <div class="profile dob">
+                  <label class="dob" for="dob">D.O.B</label>
+                  <input class="profile-Input" type="date" name="dob" placeholder="" disabled="true">
+              </div>
+              <div class="profile telephone">
+                  <label class="telephone" for="telephone">Telephone</label>
+                  <input class="profile-Input" type="number" name="telephone" placeholder="" disabled="true"> 
+              </div>
+              <div class="profile email">
+                  <label class="email" for="email">Email</label>
+                  <input class="profile-Input" type="number" name="email" placeholder="" disabled="true"> 
+              </div>
+            </div>
+
+<!--End of Bio-data  section-->
+
+<!--Start of Residence section-->
+           
+
+            <div class="profile residence input">
+                <div class="lineBorder"><span>Residence</span></div>
+                <div class="profile curr_address">
+                    <label class="curr-address" for="current-address">Current Address</label>
+                    <input class="profile-Input" type="text" name="current-address" placeholder="" disabled="true">
+                  </div>
+                  <div class="profile len_stay">
+                      <label class="len_stay" for="length-stay">Length Of Stay</label>
+                      <input class="profile-Input" type="number" name="length-stay" placeholder="" disabled="true">
+                    </div>
+                    <div class="profile type_of_residence">
+                        <label class="type_of_residence " for="type_res">Type Of Residence</label>
+                        <select class="profile-Input" name="type_res" disabled="true">
+                          <option value="null">Select...</option>
+                          <option value="rental">Rental</option>
+                          <option value="owned">Owned</option>
+                          <option value="employer-provided">Employer Provided</option>
+                          <option value="parental-house">Parents House</option>
+                        </select>
+                      </div>
+            </div>
+
+      <!--End of Residence section-->
+
+      <!--Start of Work Info section-->
+            
+            <div class="profile work-data input">
+            <div class="lineBorder"><span>Work Information</span></div>
+                <div class="profile employment-status">
+                    <label class="employment-status" for="emp-status">Employment Status</label>
+                    <select class="profile-Input" name="type_res" disabled="true">
+                        <option value="null">Select...</option>
+                        <option value="employed">Employed</option>
+                        <option value="self-employed">Self Employed</option>
+                        <option value="unemployed">Unemployed</option>
+                        
+                    </select>
+            </div>
+            <div class="profile curr-emp">
+                <label class="curr-emp" for="current-employer">Current Employer</label>
+                <input class="profile-Input" type="text" name="current-employer" placeholder="" disabled="true">
+              </div>
+              <div class="profile emp-add">
+                  <label class="emp-add" for="employer-address">Employer Address</label>
+                  <input class="profile-Input" type="text" name="employer-address" placeholder="" disabled="true">
+                </div>
+                <div class="profile emp-tel">
+                    <label class="emp-tel" for="emp-telephone">Employer Telephone</label>
+                    <input class="profile-Input" type="number" name="emp-telephone" placeholder="" disabled="true">
+                  </div>
+            
+            </div>
+      <!--End of work info section-->
+          </div >
+            <div class="input">
+              <button type="submit" class="btn btn-success" >Verify</button>
+            </div>
+          </form>
+        </div>
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+
+        <!--===============================================================-->
+        <!--Start of Footer Content -->
+        <!--===============================================================-->
+      </main>
+      <!--===============================================================-->
+      <!--End of Dashboard Content -->
+      <!--===============================================================-->
+    </div>
+    <script src="../../scripts/main.js"></script>
+  </body>
+</html>

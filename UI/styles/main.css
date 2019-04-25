@@ -65,9 +65,6 @@ a {
 .login {
   text-transform: uppercase;
 }
-section nav ul .joinus {
-  display: none;
-}
 
 .info-about {
   display: inline-grid;
@@ -93,7 +90,7 @@ section nav ul .joinus {
 }
 footer {
   background-color: #393541;
-  height: 36vh;
+  height: 18vh;
 }
 .footer-container {
   display: grid;
@@ -112,21 +109,20 @@ footer {
 .copyright {
   text-align: center;
   border-top: 1px solid wheat;
-  padding: 18px 0;
+  margin-bottom: 10px;
 }
 
 /* Register */
 
 form label {
-  text-transform: uppercase;
   font-weight: 600;
 }
 form h3 {
-  text-transform: uppercase;
   text-align: center;
 }
 .register-form {
   width: 350px;
+  margin-top: 25px;
 }
 
 .input {
@@ -137,7 +133,7 @@ form h3 {
   padding-left: 1rem;
   padding-right: 1rem;
   font-family: "Circular-Light";
-  font-size: 0.8rem;
+  font-size: 16px;
   border: 1px solid #c5cfd9;
   background: #ffffff;
 }
@@ -156,20 +152,26 @@ form h3 {
 .primary-btn {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  margin-right: 40px;
-  margin-left: 40px;
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
   background: rgb(25, 92, 92);
   color: #f1f1f2;
   padding: 0.8rem 1.2rem;
-  line-height: 9px;
+  line-height: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 10px;
   display: block;
+  width: 150px;
 }
-
+.reset .reg {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 3em;
+  font-weight: 400;
+}
 /* Login form */
 
 .login-form {
@@ -178,32 +180,47 @@ form h3 {
 }
 .forgot-cred a {
   margin-bottom: 2em;
-  display: inline-block;
-  margin-left: 2.4em;
+  margin-left: 31% !important;
+  margin-right: auto !important;
 
   color: #007c89;
 }
-.forgot-cred a:hover {
-  background-color: #007c89;
-  color: #f1f1f2;
-}
 
+.joinus {
+  text-transform: uppercase;
+  margin-left: 50px;
+}
 /* Start of Media Queries */
-@media screen and (min-width: 1281px) {
+@media only screen and (max-width: 40em) {
+  .login-form {
+    width: 60%;
+  }
+  input.reg1 {
+    width: 80%;
+    margin-left: 2em;
+  }
+  .info-about {
+    height: 60vh;
+  }
+  footer {
+    height: 34vh;
+  }
+}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
   section nav ul .joinus {
     display: flex;
   }
-  .joinus {
-    text-transform: uppercase;
-    margin-left: 50px;
-  }
+
   .nav-links {
     display: flex;
     justify-content: space-between;
   }
+  input.reg1 {
+    width: 70%;
+    margin-left: 3.5em;
+  }
 }
-
-@media screen and (max-width: 1280px) {
+@media only screen and (min-width: 64.063em) {
   .info-about {
     display: inline-grid;
     background-color: #c5cfd9;
@@ -228,68 +245,14 @@ form h3 {
     margin: 0 auto;
     padding: 0;
   }
-}
-
-@media screen and (max-width: 1024px) {
-  section nav ul .joinus {
-    display: flex;
-  }
-  .joinus {
-    text-transform: uppercase;
-    margin-left: 50px;
-  }
-  .nav-links {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-@media screen and (max-width: 850px) {
-  section nav ul .joinus {
-    display: none;
+  input.reg1 {
+    width: 80%;
+    margin-left: 3em;
   }
 
   .nav-links {
     display: flex;
     justify-content: space-between;
   }
-  .info-about {
-    height: 80vh;
-  }
-  footer {
-    height: 56vh;
-  }
 }
-@media screen and (max-width: 670px) {
-  .info-about {
-    height: 80vh;
-  }
-  footer {
-    height: 55vh;
-  }
-}
-@media screen and (max-width: 570px) {
-  .info-about {
-    height: 100vh;
-  }
-  footer {
-    height: 66vh;
-  }
-}
-@media screen and (max-width: 450px) {
-  .info-about {
-    height: 60vh;
-  }
-  footer {
-    height: 34vh;
-  }
-}
-@media screen and (max-width: 350px) {
-  .info-about {
-    height: 80vh;
-  }
-  footer {
-    height: 36vh;
-  }
-}
-
 /* End of Media Queries */

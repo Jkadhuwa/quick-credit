@@ -7,7 +7,9 @@
     sideBar.classList.toggle("side-hidden");
   }
   const menu = document.getElementById("nav-trigger");
-  menu.addEventListener("click", toggleSidebar, false);
+  if (menu) {
+    menu.addEventListener("click", toggleSidebar, false);
+  }
 })();
 //Preview uploded image by the user
 function showImage() {
@@ -65,5 +67,7 @@ function changeClassName() {
     nav_img.classList.toggle("drop-hidden");
   }
   const img = document.getElementById("user-img");
-  img.addEventListener("click", toggleUserImg, false);
+  if (img) {
+    img.addEventListener("click", toggleUserImg, false);
+  }
 })();

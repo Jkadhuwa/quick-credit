@@ -1,7 +1,141 @@
-@import "./completeProfile.css";
-* {
-  box-sizing: border-box;
+div.complete-profile.box {
+  margin-left: -0.5em;
+  margin-right: auto;
+  margin-top: 0;
+  height: fit-content;
+
+  width: 110%;
 }
+
+.profile-data {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  border: none;
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+.bio-data {
+  grid-row: 1 / 2;
+  border-right: none;
+  text-align: center;
+}
+.residence {
+  grid-row: 3 / 4;
+  border-right: none;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.work-data {
+  grid-row: 5 / 6;
+  border-left: none;
+  text-align: center;
+  margin-top: 2em;
+  padding-top: 0.5em;
+}
+
+form h3 {
+  font-family: "Verdana" !important;
+  text-align: center;
+  margin-top: 0;
+}
+img.user-image {
+  height: 100px;
+  width: 100px;
+}
+label {
+  text-align: center;
+}
+select {
+  margin: 0 auto;
+}
+
+input,
+select {
+  width: 70%;
+}
+.input,
+label,
+select {
+  display: grid;
+  text-align: center;
+}
+
+.input input,
+.input select {
+  font-family: "Circular-Light";
+  font-size: 0.8rem;
+  border: 1px solid #c5cfd9;
+  background: #ffffff;
+}
+.input input.img,
+.input img.user-image {
+  margin: 0 auto;
+}
+.input input.img {
+  border: none;
+  width: 200px;
+  margin: 5px 6em;
+}
+.profile-Input {
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+form label {
+  font-weight: 500;
+}
+.profile {
+  padding-top: 15px;
+}
+.primary-btn.cp {
+  width: fit-content;
+  margin: 10px auto;
+  text-align: center;
+  background: rgb(25, 92, 92);
+  color: #f1f1f2;
+  padding: 0.8rem 1.2rem;
+  line-height: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.btn {
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  -moz-border-radius: 50px;
+  margin: 20px 35%;
+  margin-right: 5px;
+  font-size: 16px;
+  height: 40px;
+  color: white;
+  width: 70px;
+  text-align: center;
+}
+
+div.lineBorder > span {
+  font-weight: 600;
+  text-align: center;
+}
+div.input a {
+  width: 6em;
+  margin: 10px auto;
+  text-align: center;
+  padding: 1.5rem 1.2rem;
+  line-height: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 10px;
+  display: block;
+}
+
 .m2.input {
   display: inline;
 }
@@ -19,11 +153,19 @@ button .btn-success {
 div img.user-image {
   margin: 0 auto !important;
 }
-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
+
+img.user-image {
+  height: 100px;
+  width: 100px;
 }
+
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  div.complete-profile.box {
+    width: 80vw;
+    margin-left: 10px;
+    height: 85vh;
+    padding-top: 1em;
+  }
   .profile-data {
     width: 100%;
     margin-top: -1em;
@@ -48,7 +190,10 @@ button::-moz-focus-inner {
   .bio-data input {
     margin-left: 10em;
     float: left;
+    width: 50%;
+    margin-top: -25px;
   }
+
   .bio-data label {
     text-align: right;
     float: left !important;
@@ -75,12 +220,23 @@ button::-moz-focus-inner {
   input {
     width: 25%;
   }
+
+  .profile {
+    padding-top: 15px;
+  }
   .m2.input {
     display: inline;
     margin: 0 20% !important;
   }
 }
 @media only screen and (min-width: 64.063em) {
+  div.complete-profile.box {
+    width: 65vw;
+    margin-left: 13em;
+    height: calc(85vh);
+    padding-top: 1em;
+  }
+
   .profile-data {
     width: 100%;
     margin-top: -1em;
@@ -103,9 +259,10 @@ button::-moz-focus-inner {
     justify-content: center;
   }
   .bio-data input {
-    margin-top: -4px;
-    margin-left: -25em;
+    margin-top: -7px;
+    margin-left: 3em;
     float: left;
+    width: 50%;
   }
   .bio-data label {
     text-align: right;

@@ -1,0 +1,43 @@
+{
+  "name": "quick-credit",
+  "version": "1.0.0",
+  "description": "Andela-Kigali  Developer Challenge Cycle 6 Bootcamp",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server/app.js --exec babel-node --",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jkadhuwa/quick-credit.git"
+  },
+  "author": "Jkadhuwa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jkadhuwa/quick-credit/issues"
+  },
+  "homepage": "https://github.com/Jkadhuwa/quick-credit#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.18.11"
+  }
+}

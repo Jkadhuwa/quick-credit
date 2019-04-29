@@ -4,6 +4,7 @@
   "description": "Andela-Kigali  Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
+    "lint": "eslint server/*.js  --fix",
     "start": "nodemon server/app.js --exec babel-node --",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

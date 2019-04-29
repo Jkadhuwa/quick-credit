@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint server/*.js  --fix",
     "start": "nodemon server/app.js --exec babel-node --",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require babel-core/register server/test/**/*test.js --exit"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",

@@ -1,7 +1,8 @@
 {
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "extends": "airbnb-base",
   "globals": {
@@ -13,9 +14,10 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": [2, "tab"],
+    "indent": ["warn", "tab"],
     "comma-dangle": ["warn", "only-multiline"],
     "no-console": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-tabs": "off"
   }
 }

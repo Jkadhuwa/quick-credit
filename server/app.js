@@ -12,8 +12,6 @@ app.use(cors());
 app.use(morgan('combined', { skip: (req, res) => res.statusCode < 400 }));
 app.use(bodyPaser.urlencoded({ extended: true }));
 app.use(bodyPaser.json());
-app.use(express.static('UI'));
-app.use('/UI', express.static(path.resolve(__dirname, '../../UI/')));
 const PORT = process.env.PORT || 3000;
-
+export default app;
 app.listen(PORT);

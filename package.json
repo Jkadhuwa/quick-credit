@@ -4,6 +4,8 @@
   "description": "Andela-Kigali  Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
+    "coverage": "nyc --reporter=text npm test",
+    "coveralls": "npm run coverage --reporter=text-lcov | coveralls",
     "lint": "eslint server/*.js  --fix",
     "start": "nodemon server/app.js --exec babel-node --",
     "test": "mocha --require babel-core/register server/test/**/*test.js --exit"
@@ -29,6 +31,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
@@ -36,10 +39,14 @@
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
+    "istanbul": "^0.4.5",
     "mocha": "^6.1.4",
-    "nodemon": "^1.18.11"
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.18.11",
+    "nyc": "^14.0.0"
   }
 }

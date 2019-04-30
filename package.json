@@ -1,12 +1,12 @@
 {
   "name": "quick-credit",
   "version": "1.0.0",
-  "description": "Andela-Kigali  Developer Challenge Cycle 6 Bootcamp",
+  "description": "Andela-Kigali Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
-    "coverage": "nyc --reporter=text npm test",
-    "coveralls": "npm run coverage --reporter=text-lcov | coveralls",
-    "lint": "eslint server/*.js  --fix",
+    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint server/*.js --fix",
     "start": "nodemon server/app.js --exec babel-node --",
     "test": "mocha --require babel-core/register server/test/**/*test.js --exit"
   },
@@ -40,6 +40,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",

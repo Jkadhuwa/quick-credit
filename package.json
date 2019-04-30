@@ -4,7 +4,7 @@
   "description": "Andela-Kigali Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
-    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "coverage": "nyc --reporter=html --reporter=text --cache npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint server/*.js --fix",
     "start": "nodemon server/app.js --exec babel-node --",

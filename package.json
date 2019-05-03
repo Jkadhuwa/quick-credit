@@ -39,6 +39,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",

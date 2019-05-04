@@ -7,11 +7,14 @@ import path from 'path';
 import Router from './routes/routes';
 
 const app = express();
-app.use('/api', Router);
+app.use(bodyPaser.json());
+app.use(bodyPaser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('combined', { skip: (req, res) => res.statusCode < 400 }));
-app.use(bodyPaser.urlencoded({ extended: true }));
-app.use(bodyPaser.json());
+
+// routes
+app.use('/api/v1', Router);
+
 const PORT = process.env.PORT || 3000;
 export default app;
 app.listen(PORT);

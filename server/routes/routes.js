@@ -1,8 +1,11 @@
 import express from 'express';
 import v1 from './apiv1';
+import authController from '../controllers/authController';
 
 const router = express.Router();
 
-router.use('/v1', v1);
+router.use('/', v1);
+// Authentication routes
+router.post('/auth/signup', authController.createUser);
 
 export default router;

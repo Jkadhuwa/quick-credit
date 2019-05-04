@@ -8,6 +8,9 @@ module.exports = {
       lastName: 'Kadhuwa',
       password: 'Kadhush',
       address: 'Clay works appt 4, Seasons st Kasarani',
+      nationality: 'Kenyan',
+      telephone: '+254713723191',
+      workAddress: 'bruce hse Nrb',
       status: 'verified',
       isAdmin: true
     },
@@ -18,6 +21,9 @@ module.exports = {
       lastName: 'Kadzo',
       password: 'Joankadzo',
       address: 'Majengo plt No 415, Malindi',
+      nationality: 'Rwandan',
+      telephone: '+250713723367',
+      workAddress: 'KIST hse kgl',
       status: 'verified',
       isAdmin: false
     },
@@ -28,6 +34,9 @@ module.exports = {
       lastName: 'Ziro',
       password: 'Kadhush',
       address: 'GSU Barracks, Embakasi',
+      nationality: 'Kenyan',
+      telephone: '+254713723151',
+      workAddress: 'Embakasi gsu Hqs',
       status: 'unverified',
       isAdmin: false
     },
@@ -38,6 +47,9 @@ module.exports = {
       lastName: 'Saro',
       password: 'kalume!',
       address: 'Clay works appt 6, Seasons st Kasarani',
+      nationality: 'Kenyan',
+      telephone: '+254713723191',
+      workAddress: 'bruce hse Nrb',
       status: 'verified',
       isAdmin: false
     }

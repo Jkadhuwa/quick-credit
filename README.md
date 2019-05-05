@@ -5,7 +5,7 @@
 ---
 
 [![Build Status](https://travis-ci.org/Jkadhuwa/quick-credit.svg?branch=develop)](https://travis-ci.org/Jkadhuwa/quick-credit)
-[![Coverage Status](https://coveralls.io/repos/github/Jkadhuwa/quick-credit/badge.svg)](https://coveralls.io/github/Jkadhuwa/quick-credit)
+[![Coverage Status](https://coveralls.io/repos/github/Jkadhuwa/quick-credit/badge.svg?branch=develop)](https://coveralls.io/github/Jkadhuwa/quick-credit?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4ca4a4603f8a592be4bf/maintainability)](https://codeclimate.com/github/Jkadhuwa/quick-credit/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4ca4a4603f8a592be4bf/test_coverage)](https://codeclimate.com/github/Jkadhuwa/quick-credit/test_coverage)
 

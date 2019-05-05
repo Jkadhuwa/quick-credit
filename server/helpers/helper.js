@@ -1,10 +1,14 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
 /* eslint-disable arrow-body-style */
 import data from '../mock_db/database';
 
 const createToken = () => {
   let token = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
   for (let i = 0; i < 20; i++) {
     token += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -20,7 +24,13 @@ const isValidTelephone = (telephone) => {
 };
 
 const unUsedEmail = (email) => {
-  return data.users.indexOf(email);
+  let userFound = false;
+  data.users.map((user) => {
+    if (user.email === email) {
+      userFound = true;
+    }
+    return userFound;
+  });
 };
 
 module.exports = {

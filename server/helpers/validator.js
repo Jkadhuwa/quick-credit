@@ -42,6 +42,23 @@ const validate = (data) => {
   return errorMsg;
 };
 
+// Validate login
+const validateLogin = (data) => {
+  let errorMsg = '';
+  if (data.email === '') {
+    errorMsg += 'Email is required ,';
+  } else if (!isValidEmail(data.email)) {
+    errorMsg += 'Please check email format ,';
+  }
+  if (data.password === '') {
+    errorMsg += 'Password is required , ';
+  } else if (data.password.length < 6) {
+    errorMsg += 'Password should not be less than six characters!!!, ';
+  }
+  return errorMsg;
+};
+
 module.exports = {
-  validate
+  validate,
+  validateLogin
 };

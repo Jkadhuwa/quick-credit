@@ -2,6 +2,7 @@
 module.exports = {
   users: [
     {
+      token: 'SBgpaZdIDdWlHUexc45m',
       id: 1,
       email: 'jaymusinda@live.com',
       firstName: 'Musinda',
@@ -15,6 +16,7 @@ module.exports = {
       isAdmin: true
     },
     {
+      token: 'SBgpaZdIDdWlHUexc46m',
       id: 2,
       email: 'joankadzo@gmail.com',
       firstName: 'Joan',
@@ -28,6 +30,7 @@ module.exports = {
       isAdmin: false
     },
     {
+      token: 'SBgpaZdIDdWlHUexc36m',
       id: 3,
       email: 'sam3ziro@gmail.com',
       firstName: 'Samuel',
@@ -56,36 +59,39 @@ module.exports = {
   ],
   loans: [
     {
-      id: 1,
+      loanId: 1,
       user: 'sam3ziro@gmail.com',
       createdOn: '12-10-2019',
       status: 'Pending',
       repaid: false,
-      tenor: 3,
+      tenor: 10,
       amount: 50000,
       balance: 50000,
+      paymentInstallment: 5250,
       interest: 2500
     },
     {
-      id: 2,
+      loanId: 2,
       user: 'joankadzo@gmail.com',
       createdOn: '12-10-2019',
       status: 'approved',
       repaid: false,
-      tenor: 4,
+      tenor: 10,
       amount: 10000,
       balance: 5000,
+      paymentInstallment: 1050,
       interest: 500
     },
     {
-      id: 3,
+      loanId: 3,
       user: 'kja2aro@gmail.com',
       createdOn: '12-10-2019',
       status: 'rejected',
       repaid: false,
-      tenor: 4,
+      tenor: 10,
       amount: 10000,
       balance: 0,
+      paymentInstallment: 1050,
       interest: 500
     }
   ],

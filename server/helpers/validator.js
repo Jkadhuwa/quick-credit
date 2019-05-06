@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable indent */
 import { isValidEmail, isValidTelephone } from './helper';
@@ -58,7 +59,22 @@ const validateLogin = (data) => {
   return errorMsg;
 };
 
+const validateLoan = (data) => {
+  let errorMsg = '';
+
+  if (data.amount === '') {
+    errorMsg += 'Amount is required, ';
+  } else if (data.amount < 1) {
+    errorMsg += 'Amount can not be 0 or below ,';
+  }
+  if (data.tenor === '') {
+    errorMsg += 'Tenor is required,';
+  } else if (data.tenor < 1 || data.tenor > 12) {
+    errorMsg += 'Amount can not be less than 1 or greater than 12, ';
+  }
+};
 module.exports = {
   validate,
-  validateLogin
+  validateLogin,
+  validateLoan
 };

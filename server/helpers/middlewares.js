@@ -1,9 +1,20 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable operator-linebreak */
 /* eslint-disable no-plusplus */
+/* eslint-disable arrow-body-style */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-undef */
+import data from '../mock_db/database';
+import statusCode from './statuses';
 
-class Middlewarare {}
+class TokenVerification {
+  checkToken(req, res, next) {
+    const reqToken = req.headers['access-token'];
+    for (let i = 0; i < data.users.length; i++) {
+      if (data.users[i].token === reqToken) {
+        next();
+      }
+    }
+  }
+}
 
-const middlewarare = new Middlewarare();
-export default middlewarare;
+const tokenVer = new TokenVerification();
+export default tokenVer;

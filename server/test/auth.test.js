@@ -88,16 +88,16 @@ describe('User sign in', () => {
       });
   });
 
-  it('should return status 404 with an error message when either password or email is wrong', (done) => {
+  it('should return status 401 with an error message when either password or email is wrong', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'samziro@gmail.com',
+        email: 'samzir@gmail.com',
         password: 'Kdhush'
       })
       .end((err, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(401);
         expect(res.body).to.have.property('error');
         done();
       });

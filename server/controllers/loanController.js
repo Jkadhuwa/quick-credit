@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable import/named */
 /* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
@@ -78,6 +79,28 @@ class LoanController {
         }
       }
     }
+  }
+
+  getLoan(req, res) {
+    for (let i = 0; i < data.users.length; i++) {
+      if (data.users[i].token === req.headers['access-token']) {
+        if (data.users[i].isAdmin === true) {
+          const id = parseInt(req.params.loanId, 10);
+          for (let x = 0; x < data.loans.length; x++) {
+            if (data.loans[x].loanId === id) {
+              return res.status(statusCode.STATUS_OK).send({
+                status: statusCode.STATUS_OK,
+                data: data.loans[x]
+              });
+            }
+          }
+        }
+      }
+    }
+    res.status(statusCode.NOT_FOUND).send({
+      status: statusCode.NOT_FOUND,
+      error: 'Loan not found '
+    });
   }
 }
 const loanController = new LoanController();

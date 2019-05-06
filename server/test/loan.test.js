@@ -62,3 +62,45 @@ describe('Admin view  all loans', () => {
       });
   });
 });
+
+describe('Admin should view  specific loan', () => {
+  it('Should return status 200 with data  loan appliocations of specified LoanId', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/loans/1')
+      .set('access-token', 'SBgpaZdIDdWlHUexc46m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+
+  it('Should return status 404 if no loan with the specied id is found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/loans/0')
+      .set('access-token', 'SBgpaZdIDdWlHUexc46m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.be.equal('Loan not found ');
+        done();
+      });
+  });
+  it('Should return status 404 if no loan with the specied id is found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/loans/0')
+      .set('access-token', 'SBgpaZdIDdWlHUexc46m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.be.equal('Loan not found ');
+        done();
+      });
+  });
+});

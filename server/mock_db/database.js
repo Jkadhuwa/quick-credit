@@ -27,7 +27,7 @@ module.exports = {
       telephone: '+250713723367',
       workAddress: 'KIST hse kgl',
       status: 'verified',
-      isAdmin: false
+      isAdmin: true
     },
     {
       token: 'SBgpaZdIDdWlHUexc4m',

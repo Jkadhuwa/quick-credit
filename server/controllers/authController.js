@@ -17,9 +17,7 @@ class AuthController {
         .send({ status: statusCode.BAD_REQUEST, error: validate(req.body) });
     }
     if (unUsedEmail(req.body.email) > -1) {
-      return res
-        .status(statusCode.CONFLICT)
-        .send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
+      return res.status(statusCode.CONFLICT).send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
     }
 
     const user = {

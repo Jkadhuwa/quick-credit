@@ -27,10 +27,10 @@ module.exports = {
       telephone: '+250713723367',
       workAddress: 'KIST hse kgl',
       status: 'verified',
-      isAdmin: false
+      isAdmin: true
     },
     {
-      token: 'SBgpaZdIDdWlHUexc36m',
+      token: 'SBgpaZdIDdWlHUexc4m',
       id: 3,
       email: 'sam3ziro@gmail.com',
       firstName: 'Samuel',

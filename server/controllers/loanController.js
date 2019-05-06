@@ -61,6 +61,24 @@ class LoanController {
       }
     }
   }
+
+  getLoans(req, res) {
+    for (let i = 0; i < data.users.length; i++) {
+      if (data.users[i].token === req.headers['access-token']) {
+        if (data.users[i].isAdmin === true) {
+          res.status(statusCode.STATUS_OK).send({
+            status: statusCode.STATUS_OK,
+            data: data.loans
+          });
+        } else {
+          res.status(statusCode.UNAUTHORIZED).send({
+            status: statusCode.UNAUTHORIZED,
+            error: 'Only previledged users can view '
+          });
+        }
+      }
+    }
+  }
 }
 const loanController = new LoanController();
 export default loanController;

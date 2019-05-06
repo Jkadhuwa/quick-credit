@@ -14,5 +14,6 @@ router.post('/auth/signin', authController.loginUser);
 
 // Loan routes
 router.post('/loans', tokenVer.checkToken, loanController.applyLoan);
+router.get('/loans', tokenVer.checkToken, loanController.getLoans);
 
 export default router;

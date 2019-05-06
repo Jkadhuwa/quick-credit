@@ -16,5 +16,5 @@ app.use(morgan('combined', { skip: (req, res) => res.statusCode < 400 }));
 app.use('/api/v1', Router);
 
 const PORT = process.env.PORT || 3000;
-export default app;
 app.listen(PORT);
+export default app;

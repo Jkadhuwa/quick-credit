@@ -7,10 +7,11 @@ class TokenVerification {
     const reqToken = req.headers['access-token'];
     for (let i = 0; i < data.users.length; i += 1) {
       if (data.users[i].token === reqToken) {
+        // res.send({ messages: reqToken });
         next();
       }
     }
-    return res
+    res
       .status(statusCode.UNAUTHORIZED)
       .send({ status: statusCode.UNAUTHORIZED, error: 'Token error' });
   }

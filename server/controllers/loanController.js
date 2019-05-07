@@ -11,7 +11,7 @@ import {
   totalAmount
 } from '../helpers/helper';
 
-import { checkToken } from '../middlewares/middlewares';
+import checkToken from '../middlewares/middlewares';
 
 class LoanController {
   applyLoan(req, res) {
@@ -103,6 +103,41 @@ class LoanController {
       error: 'Loan not found '
     });
   }
+
+  approveOrReject(req, res) {
+    if (checkToken) {
+      if (data.users.isAdmin === false) {
+        res.status(statusCode.UNAUTHORIZED).send({
+          status: statusCode.UNAUTHORIZED,
+          error: 'You do not have enough user previledges'
+        });
+      }
+
+      for (let x = 0; x < data.loans.length; x += 1) {
+        const id = parseInt(req.params.loanId, 10);
+        if (data.loans[x].loanId === id) {
+          data.loans[x].status = req.body.status;
+
+          return res.status(statusCode.STATUS_OK).send({
+            status: statusCode.STATUS_OK,
+            data: {
+              loanId: data.loans[x].loanId,
+              loanAmount: data.loans[x].loanAmount,
+              tenor: data.loans[x].tenor,
+              status: data.loans[x].status,
+              monthlyInstallment: data.loans[x].paymentInstallment,
+              interest: data.loans[x].interest
+            }
+          });
+        }
+      }
+      res.status(statusCode.NOT_FOUND).send({
+        status: statusCode.NOT_FOUND,
+        error: 'Loan not found '
+      });
+    }
+  }
 }
+
 const loanController = new LoanController();
 export default loanController;

@@ -17,11 +17,16 @@ router.post('/auth/signin', authController.loginUser);
 router.post('/loans', tokenVer.checkToken, loanController.applyLoan);
 router.get('/loans', tokenVer.checkToken, loanController.getLoans);
 router.get('/loans/:loanId', tokenVer.checkToken, loanController.getLoan);
+router.patch(
+	'/loans/:loanId',
+	tokenVer.checkToken,
+	loanController.approveOrReject
+);
 
 // Users routes
 router.patch(
-  '/users/:userEmail/verify',
-  tokenVer.checkToken,
-  usersController.markVerified
+	'/users/:userEmail/verify',
+	tokenVer.checkToken,
+	usersController.markVerified
 );
 export default router;

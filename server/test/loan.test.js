@@ -63,6 +63,8 @@ describe('Admin view  all loans', () => {
   });
 });
 
+// Adnin tests
+
 describe('Admin should view  specific loan', () => {
   it('Should return status 200 with data  loan appliocations of specified LoanId', (done) => {
     chai
@@ -100,6 +102,63 @@ describe('Admin should view  specific loan', () => {
         expect(res).to.have.status(404);
         expect(res.body).to.have.property('error');
         expect(res.body.error).to.be.equal('Loan not found ');
+        done();
+      });
+  });
+});
+describe('Admin should view be able to Approve or Reject loan', () => {
+  it('Should return status 200 with data of loan applications of specified LoanId', (done) => {
+    chai
+      .request(app)
+      .patch('/api/v1/loans/1')
+      .set('access-token', 'SBgpaZdIDdWlHUexc46m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+        expect(res.body.data).to.have.property('loanId');
+        done();
+      });
+  });
+  it('Should return status 401 with error Wrong token ', (done) => {
+    chai
+      .request(app)
+      .patch('/api/v1/loans/1')
+      .set('access-token', 'SBgpaZdIDdWlHUexc6m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.have.property('error');
+        expect(res.body).to.have.property('status');
+        expect(res.body.error).to.be.equal('Token error');
+        done();
+      });
+  });
+  it('Should return status 404 with error Wrong token ', (done) => {
+    chai
+      .request(app)
+      .patch('/api/v1/loans/0')
+      .set('access-token', 'SBgpaZdIDdWlHUexc46m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('error');
+        expect(res.body).to.have.property('status');
+        expect(res.body.error).to.be.equal('Loan not found ');
+        done();
+      });
+  });
+  it('Should return status 404 with error dont have enough user previledge ', (done) => {
+    chai
+      .request(app)
+      .patch('/api/v1/loans/0')
+      .set('access-token', 'SBgpaZdIDdWlHUexc4m')
+      .send()
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('error');
+        expect(res.body).to.have.property('status');
+
         done();
       });
   });

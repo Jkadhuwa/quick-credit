@@ -65,7 +65,7 @@ module.exports = {
       status: 'Pending',
       repaid: false,
       tenor: 10,
-      amount: 50000,
+      loanAmount: 50000,
       balance: 50000,
       paymentInstallment: 5250,
       interest: 2500

@@ -17,7 +17,9 @@ class AuthController {
         .send({ status: statusCode.BAD_REQUEST, error: validate(req.body) });
     }
     if (unUsedEmail(req.body.email) > -1) {
-      return res.status(statusCode.CONFLICT).send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
+      return res
+        .status(statusCode.CONFLICT)
+        .send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
     }
 
     const user = {
@@ -57,7 +59,6 @@ class AuthController {
     });
   }
 
-  // eslint-disable-next-line consistent-return
   loginUser(req, res) {
     if (validateLogin(req.body).length > 0) {
       return res.status(statusCode.BAD_REQUEST).send({

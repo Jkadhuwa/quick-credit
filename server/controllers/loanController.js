@@ -11,7 +11,7 @@ import {
   totalAmount
 } from '../helpers/helper';
 
-import { validateLoan } from '../helpers/validator';
+import { checkToken } from '../middlewares/middlewares';
 
 class LoanController {
   applyLoan(req, res) {
@@ -97,6 +97,7 @@ class LoanController {
         }
       }
     }
+
     res.status(statusCode.NOT_FOUND).send({
       status: statusCode.NOT_FOUND,
       error: 'Loan not found '

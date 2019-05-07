@@ -2,7 +2,8 @@ import express from 'express';
 import v1 from './apiv1';
 import authController from '../controllers/authController';
 import loanController from '../controllers/loanController';
-import tokenVer from '../helpers/middlewares';
+import tokenVer from '../middlewares/middlewares';
+import usersController from '../controllers/usersController';
 
 const router = express.Router();
 
@@ -17,4 +18,10 @@ router.post('/loans', tokenVer.checkToken, loanController.applyLoan);
 router.get('/loans', tokenVer.checkToken, loanController.getLoans);
 router.get('/loans/:loanId', tokenVer.checkToken, loanController.getLoan);
 
+// Users routes
+router.patch(
+  '/users/:userEmail/verify',
+  tokenVer.checkToken,
+  usersController.markVerified
+);
 export default router;

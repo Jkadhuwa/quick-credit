@@ -171,7 +171,7 @@ describe('User Should be able to create a loan repayment record', () => {
 	it('Should return status 201 with data of loan repayment record', (done) => {
 		chai
 			.request(app)
-			.post('/api/v1/loans/2/repayment')
+			.post('/api/v1/loans/2/repayments')
 			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
 			.send({ amount: '1000' })
 			.end((err, res) => {
@@ -185,7 +185,7 @@ describe('User Should be able to create a loan repayment record', () => {
 	it('Should return status 401 with error message of Token error', (done) => {
 		chai
 			.request(app)
-			.post('/api/v1/loans/1/repayment')
+			.post('/api/v1/loans/1/repayments')
 			.set('access-token', 'SBgpaZdIDdWlexc46m')
 			.send()
 			.end((err, res) => {
@@ -198,13 +198,60 @@ describe('User Should be able to create a loan repayment record', () => {
 	it('Should return status 404 with error message of Loan Loan Found ', (done) => {
 		chai
 			.request(app)
-			.post('/api/v1/loans/0/repayment')
+			.post('/api/v1/loans/0/repayments')
 			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
 				expect(res.body).to.have.property('error');
 				expect(res.body.error).to.be.equal('Loan Not Found');
+				done();
+			});
+	});
+});
+
+// View Loan Repayment History
+
+describe('User Should be able to View a loan repayment history', () => {
+	it('Should return status 200 with data of loan repayment history', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/2/repayments')
+			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.send({})
+			.end((err, res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.property('data');
+				expect(res.body.data).to.have.property('loanId');
+				expect(res.body.data.balance).to.be.not.equal(null);
+				done();
+			});
+	});
+
+	it('Should return status 404 with error Loan Not Found', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/0/repayments')
+			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(404);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Loan Not found');
+				done();
+			});
+	});
+
+	it('Should return status 401 with Token Error', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/2/repayments')
+			.set('access-token', 'SBgpaZIDdWlHUexc4m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(401);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Token error');
 				done();
 			});
 	});

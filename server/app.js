@@ -6,6 +6,7 @@ import cors from 'cors';
 import path from 'path';
 import Router from './routes/routes';
 
+dotenv.config();
 const app = express();
 app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: true }));

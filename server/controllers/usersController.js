@@ -38,6 +38,25 @@ class UsersController {
 			}
 		}
 	}
+
+	getAllUsers(req, res) {
+		for (let i = 0; i < data.users.length; i += 1) {
+			if (data.users[i].token === req.headers['access-token']) {
+				if (data.users[i].isAdmin === true) {
+					res.status(statusCode.STATUS_OK).send({
+						status: statusCode.STATUS_OK,
+						data: data.users
+					});
+				} else {
+					res.status(statusCode.UNAUTHORIZED).send({
+						status: statusCode.UNAUTHORIZED,
+						error: 'Users does not have enough previledges'
+					});
+				}
+			}
+		}
+	}
 }
+
 const usersController = new UsersController();
 export default usersController;

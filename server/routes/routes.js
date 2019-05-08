@@ -23,11 +23,15 @@ router.patch(
 	loanController.approveOrReject
 );
 router.post(
-	'/loans/:loanId/repayment',
+	'/loans/:loanId/repayments',
 	tokenVer.checkToken,
-	loanController.createRepayment
+	loanController.createRepayments
 );
-
+router.get(
+	'/loans/:loanId/repayments',
+	tokenVer.checkToken,
+	loanController.getRepaymets
+);
 // Users routes
 router.patch(
 	'/users/:userEmail/verify',

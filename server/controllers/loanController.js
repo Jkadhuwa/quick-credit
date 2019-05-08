@@ -1,4 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable import/named */
+
 /* eslint-disable class-methods-use-this */
 import data from '../mock_db/database';
 import statusCode from '../helpers/statuses';
@@ -29,7 +32,7 @@ class LoanController {
 					interest: 5 * (req.body.amount / 100),
 					totalAmount: totalAmount(req.body.amount),
 					amountPaid: 0,
-					balance: totalAmount(req.body.amount),
+					balance: balance(totalAmount(req.body.amount), 0),
 					repaid: false
 				};
 				const currentTotalLoans = parseInt(data.loans.length, 10);
@@ -42,7 +45,7 @@ class LoanController {
 				return res.status(currentStatus).send({
 					status: currentStatus,
 					data: {
-						loanId: loan.id,
+						loanId: loan.loanId,
 						createdOn: loan.createdOn,
 						firstName: data.users[i].firstName,
 						lastName: data.users[i].lastName,
@@ -139,7 +142,7 @@ class LoanController {
 		return true;
 	}
 
-	createRepayment(req, res) {
+	createRepayments(req, res) {
 		let authenticated;
 		data.users.forEach((user) => {
 			if (user.token === req.headers['access-token']) {
@@ -167,7 +170,7 @@ class LoanController {
 							amount: ln.totalAmount,
 							monthlyInstallment: ln.monthlyInstallment,
 							paidAmount: loan.amount,
-							balance: balance(ln.totalAmount, req.body.amount)
+							balance: balance(ln.balance, req.body.amount)
 						}
 					});
 				}
@@ -175,6 +178,44 @@ class LoanController {
 			res.status(statusCode.NOT_FOUND).send({
 				status: statusCode.NOT_FOUND,
 				error: 'Loan Not Found'
+			});
+		}
+		return false;
+	}
+
+	getRepaymets(req, res) {
+		let authenticated;
+		data.users.forEach((user) => {
+			if (user.token === req.headers['access-token']) {
+				authenticated = true;
+			}
+		});
+		if (authenticated) {
+			const id = parseInt(req.params.loanId, 10);
+			const monthlyPayment = data.loans.find((loan) => {
+				if (loan.loanId === id) {
+					return parseFloat(loan.paymentInstallment);
+				}
+			});
+
+			data.repayments.forEach((loan) => {
+				if (loan.loanId === id) {
+					return res.status(statusCode.STATUS_OK).send({
+						status: statusCode.STATUS_OK,
+						data: {
+							loanId: loan.loanId,
+							createdOn: loan.createdOn,
+							totalAmount: monthlyPayment.totalAmount,
+							monthlyInstallment: monthlyPayment.paymentInstallment,
+							amount: loan.amount
+						}
+					});
+				}
+				return true;
+			});
+			return res.status(statusCode.NOT_FOUND).send({
+				status: statusCode.NOT_FOUND,
+				error: 'Loan Not found'
 			});
 		}
 		return false;

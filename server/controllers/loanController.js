@@ -168,7 +168,6 @@ class LoanController {
 			}
 		});
 		if (authenticated) {
-			// eslint-disable-next-line consistent-return
 			data.loans.forEach((ln) => {
 				if (ln.loanId === parseInt(req.params.loanId, 10)) {
 					const loan = {
@@ -177,7 +176,6 @@ class LoanController {
 						createdOn: currentDate(),
 						amount: req.body.amount
 					};
-					// res.send({ message: req.headers['access-token'] });
 					data.repayments.push(loan);
 					return res.status(statusCode.STATUS_CREATED).send({
 						status: statusCode.STATUS_CREATED,

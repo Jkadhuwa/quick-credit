@@ -95,6 +95,19 @@ module.exports = {
 			balance: 0,
 			paymentInstallment: 1050,
 			interest: 500
+		},
+		{
+			loanId: 4,
+			user: 'justinemsinda@gmail.com',
+			createdOn: '12-10-2019',
+			status: 'approved',
+			repaid: true,
+			tenor: 10,
+			amount: 50000,
+			totalAmount: 52500,
+			balance: 0,
+			paymentInstallment: 5250,
+			interest: 2500
 		}
 	],
 	repayments: [

@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "coverage": "nyc --reporter=html --reporter=text npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm run coverage report --reporter=text-lcov | coveralls",
     "lint": "eslint server/*.js --fix",
     "start": "nodemon server/app.js --exec babel-node --",
     "test": "mocha --require babel-core/register server/test/**/*test.js --exit"

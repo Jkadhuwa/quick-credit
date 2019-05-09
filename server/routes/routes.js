@@ -18,25 +18,26 @@ router.post('/loans', tokenVer.checkToken, loanController.applyLoan);
 router.get('/loans', tokenVer.checkToken, loanController.getLoans);
 router.get('/loans/:loanId', tokenVer.checkToken, loanController.getLoan);
 router.patch(
-	'/loans/:loanId',
-	tokenVer.checkToken,
-	loanController.approveOrReject
+  '/loans/:loanId',
+  tokenVer.checkToken,
+  loanController.approveOrReject
 );
 router.post(
-	'/loans/:loanId/repayments',
-	tokenVer.checkToken,
-	loanController.createRepayments
+  '/loans/:loanId/repayments',
+  tokenVer.checkToken,
+  loanController.createRepayments
 );
 router.get(
-	'/loans/:loanId/repayments',
-	tokenVer.checkToken,
-	loanController.getRepaymets
+  '/loans/:loanId/repayments',
+  tokenVer.checkToken,
+  loanController.getRepaymets
 );
+
 // Users routes
 router.patch(
-	'/users/:userEmail/verify',
-	tokenVer.checkToken,
-	usersController.markVerified
+  '/users/:userEmail/verify',
+  tokenVer.checkToken,
+  usersController.markVerified
 );
 router.get('/users', tokenVer.checkToken, usersController.getAllUsers);
 export default router;

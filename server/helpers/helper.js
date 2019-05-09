@@ -21,7 +21,7 @@ const isValidTelephone = (telephone) => {
 	return /^07(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6}$/.test(telephone);
 };
 
-const unUsedEmail = (email) => {
+const usedEmail = (email) => {
 	let userFound = false;
 	data.users.map((user) => {
 		if (user.email === email) {
@@ -50,14 +50,19 @@ const currentDate = () => {
 	return dateTime;
 };
 const balance = (loan, paidAmount) => {
-	const blnc = parseFloat(loan) - parseFloat(paidAmount);
+	let blnc;
+	if (parseFloat(loan) >= parseFloat(paidAmount)) {
+		blnc = parseFloat(loan) - parseFloat(paidAmount);
+	} else {
+		blnc = 0;
+	}
 	return blnc;
 };
 module.exports = {
 	createToken,
 	isValidEmail,
 	isValidTelephone,
-	unUsedEmail,
+	usedEmail,
 	paymentInstallment,
 	currentDate,
 	totalAmount,

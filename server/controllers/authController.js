@@ -5,7 +5,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 import data from '../mock_db/database';
-import { createToken, unUsedEmail } from '../helpers/helper';
+import { createToken, usedEmail } from '../helpers/helper';
 import { validate, validateLogin } from '../helpers/validator';
 import statusCode from '../helpers/statuses';
 
@@ -16,12 +16,11 @@ class AuthController {
         .status(statusCode.BAD_REQUEST)
         .send({ status: statusCode.BAD_REQUEST, error: validate(req.body) });
     }
-    if (unUsedEmail(req.body.email) > -1) {
-      return res
-        .status(statusCode.CONFLICT)
-        .send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
-    }
-
+   if (usedEmail(req.body.email) > -1) {
+			return res
+				.status(statusCode.CONFLICT)
+				.send({ status: statusCode.CONFLICT, error: 'Email already taken!!' });
+		}
     const user = {
       token: createToken(),
       id: data.users.length + 1,

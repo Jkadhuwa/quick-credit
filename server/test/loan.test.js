@@ -58,7 +58,9 @@ describe('Admin view  all loans', () => {
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
-				expect(res.body.error).to.equal('Only previledged users can view ');
+				expect(res.body.error).to.equal(
+					'Unauthorized Access! You should be an Administrator'
+				);
 				done();
 			});
 	});
@@ -259,11 +261,11 @@ describe('User Should be able to View a loan repayment history', () => {
 
 // Get all current loans(Not Fully paid)
 
-describe('Admin Should be able to View al current loans', () => {
+describe('Admin Should be able to View all current loans', () => {
 	it('Should return status 200 with data of all current loans', (done) => {
 		chai
 			.request(app)
-			.get('/api/v1/loans?status=approved&repaidfalse')
+			.get('/api/v1/loans?status=approved&repaid=false')
 			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
 			.send()
 			.end((err, res) => {
@@ -278,7 +280,7 @@ describe('Admin Should be able to View al current loans', () => {
 	it('Should return status 401 with data of Token error', (done) => {
 		chai
 			.request(app)
-			.get('/api/v1/loans?status=approved&repaidfalse')
+			.get('/api/v1/loans?status=approved&repaid=false')
 			.set('access-token', 'SBgpaZIDdWlHUexc46m')
 			.send({})
 			.end((err, res) => {
@@ -292,13 +294,110 @@ describe('Admin Should be able to View al current loans', () => {
 	it('Should return status 401 with data of Unauthorized access when the user is not Administartor', (done) => {
 		chai
 			.request(app)
-			.get('/api/v1/loans?status=approved&repaidfalse')
+			.get('/api/v1/loans?status=approved&repaid=false')
 			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Only previledged users can view ');
+				expect(res.body.error).to.be.equal(
+					'Unauthorized Access! You should be an Administrator'
+				);
+				done();
+			});
+	});
+});
+
+// Get all current loans(Not Fully paid)
+describe('User Should be able to View a loan repayment history', () => {
+	it('Should return status 200 with data of loan repayment history', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/2/repayments')
+			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.send({})
+			.end((err, res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.property('data');
+				expect(res.body.data).to.have.property('loanId');
+				expect(res.body.data.balance).to.be.not.equal(null);
+				done();
+			});
+	});
+
+	it('Should return status 404 with error Loan Not Found', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/0/repayments')
+			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(404);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Loan Not found');
+				done();
+			});
+	});
+
+	it('Should return status 401 with Token Error', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans/2/repayments')
+			.set('access-token', 'SBgpaZIDdWlHUexc4m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(401);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Token error');
+				done();
+			});
+	});
+});
+
+// Get all Repaid Loans
+
+describe('Admin Should be able to View all repaid loans', () => {
+	it('Should return status 200 with data of all repaid loans', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans?status=approved&repaid=true')
+			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.property('data');
+				expect(res.body.data).to.be.an('array');
+				expect(res.body.data.balance).to.be.not.equal(null);
+				done();
+			});
+	});
+
+	it('Should return status 401 with data of Token error', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans?status=approved&repaid=true')
+			.set('access-token', 'SBgpaZIDdWlHUexc46m')
+			.send({})
+			.end((err, res) => {
+				expect(res).to.have.status(401);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Token error');
+				done();
+			});
+	});
+
+	it('Should return status 401 with data of Unauthorized access when the user is not Administartor', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans?status=approved&repaid=true')
+			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.send()
+			.end((err, res) => {
+				expect(res).to.have.status(401);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal(
+					'Unauthorized Access! You should be an Administrator'
+				);
 				done();
 			});
 	});

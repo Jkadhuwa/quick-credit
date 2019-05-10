@@ -120,7 +120,7 @@ module.exports = {
 		{
 			id: 2,
 			createdOn: '13-12-2020',
-			loanId: 2,
+			loanId: 1,
 			amount: 5000
 		}
 	]

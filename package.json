@@ -4,11 +4,15 @@
   "description": "Andela-Kigali Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
+	 "build": "npm run clean && npm run build-babel", 
+    "build-babel": "babel -d ./build ./server -s",
+   "clean": "rm -rf build && mkdir build",
+    "heroku-postbuild": "npm run build",
     "coverage": "nyc --reporter=html --reporter=text npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/eslint ./server/*.js",
-	"lint-fix": "node_modules/.bin/eslint --fix ./server --ext .js --color",
-    "start": "nodemon server/app.js --exec babel-node --",
+    "lint-fix": "node_modules/.bin/eslint --fix ./server --ext .js --color",
+    "start": "npm run build && node ./build/app.js",
     "test": "mocha --require babel-core/register server/test/**/*test.js --exit"
   },
   "repository": {

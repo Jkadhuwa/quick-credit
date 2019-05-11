@@ -16,3 +16,20 @@ Front End Pages are hosted using github pages: https://jkadhuwa.github.io/quick-
 To access the client/User pages go to: https://jkadhuwa.github.io/quick-credit/UI/views/Client/clientDashboard.html/
 
 To access adminstartors pages got to: https://jkadhuwa.github.io/quick-credit/UI/views/Admin/adminDashboard.html
+
+
+**API PART**
+**Installation**
+- Clone this repo with git clone https://github.com/Jkadhuwa/quick-credit.git,
+- Install dependencies with npm install.
+- Run npm test.
+- To run server, execute npm run dev
+- Please ensure to set all required environment variables, for example
+  JWT_SIGN_SECRET_KEY=addjsonwebtokensecretherelikeAndelaKigalicycle6
+
+
+**API Deployment**
+- API endpoints was hosted using Heroku  https://quick-credit-adc.herokuapp.com/api/v1/
+
+**Documentation**
+- Quick credit REST API  documentation is available at  https://quick-credit-adc.herokuapp.com/doc/

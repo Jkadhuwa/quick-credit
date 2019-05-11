@@ -1,21 +1,48 @@
 /* eslint-disable class-methods-use-this */
+import jwt from 'jsonwebtoken';
 import data from '../mock_db/database';
 import statusCode from '../helpers/statuses';
 
-class TokenVerification {
-	checkToken(req, res, next) {
-		const reqToken = req.headers['access-token'];
+// eslint-disable-next-line consistent-return
+const checkToken = (req, res, next) => {
+	const reqToken = req.headers.authorization;
+
+	if (!reqToken) {
+		return res.status(statusCode.FORBIDDEN).send({
+			status: statusCode.FORBIDDEN,
+			error: 'Token Required'
+		});
+	}
+	try {
 		for (let i = 0; i < data.users.length; i += 1) {
-			if (data.users[i].token === reqToken) {
-				// res.send({ messages: reqToken });
+			const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
+			if (data.users[i].id === verified.userId) {
 				next();
 			}
 		}
-		res
-			.status(statusCode.UNAUTHORIZED)
-			.send({ status: statusCode.UNAUTHORIZED, error: 'Token error' });
+	} catch (error) {
+		return res.status(statusCode.UNAUTHORIZED).send({
+			status: statusCode.UNAUTHORIZED,
+			error: 'Invalid Token supplied'
+		});
 	}
-}
+};
 
-const tokenVer = new TokenVerification();
-export default tokenVer;
+const checkAdmin = (req, res, next) => {
+	const reqToken = req.headers.authorization;
+	if (checkToken) {
+		const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
+		for (let i = 0; i < data.users.length; i += 1) {
+			if (verified.isAdmin === true) {
+				next();
+			}
+		}
+		return res.status(statusCode.UNAUTHORIZED).send({
+			status: statusCode.UNAUTHORIZED,
+			error: 'You do not have enough priviledges to continue'
+		});
+	}
+	return false;
+};
+
+export default { checkToken, checkAdmin };

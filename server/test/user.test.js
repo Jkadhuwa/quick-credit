@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
-import usersController from '../controllers/usersController';
-import tokenVer from '../middlewares/middlewares';
+
+const request = require('supertest')(app);
 
 const { expect } = chai;
 
@@ -10,12 +10,38 @@ chai.use(chaiHttp);
 
 // Mark user verified with valid inputs
 
+let userToken = null;
+let adminToken = null;
+before((done) => {
+	const admin = {
+		email: 'joankadzo@gmail.com',
+		password: 'Joankadzo',
+	};
+	const user = {
+		email: 'sam3ziro@gmail.com',
+		password: 'Kadhush',
+	};
+	request.post('/api/v1/auth/signin')
+		.send(user)
+		.end((err, res) => {
+			if (err) throw err;
+			userToken = res.body.data.token;
+		});
+	request.post('/api/v1/auth/signin')
+		.send(admin)
+		.end((err, res) => {
+			if (err) throw err;
+			adminToken = res.body.data.token;
+			done();
+		});
+});
+
 describe('Admin can mark user as verified', () => {
 	it('Should return status 200 with data of of the updated user', (done) => {
 		chai
 			.request(app)
 			.patch('/api/v1/users/sam3ziro@gmail.com/verify')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -31,7 +57,7 @@ describe('Admin can mark user as verified', () => {
 		chai
 			.request(app)
 			.patch('/api/v1/users/sam3zirogmail.com/verify')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -44,7 +70,7 @@ describe('Admin can mark user as verified', () => {
 		chai
 			.request(app)
 			.get('/api/v1/users')
-			.set('access-token', 'SBgpaZdIDdWlHUex6m')
+			.set('authorization', 'SBgpaZdIDdWlHUex6m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
@@ -62,7 +88,7 @@ describe('Admin can view all users in the system', () => {
 		chai
 			.request(app)
 			.get('/api/v1/users')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -76,7 +102,7 @@ describe('Admin can view all users in the system', () => {
 		chai
 			.request(app)
 			.get('/api/v1/users')
-			.set('access-token', 'SBgpaZdIDdWlHUex6m')
+			.set('authorization', 'SBgpaZdIDdWlHUex6m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
@@ -89,7 +115,7 @@ describe('Admin can view all users in the system', () => {
 		chai
 			.request(app)
 			.get('/api/v1/users')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', userToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);

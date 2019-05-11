@@ -1,7 +1,6 @@
 module.exports = {
 	users: [
 		{
-			token: 'SBgpaZdIDdWlHUexc45m',
 			id: 1,
 			email: 'jaymusinda@live.com',
 			firstName: 'Musinda',
@@ -15,7 +14,6 @@ module.exports = {
 			isAdmin: true
 		},
 		{
-			token: 'SBgpaZdIDdWlHUexc46m',
 			id: 2,
 			email: 'joankadzo@gmail.com',
 			firstName: 'Joan',
@@ -29,7 +27,6 @@ module.exports = {
 			isAdmin: true
 		},
 		{
-			token: 'SBgpaZdIDdWlHUexc4m',
 			id: 3,
 			email: 'sam3ziro@gmail.com',
 			firstName: 'Samuel',
@@ -61,7 +58,7 @@ module.exports = {
 			loanId: 1,
 			user: 'sam3ziro@gmail.com',
 			createdOn: '12-10-2019',
-			status: 'Pending',
+			status: 'pending',
 			repaid: false,
 			tenor: 10,
 			amount: 50000,

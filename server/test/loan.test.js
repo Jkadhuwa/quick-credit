@@ -2,9 +2,40 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 
+
+const request = require('supertest')(app);
+
 const { expect } = chai;
 
 chai.use(chaiHttp);
+
+// Mark user verified with valid inputs
+
+let userToken = null;
+let adminToken = null;
+before((done) => {
+	const admin = {
+		email: 'joankadzo@gmail.com',
+		password: 'Joankadzo',
+	};
+	const user = {
+		email: 'sam3ziro@gmail.com',
+		password: 'Kadhush',
+	};
+	request.post('/api/v1/auth/signin')
+		.send(user)
+		.end((err, res) => {
+			if (err) throw err;
+			userToken = res.body.data.token;
+		});
+	request.post('/api/v1/auth/signin')
+		.send(admin)
+		.end((err, res) => {
+			if (err) throw err;
+			adminToken = res.body.data.token;
+			done();
+		});
+});
 
 // CREATE /SIGN UP TESTS
 
@@ -13,7 +44,7 @@ describe('User applies a loan', () => {
 		chai
 			.request(app)
 			.post('/api/v1/loans')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', userToken)
 			.send({
 				amount: '150000',
 				tenor: '12'
@@ -31,7 +62,7 @@ describe('Admin view  all loans', () => {
 			chai
 				.request(app)
 				.get('/api/v1/loans')
-				.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+				.set('authorization', adminToken)
 				.send()
 				.end((err, res) => {
 					expect(res).to.have.status(200);
@@ -44,8 +75,20 @@ describe('Admin view  all loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans')
+			.set('authorization', 'adminToken')
 			.end((err, res) => {
 				expect(res).to.have.status(401);
+				done();
+			});
+	});
+
+	it('Should return status 403 with no token supplied', (done) => {
+		chai
+			.request(app)
+			.get('/api/v1/loans')
+			.set('authorization', '')
+			.end((err, res) => {
+				expect(res).to.have.status(403);
 				done();
 			});
 	});
@@ -54,12 +97,12 @@ describe('Admin view  all loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', userToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body.error).to.equal(
-					'Unauthorized Access! You should be an Administrator'
+					'You do not have enough priviledges to continue'
 				);
 				done();
 			});
@@ -73,7 +116,7 @@ describe('Admin should view  specific loan', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/1')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -86,20 +129,7 @@ describe('Admin should view  specific loan', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/0')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
-			.send()
-			.end((err, res) => {
-				expect(res).to.have.status(404);
-				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Loan not found ');
-				done();
-			});
-	});
-	it('Should return status 404 if no loan with the specied id is found', (done) => {
-		chai
-			.request(app)
-			.get('/api/v1/loans/0')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -114,7 +144,7 @@ describe('Admin should view be able to Approve or Reject loan', () => {
 		chai
 			.request(app)
 			.patch('/api/v1/loans/1')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -127,13 +157,13 @@ describe('Admin should view be able to Approve or Reject loan', () => {
 		chai
 			.request(app)
 			.patch('/api/v1/loans/1')
-			.set('access-token', 'SBgpaZdIDdWlHUexc6m')
+			.set('authorization', 'SBgpaZdIDdWlHUexc6m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
 				expect(res.body).to.have.property('status');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
@@ -141,7 +171,7 @@ describe('Admin should view be able to Approve or Reject loan', () => {
 		chai
 			.request(app)
 			.patch('/api/v1/loans/0')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -151,14 +181,14 @@ describe('Admin should view be able to Approve or Reject loan', () => {
 				done();
 			});
 	});
-	it('Should return status 404 with error dont have enough user previledge ', (done) => {
+	it('Should return status 401 with error dont have enough user previledge ', (done) => {
 		chai
 			.request(app)
 			.patch('/api/v1/loans/0')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', userToken)
 			.send()
 			.end((err, res) => {
-				expect(res).to.have.status(404);
+				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
 				expect(res.body).to.have.property('status');
 
@@ -174,7 +204,7 @@ describe('User Should be able to create a loan repayment record', () => {
 		chai
 			.request(app)
 			.post('/api/v1/loans/2/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', adminToken)
 			.send({ amount: '1000' })
 			.end((err, res) => {
 				expect(res).to.have.status(201);
@@ -188,20 +218,20 @@ describe('User Should be able to create a loan repayment record', () => {
 		chai
 			.request(app)
 			.post('/api/v1/loans/1/repayments')
-			.set('access-token', 'SBgpaZdIDdWlexc46m')
+			.set('authorization', 'SBgpaZdIDdWlexc46m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
-	it('Should return status 404 with error message of Loan Loan Found ', (done) => {
+	it('Should return status 404 with error message of Loan Found ', (done) => {
 		chai
 			.request(app)
 			.post('/api/v1/loans/0/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -214,12 +244,12 @@ describe('User Should be able to create a loan repayment record', () => {
 
 // View Loan Repayment History
 
-describe('User Should be able to View a loan repayment history', () => {
+describe('Admin Should be able to View a loan repayment history', () => {
 	it('Should return status 200 with data of loan repayment history', (done) => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/2/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', adminToken)
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -234,7 +264,7 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/0/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -248,12 +278,12 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/2/repayments')
-			.set('access-token', 'SBgpaZIDdWlHUexc4m')
+			.set('authorization', 'SBgpaZIDdWlHUexc4m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
@@ -266,7 +296,7 @@ describe('Admin Should be able to View all current loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=false')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -281,12 +311,12 @@ describe('Admin Should be able to View all current loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=false')
-			.set('access-token', 'SBgpaZIDdWlHUexc46m')
+			.set('authorization', 'SBgpaZIDdWlHUexc46m')
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
@@ -295,13 +325,13 @@ describe('Admin Should be able to View all current loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=false')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', userToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
 				expect(res.body.error).to.be.equal(
-					'Unauthorized Access! You should be an Administrator'
+					'You do not have enough priviledges to continue'
 				);
 				done();
 			});
@@ -314,7 +344,7 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/2/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', adminToken)
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -329,7 +359,7 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/0/repayments')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(404);
@@ -343,12 +373,12 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/2/repayments')
-			.set('access-token', 'SBgpaZIDdWlHUexc4m')
+			.set('authorization', 'SBgpaZIDdWlHUexc4m')
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
@@ -361,7 +391,7 @@ describe('Admin Should be able to View all repaid loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=true')
-			.set('access-token', 'SBgpaZdIDdWlHUexc46m')
+			.set('authorization', adminToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(200);
@@ -376,12 +406,12 @@ describe('Admin Should be able to View all repaid loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=true')
-			.set('access-token', 'SBgpaZIDdWlHUexc46m')
+			.set('authorization', 'SBgpaZIDdWlHUexc46m')
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
-				expect(res.body.error).to.be.equal('Token error');
+				expect(res.body.error).to.be.equal('Invalid Token supplied');
 				done();
 			});
 	});
@@ -390,13 +420,13 @@ describe('Admin Should be able to View all repaid loans', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans?status=approved&repaid=true')
-			.set('access-token', 'SBgpaZdIDdWlHUexc4m')
+			.set('authorization', userToken)
 			.send()
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
 				expect(res.body.error).to.be.equal(
-					'Unauthorized Access! You should be an Administrator'
+					'You do not have enough priviledges to continue'
 				);
 				done();
 			});

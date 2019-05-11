@@ -14,30 +14,30 @@ router.post('/auth/signup', authController.createUser);
 router.post('/auth/signin', authController.loginUser);
 
 // Loan routes
-router.post('/loans', tokenVer.checkToken, loanController.applyLoan);
-router.get('/loans', tokenVer.checkToken, loanController.getLoans);
-router.get('/loans/:loanId', tokenVer.checkToken, loanController.getLoan);
+router.post('/loans', [tokenVer.checkToken], loanController.applyLoan);
+router.get('/loans', [tokenVer.checkToken, tokenVer.checkAdmin], loanController.getLoans);
+router.get('/loans/:loanId', [tokenVer.checkToken, tokenVer.checkAdmin], loanController.getLoan);
 router.patch(
 	'/loans/:loanId',
-	tokenVer.checkToken,
+	[tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.approveOrReject
 );
 router.post(
 	'/loans/:loanId/repayments',
-	tokenVer.checkToken,
+	[tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.createRepayments
 );
 router.get(
 	'/loans/:loanId/repayments',
-	tokenVer.checkToken,
+	[tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.getRepaymets
 );
 
 // Users routes
 router.patch(
 	'/users/:userEmail/verify',
-	tokenVer.checkToken,
+	[tokenVer.checkToken, tokenVer.checkAdmin],
 	usersController.markVerified
 );
-router.get('/users', tokenVer.checkToken, usersController.getAllUsers);
+router.get('/users', [tokenVer.checkToken, tokenVer.checkAdmin], usersController.getAllUsers);
 export default router;

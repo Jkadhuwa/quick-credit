@@ -7,7 +7,6 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 // CREATE /SIGN UP TESTS
-
 describe('Create new user', () => {
 	it('should return status 201 with data of newly created user', (done) => {
 		chai
@@ -26,6 +25,9 @@ describe('Create new user', () => {
 				expect(res).to.have.status(201);
 				expect(res.body.data).to.be.an('object');
 				expect(res.body.data.id).to.be.a('number');
+				expect(res.body.data)
+					.to.have.property('token')
+					.to.be.a('string');
 				done();
 			});
 	});

@@ -3,16 +3,6 @@
 /* eslint-disable arrow-body-style */
 import data from '../mock_db/database';
 
-const createToken = () => {
-	let token = '';
-	const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	const charactersLength = characters.length;
-	for (let i = 0; i < 20; i += 1) {
-		token += characters.charAt(Math.floor(Math.random() * charactersLength));
-	}
-	return token;
-};
 const isValidEmail = (email) => {
 	return /\S+@\S+\.\S+/.test(email);
 };
@@ -59,7 +49,6 @@ const balance = (loan, paidAmount) => {
 	return blnc;
 };
 module.exports = {
-	createToken,
 	isValidEmail,
 	isValidTelephone,
 	usedEmail,

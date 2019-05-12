@@ -31,7 +31,7 @@ form span h3 {
 .input input {
   padding-left: 1rem;
   padding-right: 1rem;
-  font-family: "Circular-Light";
+  font-family: 'Circular-Light';
   font-size: 0.8rem;
   border: 1px solid #c5cfd9;
   background: #ffffff;
@@ -64,7 +64,7 @@ label.lbl-loan {
   line-height: 9px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 19px;
   border-radius: 10px;
   display: block;
   transition: all 0.5s ease;
@@ -88,15 +88,16 @@ label.lbl-loan {
   .loan input,
   .loan select {
     width: 15em;
-    font-family: "Circular-Light";
-    font-size: 0.8em;
+    font-family: 'Circular-Light';
+    font-size: 18px;
     float: right;
-    margin-right: 3.5em;
+	margin-top: -0.5em;
   }
   label.lbl-loan {
     text-align: right;
     margin-right: 2em;
-    margin-left: 4.5em;
+    margin-left: 3em;
+	font-size: 18px;
   }
   .input {
     display: block;

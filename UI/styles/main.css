@@ -133,7 +133,7 @@ form h3 {
   padding-left: 1rem;
   padding-right: 1rem;
   font-family: "Circular-Light";
-  font-size: 16px;
+  font-size: 18px;
   border: 1px solid #c5cfd9;
   background: #ffffff;
 }
@@ -161,10 +161,10 @@ form h3 {
   line-height: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 10px;
   display: block;
-  width: 150px;
+  width: 70%;
 }
 .reset .reg {
   margin-left: auto !important;
@@ -246,8 +246,8 @@ form h3 {
     padding: 0;
   }
   input.reg1 {
-    width: 80%;
-    margin-left: 3em;
+    width: 90%;
+    margin-left: 1em;
   }
 
   .nav-links {

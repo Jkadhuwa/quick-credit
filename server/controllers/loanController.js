@@ -21,10 +21,7 @@ class LoanController {
 				user: data.users[i].email,
 				amount: req.body.amount,
 				tenor: req.body.tenor,
-				paymentInstallment: paymentInstallment(
-					req.body.amount,
-					req.body.tenor
-				),
+				paymentInstallment: paymentInstallment(req.body.amount, req.body.tenor),
 				status: 'Pending',
 				interest: 5 * (req.body.amount / 100),
 				totalAmount: totalAmount(req.body.amount),

@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Andela Developer Challenge-Kigali cycle 6 Bootcam Project. Quick-Credit is an online platform which provides short term loans to individuals.",
-    "version": "1.0.0",
+    "version": "1.0",
     "title": "Quick-Credit",
+    "description": "Andela Developer Challenge-Kigali cycle 6 Bootcam Project. Quick-Credit is an online platform which provides short term loans to individuals.",
     "termsOfService": "https://quick-credit-adc.herokuapp.com/terms",
     "contact": {
       "email": "justinemsinda@gmail.com"
@@ -13,8 +13,11 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "quick-credit-adc.herokuapp.com",
+  "host": "localhost:8080",
   "basePath": "/api/v1",
+  "schemes": ["http"],
+  "produces": ["application/json"],
+
   "tags": [
     {
       "name": "Front End Pages",
@@ -33,590 +36,509 @@
       "description": "All Operations about loans"
     }
   ],
-  "schemes": [
-    "http"
-  ],
   "paths": {
     "/": {
       "get": {
-        "tags": [
-          "Front End Pages"
-        ],
+        "description": "",
         "summary": "Serve front end pages",
-        "description": " ",
-        "operationId": "frontEndPages",
-        "produces": [
-          "XML",
-          "HTML"
-        ],
+        "tags": ["Front End Pages"],
+        "operationId": "V1Get",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "successful operation",
+            "headers": {}
           },
           "404": {
-            "description": "Pages Not Found"
+            "description": "Pages Not Found",
+            "headers": {}
           }
         }
       }
     },
-    "/auth/signup": {
+    "/auth/signup/": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "description": "User object that needs to be added to the database",
         "summary": "Create a new user",
-        "description": "",
-        "operationId": "addUser",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Auth"],
+        "operationId": "V1AuthSignupPost",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "User object that needs to be added to the database",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/userSignUp"
-            }
+            "name": "firstName",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "lastName",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "telephone",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "address",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "nationality",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "workAddress",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/userSignupResponse"
-            }
+            "headers": {}
           },
           "409": {
             "description": "Email already taken",
-            "schema": {
-              "$ref": "#/definitions/conflict"
-            }
+            "headers": {}
           },
           "500": {
             "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "headers": {}
           }
         }
       }
     },
-    "/auth/signin": {
+    "/auth/signin/": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Sign in to existing user account",
         "description": "Authenticates user using email address and password",
-        "operationId": "loginUser",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Sign in to existing user account",
+        "tags": ["Auth"],
+        "operationId": "V1AuthSigninPost",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "User who want to login in to their account and access the system",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/userSignIn"
-            }
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/userSigninResponse"
-            }
+            "headers": {}
           },
           "400": {
-            "description": "Invalid username/password supplied"
+            "description": "Invalid username/password supplied",
+            "headers": {}
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "headers": {}
           },
           "405": {
-            "description": "Validation exception"
+            "description": "Validation exception",
+            "headers": {}
           },
           "500": {
             "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "headers": {}
           }
         }
       }
     },
     "/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Finds all system users",
         "description": "Used by the Administartor to view all users/clients in the system",
-        "operationId": "viewUsers",
-        "produces": [
-          "application/json"
+        "summary": "Finds all system users",
+        "tags": ["Users"],
+        "operationId": "UsersGet",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
         ],
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/usersResponse"
-              }
-            }
+            "description": "OK - Operation carried out successful ",
+            "headers": {}
+          },
+          "401": {
+            "description": "Invalid Token supplied",
+            "headers": {}
           },
           "404": {
             "description": "No user Found",
-            "schema": {
-              "$ref": "#/definitions/userNotFound"
-            }
+            "headers": {}
           },
           "500": {
             "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "headers": {}
           }
-        },
-        "security": [
-          {
-            "verifyToken": [
-              "read:users"
-            ]
-          }
-        ]
+        }
       }
     },
-    "/users/:userEmail/verify": {
+    "/users/{userEmail}/verify": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Update user status",
         "description": "Admin updates the user status by marking the user verified",
-        "operationId": "verifyUsers",
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Update user status",
+        "tags": ["Users"],
+        "operationId": "V1VerifyPatch",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
           {
             "name": "userEmail",
             "in": "path",
-            "description": "Email for the user the admin wants to verify",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/verifyUsersResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/unauthorizedAccess"
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": "#/definitions/userNotFound"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "description": "",
+            "headers": {}
           }
-        },
-        "security": [
-          {
-            "verifyToken": [
-              "write:users",
-              "read:users"
-            ]
-          }
-        ]
+        }
       }
     },
     "/loans": {
-      "get": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "View all loan applications",
-        "description": "Returns all loans in the system to the admin",
-        "operationId": "viewLoans",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Filter loans by status='approved'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "repaid",
-            "in": "query",
-            "description": "Filter loans by approved=false or true",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/getLoansResponse"
-              }
-            }
-          },
-          "404": {
-            "description": "No Loans found",
-            "schema": {
-              "$ref": "#/definitions/loanNotFound"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
       "post": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "Create a loan application",
-        "description": "User supplies amount and tenor to make a loan application",
-        "operationId": "loanApplication",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Create a loan application by user",
+        "summary": "Create a loan appliaction",
+        "tags": ["Loans"],
+        "operationId": "LoansPost",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "Supply loan amount and number of months you need to repay",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/loanApplication"
-            }
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "amount",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "description": ""
+          },
+          {
+            "name": "tenor",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "description": ""
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/createLoansResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "headers": {}
           }
         },
-        "security": [
+        "500": {
+          "description": "Internal Server Error",
+          "headers": {}
+        }
+      },
+      "get": {
+        "description": "Returns all loans in the system to the admin",
+        "summary": "View all loan applications",
+        "tags": ["Loans"],
+        "operationId": "LoansGet",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
           {
-            "verifyToken": [
-              "write:loans",
-              "read:loans"
-            ]
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "repaid",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": ""
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {}
+          }
+        },
+        "404": {
+          "description": "No Loans found",
+          "headers": {}
+        },
+        "500": {
+          "description": "Internal Server Error",
+          "headers": {}
+        }
+      }
+    },
+    "/loans/{loanId}/repayments": {
+      "get": {
+        "description": "Returns a loan identified by an id the system to the admin",
+        "summary": "View  loan applications by id",
+        "tags": ["Loans"],
+        "operationId": "Loans1RepaymentsGet",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": false,
+            "type": "integer",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "headers": {}
+          },
+          "404": {
+            "description": "Loan Not found",
+            "headers": {}
+          }
+        }
       }
     },
     "/loans/{loanId}": {
       "get": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "View  loan applications by id",
         "description": "Returns a loan identified by an id the system to the admin",
-        "operationId": "viewLoansId",
-        "produces": [
-          "application/json"
-        ],
+        "summary": "View  loan applications by id",
+        "tags": ["Loans"],
+        "operationId": "V1Loans1Get",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
           {
             "name": "loanId",
             "in": "path",
-            "description": "loanId is a unique identifier used to fetch a specific loan",
+            "description": "",
             "type": "integer",
-            "required": true
+            "required": false
           }
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/getLoansResponse"
-            }
+            "description": "",
+            "headers": {}
           },
           "401": {
             "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/unauthorizedAccess"
-            }
+            "headers": {}
           },
           "404": {
             "description": "Loan Not found",
-            "schema": {
-              "$ref": "#/definitions/loanNotFound"
-            }
+            "headers": {}
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       },
       "patch": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "Update loan status",
         "description": "Admin updates the status of a loan application from pending to either approved or rejected",
-        "operationId": "updateLoanStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Update loan status",
+        "tags": ["Loans"],
+        "operationId": "V1Loans1Patch",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
           {
             "name": "loanId",
             "in": "path",
-            "description": "loanId is a unique identifier used to fetch a specific loan",
+            "description": "",
             "type": "integer",
-            "required": true
+            "required": false
           },
           {
-            "in": "body",
-            "name": "body",
-            "description": "This property can take either 'approved' or 'rejected'",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/loanStatus"
-            }
+            "name": "status",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/updateLoanStatus"
-            }
+            "description": "",
+            "headers": {}
           },
           "400": {
             "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/badRequest"
-            }
+            "headers": {}
           },
           "401": {
             "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/unauthorizedAccess"
-            }
+            "headers": {}
           },
           "500": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "description": "Internal Server Error",
+            "headers": {}
           }
-        },
-        "security": [
-          {
-            "verifyToken": [
-              "write:loans",
-              "read:loans"
-            ]
-          }
-        ]
+        }
       }
     },
-    "/loans/{loanId}/repayments": {
+    "/loans/{loanId}/repayment": {
       "post": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "Creates a loan repayment record",
         "description": "Admin post a loan repayment transaction in favour of a client",
-        "operationId": "createLoanRepayment",
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Creates a loan repayment record",
+        "tags": ["Loans"],
+        "operationId": "Loans1RepaymentPost",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
           {
             "name": "loanId",
             "in": "path",
-            "description": "loanId is used to uniquely identify a loan so as to be able to make a repayment",
+            "description": "",
             "type": "integer",
-            "required": true
+            "required": false
           },
           {
             "name": "amount",
-            "in": "body",
-            "description": "Amount to be transacted as a repayment installment",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/createLoanRepayment"
-            }
+            "in": "formData",
+            "description": "",
+            "required": false
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/loanRepaymentResponse"
-            }
+            "description": "",
+            "headers": {}
           },
           "401": {
             "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/unauthorizedAccess"
-            }
+            "headers": {}
           },
           "404": {
             "description": "Loan Not Found",
-            "schema": {
-              "$ref": "#/definitions/loanNotFound"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
+            "headers": {}
           }
         },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "Loans"
-        ],
-        "summary": "Creates a loan repayment record",
-        "description": "Admin post a loan repayment transaction in favour of a client",
-        "operationId": "getLoanRepayment",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "loanId",
-            "in": "path",
-            "description": "loanId is used to uniquely identify a loan so as to be able to make a repayment",
-            "type": "integer",
-            "required": true
-          },
-          {
-            "name": "amount",
-            "in": "body",
-            "description": "Amount to be transacted as a repayment installment",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/viewLoanRepayments"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/viewLoanRepaymentsResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/unauthorizedAccess"
-            }
-          },
-          "404": {
-            "description": "Loan Not Found",
-            "schema": {
-              "$ref": "#/definitions/loanNotFound"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/internalServerError"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        "500": {
+          "description": "Internal Server Error",
+          "headers": {}
+        }
       }
     }
   },
-  "securityDefinitions": {
-    "verifyToken": {
-      "type": "oauth2",
-      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
-      "scopes": {
-        "write:users": "modify users ",
-        "read:users": "read users",
-        "write:loans": "modify loans ",
-        "read:loans": "read loans"
-      }
-    },
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    }
-  },
+
   "definitions": {
-    "userSignUp": {
+    "http://localhost:8080/api/v1/auth/signup/Request": {
+      "title": "http://localhost:8080/api/v1/auth/signup/Request",
+      "example": {
+        "firstName": "joan",
+        "lastName": "kadzo",
+        "email": "kja2aro@gmail.com",
+        "password": "kulume",
+        "telephone": "0713723191",
+        "nationality": "Kenyan",
+        "workAddress": "embakasi"
+      },
       "type": "object",
       "properties": {
         "firstName": {
@@ -634,18 +556,29 @@
         "telephone": {
           "type": "string"
         },
-        "address": {
-          "type": "string"
-        },
         "nationality": {
           "type": "string"
         },
         "workAddress": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "telephone",
+        "nationality",
+        "workAddress"
+      ]
     },
-    "userSignIn": {
+    "http://localhost:8080/api/v1/auth/signin/Request": {
+      "title": "http://localhost:8080/api/v1/auth/signin/Request",
+      "example": {
+        "email": "sam3iro@gmail.com",
+        "password": "Kadhush"
+      },
       "type": "object",
       "properties": {
         "email": {
@@ -654,648 +587,52 @@
         "password": {
           "type": "string"
         }
-      }
+      },
+      "required": ["email", "password"]
     },
-    "userSignupResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 201
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/CreateItems"
-        }
-      }
-    },
-    "CreateItems": {
-      "type": "object",
-      "properties": {
-        "token": {
-          "type": "string"
-        },
-        "id": {
-          "type": "integer"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "nationality": {
-          "type": "string"
-        },
-        "workAddress": {
-          "type": "string"
-        }
-      }
-    },
-    "userSigninResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/items"
-        }
-      }
-    },
-    "items": {
-      "type": "object",
-      "properties": {
-        "token": {
-          "type": "string"
-        },
-        "id": {
-          "type": "integer"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        }
-      }
-    },
-    "users": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email": {
-          "type": "string",
-          "example": "msinda@gmail.com"
-        },
-        "firstName": {
-          "type": "string",
-          "example": "Musinda"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "Musinda"
-        },
-        "password": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "nationality": {
-          "type": "string"
-        },
-        "workAddress": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        }
-      }
-    },
-    "usersResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/usersItems"
-        }
-      }
-    },
-    "usersItems": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "email": {
-          "type": "string",
-          "example": "msinda@gmail.com"
-        },
-        "firstName": {
-          "type": "string",
-          "example": "Musinda"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "Musinda"
-        },
-        "password": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "nationality": {
-          "type": "string"
-        },
-        "workAddress": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "isAdmin": {
-          "type": "string"
-        }
-      }
-    },
-    "verifyUsersResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/verifyItems"
-        }
-      }
-    },
-    "verifyItems": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "email": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "isAdmin": {
-          "type": "string"
-        }
-      }
-    },
-    "loans": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user": {
-          "type": "string",
-          "example": "justinemsinda@gmail.com"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "description": "Loan Status",
-          "enum": [
-            "Pending",
-            "approved",
-            "rejected"
-          ]
-        },
-        "repaid": {
-          "type": "boolean",
-          "default": false
-        },
-        "tenor": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 12
-        },
-        "amount": {
-          "type": "number",
-          "format": "float",
-          "minimum": 100
-        },
-        "paymentInstallment": {
-          "type": "number",
-          "format": "float"
-        },
-        "balance": {
-          "type": "number",
-          "format": "float"
-        },
-        "interest": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "loanStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        }
-      }
-    },
-    "loanApplication": {
+    "http://localhost:8080/api/v1/loansRequest": {
+      "title": "http://localhost:8080/api/v1/loansRequest",
+      "example": {
+        "amount": "100000",
+        "tenor": "10"
+      },
       "type": "object",
       "properties": {
         "amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "tenor": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 12
-        }
-      }
-    },
-    "createLoanRepayment": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "viewLoanRepayments": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "createLoansResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 201
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/createLoansItems"
-        }
-      }
-    },
-    "createLoansItems": {
-      "type": "object",
-      "properties": {
-        "loanId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastname": {
-          "type": "string"
-        },
-        "status": {
           "type": "string"
         },
         "tenor": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 12
-        },
-        "amount": {
-          "type": "number",
-          "format": "float",
-          "minimum": 100
-        },
-        "paymentInstallment": {
-          "type": "number",
-          "format": "float"
-        },
-        "interest": {
-          "type": "number",
-          "format": "float"
-        },
-        "totalAmount": {
-          "type": "number",
-          "format": "float"
-        },
-        "amountPaid": {
-          "type": "number",
-          "format": "float"
-        },
-        "balance": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "getLoansResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/getLoansItems"
-        }
-      }
-    },
-    "getLoansItems": {
-      "type": "object",
-      "properties": {
-        "loanId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user": {
-          "type": "string",
-          "example": "justinemsinda@gmail.com"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "description": "Loan Status",
-          "example": "pending"
-        },
-        "repaid": {
-          "type": "boolean",
-          "default": false
-        },
-        "tenor": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 12
-        },
-        "amount": {
-          "type": "number",
-          "format": "float",
-          "minimum": 100
-        },
-        "totalAmount": {
-          "type": "number",
-          "format": "float",
-          "minimum": 100
-        },
-        "paymentInstallment": {
-          "type": "number",
-          "format": "float"
-        },
-        "amountPaid": {
-          "type": "number",
-          "format": "float"
-        },
-        "balance": {
-          "type": "number",
-          "format": "float"
-        },
-        "interest": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "updateLoanStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/updateLoanItems"
-        }
-      }
-    },
-    "updateLoanItems": {
-      "type": "object",
-      "properties": {
-        "loanId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "tenor": {
-          "type": "integer"
-        },
-        "status": {
-          "type": "string"
-        },
-        "monthlyIstallment": {
-          "type": "string"
-        },
-        "interest": {
           "type": "string"
         }
-      }
+      },
+      "required": ["amount", "tenor"]
     },
-    "loanRepaymentResponse": {
+    "http://localhost:8080/api/v1/loans/:idRequest": {
+      "title": "http://localhost:8080/api/v1/loans/:idRequest",
+      "example": {
+        "status": "Rejected"
+      },
       "type": "object",
       "properties": {
         "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/loanRepaymentItems"
+          "type": "string"
         }
-      }
+      },
+      "required": ["status"]
     },
-    "loanRepaymentItems": {
+    "http://localhost:8080/api/v1/loans/:loanId/repaymenstRequest": {
+      "title": "http://localhost:8080/api/v1/loans/:loanId/repaymenstRequest",
+      "example": {
+        "amount": 4000
+      },
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "loanId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
-        },
         "amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "paidAmount": {
-          "type": "number",
-          "format": "float"
-        },
-        "balance": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "viewLoanRepaymentsResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
           "type": "integer",
-          "format": "int64",
-          "example": 200
-        },
-        "data": {
-          "type": "object",
-          "$ref": "#/definitions/viewLoanRepResItems"
+          "format": "int32"
         }
-      }
-    },
-    "viewLoanRepResItems": {
-      "type": "object",
-      "properties": {
-        "loanId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "totalAmount": {
-          "type": "number",
-          "format": "float"
-        },
-        "monthlyInstallment": {
-          "type": "number",
-          "format": "float"
-        },
-        "amount": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
-    "badRequest": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 400
-        },
-        "error": {
-          "type": "string",
-          "example": "Unauthorized Access"
-        }
-      }
-    },
-    "unauthorizedAccess": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 401
-        },
-        "error": {
-          "type": "string",
-          "example": "Unauthorized Access"
-        }
-      }
-    },
-    "userNotFound": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 404
-        },
-        "error": {
-          "type": "string",
-          "example": "User Not Found"
-        }
-      }
-    },
-    "loanNotFound": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 404
-        },
-        "error": {
-          "type": "string",
-          "example": "Loan Not Found"
-        }
-      }
-    },
-    "conflict": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 409
-        },
-        "error": {
-          "type": "string",
-          "example": "Email already taken"
-        }
-      }
-    },
-    "internalServerError": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "example": 500
-        },
-        "error": {
-          "type": "string",
-          "example": "Internal Server Error"
-        }
-      }
+      },
+      "required": ["amount"]
     }
   }
 }

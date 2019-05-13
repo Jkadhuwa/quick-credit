@@ -49,7 +49,7 @@ module.exports = {
 			nationality: 'Kenyan',
 			telephone: '+254713723191',
 			workAddress: 'bruce hse Nrb',
-			status: 'verified',
+			status: 'unverified',
 			isAdmin: false
 		}
 	],

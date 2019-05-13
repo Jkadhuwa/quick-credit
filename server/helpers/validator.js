@@ -73,7 +73,7 @@ const validateLoan = (data) => {
     errorMsg += 'Amount can not be less than 1 or greater than 12, ';
   }
 };
-module.exports = {
+export default {
   validate,
   validateLogin,
   validateLoan

@@ -11,7 +11,6 @@ const swaggerDoc = require('../swagger.json');
 
 dotenv.config();
 
-
 const environment = process.env.NODE_ENV;
 const app = express();
 app.use(bodyPaser.json());
@@ -19,10 +18,6 @@ app.use(bodyPaser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('combined', { skip: (req, res) => res.statusCode < 400 }));
 
-
-if (environment !== 'production') {
-	app.use(morgan('dev'));
-}
 // routes
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use('/api/v1', Router);

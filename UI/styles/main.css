@@ -17,7 +17,7 @@
   margin-top: 5rem;
   margin-bottom: 5rem;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
 }
 
 .navbar {
@@ -50,14 +50,16 @@ a {
 .btn-join {
   border-radius: 8px;
   border: none;
-  width: 100px;
+  width: 150px;
   background: #f1f1f2;
   font-size: 16px;
   height: 40px;
   background: rgb(25, 92, 92);
   color: #f1f1f2;
 }
-
+form {
+  height: 400px;
+}
 .nav-links {
   display: flex;
   justify-content: end;
@@ -65,7 +67,6 @@ a {
 .login {
   text-transform: uppercase;
 }
-
 .info-about {
   display: inline-grid;
   background-color: #c5cfd9;
@@ -132,8 +133,8 @@ form h3 {
 .input input {
   padding-left: 1rem;
   padding-right: 1rem;
-  font-family: "Circular-Light";
-  font-size: 16px;
+  font-family: 'Circular-Light';
+  font-size: 18px;
   border: 1px solid #c5cfd9;
   background: #ffffff;
 }
@@ -161,10 +162,10 @@ form h3 {
   line-height: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 10px;
   display: block;
-  width: 150px;
+  width: 70%;
 }
 .reset .reg {
   margin-left: auto !important;
@@ -176,16 +177,24 @@ form h3 {
 
 .login-form {
   width: 350px;
-  height: 400px;
+  height: 450px;
 }
-.forgot-cred a {
-  margin-bottom: 2em;
+.forgot-cred a,
+.loginLink a,
+.loginAsUser a {
+  margin-bottom: 0.5em;
   margin-left: 31% !important;
   margin-right: auto !important;
-
   color: #007c89;
 }
-
+.loginLink a,
+.loginAsUser a {
+  color: #111;
+  font-size: 18px;
+}
+.forgot-cred {
+  margin-bottom: -2em;
+}
 .joinus {
   text-transform: uppercase;
   margin-left: 50px;
@@ -246,8 +255,8 @@ form h3 {
     padding: 0;
   }
   input.reg1 {
-    width: 80%;
-    margin-left: 3em;
+    width: 90%;
+    margin-left: 1em;
   }
 
   .nav-links {

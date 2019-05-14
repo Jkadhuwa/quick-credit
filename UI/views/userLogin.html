@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,7 +13,7 @@
       <nav class="navbar">
         <a class="nav-brand" href="../index.html">MKOPO </a>
         <ul class="nav-links">
-          <li class="login"><a href="./userLogin.html">Login</a></li>
+          <li class="login"><a href="./adminLogin.html" hidden>Login</a></li>
           <li class="joinus"><a href="./register.html">Join Us</a></li>
         </ul>
       </nav>
@@ -21,21 +21,50 @@
 
     <div class="container">
       <div class="login-form box">
-        <form action="/" method="POST">
+        <form
+          name="login"
+          action="./Client/clientDashboard.html"
+          method="POST"
+          onsubmit="return(validate())"
+        >
           <div class="container">
-            <h3 class="md-text">Reset Password</h3>
-            <div class=" reset input">
-              <label class="reg" for="email">Enter Your Email</label>
+            <h3 class="md-text">User Login</h3>
+            <div class="reg input">
+              <label class="reg" for="email">Email</label>
               <input
-                class="reg1 reset"
-                type="text"
+                class="reg1"
+                id="emailLogin"
+                type="email"
                 name="email"
-                placeholder="Enter Your Email Address"
+                placeholder="Your Email Address"
+                required
+              />
+            </div>
+
+            <div class="reg input">
+              <label class="reg" for="password">Password</label>
+              <input
+                class="reg1"
+                id="pwdlogin"
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+                minlength="6"
               />
             </div>
 
             <div class="m2 input">
-              <a class="primary-btn" href="#">Reset</a>
+              <button class="primary-btn" type="submit">
+                Login
+              </button>
+            </div>
+            <div class="loginLink">
+              <a href="./adminLogin.html">Login as Admin</a>
+            </div>
+			</br>
+            <div class="forgot-cred">
+              <a href="./resetPassword.html">Forgot Password?</a>
             </div>
           </div>
         </form>

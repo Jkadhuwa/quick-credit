@@ -1,0 +1,5 @@
+node_modules
+swagger1.json
+.eslintignore
+.nyc_output
+coverage

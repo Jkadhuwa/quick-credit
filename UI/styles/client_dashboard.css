@@ -32,7 +32,7 @@ header div.navbar-top-right {
 header a.navbar-brand {
   text-decoration: none;
   font-size: 20px;
-  font-family: "Courier New";
+  font-family: 'Courier New';
   margin: 20px auto 20px 1em;
   display: block;
   color: white;
@@ -73,7 +73,7 @@ header div ul li {
 .side-nav ul li a {
   text-decoration: none;
   color: #fff;
-  font-family: " Verdana";
+  font-family: ' Verdana';
 }
 aside nav ul li button.dropdown-btn img {
   width: 20px;
@@ -96,7 +96,7 @@ img {
   height: 20px;
 }
 .settings-container {
-  font-family: " Verdana";
+  font-family: ' Verdana';
   margin-left: 25px;
   padding-top: 10px;
   padding-left: 4px;
@@ -108,9 +108,9 @@ button.dropdown-btn {
   border: none;
   background: none;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 15px;
-  font-family: " Verdana";
+  font-family: ' Verdana';
 }
 button.dropdown-btn span {
   margin-left: 20px;
@@ -148,7 +148,7 @@ div.complete-profile.box {
 }
 
 .dash-content {
-  font-family: " Verdana";
+  font-family: ' Verdana';
   text-align: center;
   margin-top: 10rem;
   color: rgb(63, 61, 61);
@@ -196,9 +196,9 @@ div.input a {
     border: none;
     background: none;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     margin-left: -0.3em;
-    font-family: " Verdana";
+    font-family: ' Verdana';
   }
   button.dropdown-btn span {
     margin-left: 0;
@@ -249,15 +249,15 @@ div.input a {
     border: none;
     background: none;
     color: white;
-    font-size: 16px;
+    font-size: 19px;
     margin-left: -0.4em;
-    font-family: " Verdana";
+    font-family: ' Verdana';
   }
   button.dropdown-btn span {
     margin-left: -0.1em;
   }
   .settings-container {
-    font-family: " Verdana";
+    font-family: ' Verdana';
     margin-left: 1.2em;
     padding-top: 10px;
     padding-left: 4px;
@@ -315,7 +315,7 @@ div.input a {
   }
   header div ul li div div h5 {
     font-family: Verdana;
-    font-size: 16px;
+    font-size: 19px;
     padding: 10px;
     text-align: center;
     color: white;
@@ -342,9 +342,9 @@ div.input a {
     border: none;
     background: none;
     color: white;
-    font-size: 16px;
+    font-size: 19px;
     margin-left: -0.4em;
-    font-family: " Verdana";
+    font-family: ' Verdana';
   }
   button.dropdown-btn span {
     margin-left: -0.1em;

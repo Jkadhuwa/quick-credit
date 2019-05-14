@@ -50,7 +50,7 @@ div.complete-profile.client-profile {
   padding-top: 0.5em;
 }
 form h3 {
-  font-family: "Verdana";
+  font-family: 'Verdana';
   text-align: center;
   margin-top: 0;
 }
@@ -74,12 +74,13 @@ label,
 select {
   display: grid;
   text-align: center;
+  font-size: 18px;
 }
 
 .input input,
 .input select {
-  font-family: "Circular-Light";
-  font-size: 0.8rem;
+  font-family: 'Circular-Light';
+  font-size: 18px;
   border: 1px solid #c5cfd9;
   background: #ffffff;
 }
@@ -160,7 +161,7 @@ div.input a {
     display: grid;
     grid-template-columns: 40% 30% 30%;
     grid-template-rows: 1fr;
-    grid-template-areas: "left center right";
+    grid-template-areas: 'left center right';
     height: 66vh;
     margin-top: 10px;
     width: 100%;
@@ -168,9 +169,9 @@ div.input a {
   }
   .profile-data {
     display: grid;
-    grid-template-columns: 40% 30% 30%;
+    grid-template-columns: 30% 30% 30%;
     grid-template-rows: 1fr;
-    grid-template-areas: "left center right";
+    grid-template-areas: 'left center right';
     height: 70vh;
     margin-top: -5px;
     width: 100%;
@@ -181,16 +182,16 @@ div.input a {
     grid-area: left;
     position: absolute;
   }
+  .bio-data input {
+    margin-left: -12em;
+  }
 
-  .bio-data input,
   .bio-data select {
-    float: right;
-    margin-top: -2em;
-    margin-right: 20em;
+    margin-left: 1.5em;
   }
   .bio-data label {
-    margin-right: 25em;
-    text-align: right;
+    margin-right: 14em;
+    text-align: center;
   }
   .residence {
     grid-area: center;
@@ -201,6 +202,7 @@ div.input a {
   }
 
   .work-data {
+    margin-right: -4em;
     margin-top: 0;
     grid-area: right;
     height: 50vh;
@@ -225,14 +227,14 @@ div.input a {
   .input select {
     align-content: center;
   }
-  .input input.img,
+
   .input img.user-image {
-    margin-right: 18em;
+    margin-left: 4em;
   }
-  .input input.img {
+  .input > input.img {
     border: none;
     width: 40%;
-    margin-right: 7em;
+    margin-left: 2em;
   }
   .btn {
     margin: 10px 45%;
@@ -240,19 +242,25 @@ div.input a {
   }
 }
 @media only screen and (min-width: 64.063em) {
+  .main-content {
+    width: 100% !important;
+    padding-right: 3em;
+    padding-right: 3em;
+    height: calc(100vh- 100px) !important;
+  }
   div.complete-profile.box {
     width: 65vw;
     margin-left: 13em;
-    height: calc(85vh);
+    height: calc(86vh);
     padding-top: 1em;
   }
   .profile-data {
     display: grid;
-    grid-template-columns: 40% 30% 30%;
+    grid-template-columns: 33% 33% 33%;
     grid-template-rows: 1fr;
-    grid-template-areas: "left center right";
-    height: 69vh;
-    margin-top: -5px;
+    grid-template-areas: 'left center right';
+    height: 73vh;
+    margin-top: -4px;
     width: 100%;
     border: 1px solid #111;
   }
@@ -260,17 +268,20 @@ div.input a {
   .bio-data {
     grid-area: left;
     position: absolute;
+    text-align: center;
   }
 
-  .bio-data input,
+  .bio-data input {
+    margin-right: 7em;
+    width: 60% !important;
+  }
+
   .bio-data select {
-    float: right;
-    margin-top: -2em;
-    margin-right: 12em;
+    margin-right: 8.5em;
+    width: 60%;
   }
   .bio-data label {
-    margin-right: 23em;
-    text-align: right;
+    margin-right: 15em;
   }
   .residence {
     grid-area: center;
@@ -288,20 +299,32 @@ div.input a {
 
   input,
   select {
-    width: 14em;
+    width: 80%;
   }
   .input {
     display: grid;
     text-align: center;
   }
   .input input.img {
-    width: 60%;
-    margin-left: 6em;
+    width: 70%;
+    margin-left: 2em;
   }
   .btn {
     margin: 10px 44%;
     height: 40px;
     width: 90px;
     font-size: 18px;
+  }
+
+  div.lineBorder.bio > span {
+    font-weight: 600;
+    text-align: center;
+    margin-right: 10em;
+    margin-top: -2em !important;
+  }
+  img.user-image {
+    height: 100px;
+    width: 100px;
+    margin-left: 5em !important;
   }
 }

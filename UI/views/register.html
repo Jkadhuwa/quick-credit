@@ -13,7 +13,7 @@
       <nav class="navbar">
         <a class="nav-brand" href="../index.html">MKOPO </a>
         <ul class="nav-links">
-          <li class="login"><a href="./login.html">Login </a></li>
+          <li class="login"><a href="./userLogin.html">Login </a></li>
           <li class="joinus">
             <a href="./register.html" hidden>Join Us </a>
           </li>
@@ -23,16 +23,17 @@
 
     <div class="container">
       <div class="register-form box">
-        <form action="/" method="POST">
+        <form action="./userLogin.html" method="POST">
           <div class="container">
             <h3 class="md-text">Register</h3>
             <div class="reg input">
               <label class="reg" for="email">Email</label>
               <input
                 class="reg1"
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Your Email Address"
+                required
               />
             </div>
 
@@ -43,6 +44,7 @@
                 type="password"
                 name="password"
                 placeholder="Enter Password"
+                required
               />
             </div>
             <div class="reg input">
@@ -52,10 +54,13 @@
                 type="password"
                 name="password"
                 placeholder="Confirm Password"
+                required
               />
             </div>
             <div class="m2 input">
-              <a class="primary-btn " href="#">Join MKOPO</a>
+              <button class="primary-btn" type="submit">
+                Join Mkopo
+              </button>
             </div>
           </div>
         </form>
@@ -94,7 +99,9 @@
         </div>
       </div>
       <div class="copyright">
-        <p>&copy 2019 Quick Credit Ltd. All Rights Reserved</p>
+        <p>Quick Credit Ltd.</p>
+
+        <p>&copy 2019 All Rights Reserved</p>
       </div>
     </footer>
     <!--End of Footer section-->

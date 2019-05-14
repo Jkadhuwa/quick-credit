@@ -94,7 +94,7 @@
             </button>
             <div class="settings-container">
               <a href="./completeProfile.html">Complete Profile</a><br /><br />
-              <a href="./userProfile.html">View Profile</a>
+              <a href="./userProfile.html">Complete Profile</a>
             </div>
           </li>
         </ul>
@@ -109,7 +109,7 @@
 
       <main class="main-content ">
         <div class="loan-application box">
-          <form action="/" method="POST">
+          <form name="loanApp" action="./clientDashboard.html" method="POST">
             <span><h3>Loan Payment</h3></span>
             <div class="lineBorder"></div>
             <div class="loan input">
@@ -118,7 +118,8 @@
                 class="loan1"
                 type="number"
                 name="loanID"
-                placeholder="Loan ID"
+                placeholder=""
+                value="2"
                 readonly
               />
             </div>
@@ -128,7 +129,8 @@
                 class="loan1"
                 type="number"
                 name="loan-amount"
-                placeholder="Loan"
+                placeholder=""
+                value="52500"
                 readonly
               />
             </div>
@@ -138,7 +140,8 @@
                 class="loan1"
                 type="number"
                 name="balance"
-                placeholder="Balance"
+                placeholder=""
+                value="25000"
                 readonly
               />
             </div>
@@ -149,11 +152,14 @@
                 type="number"
                 name="amount"
                 placeholder="Amount You want to pay"
+                required
               />
             </div>
 
             <div class="m2 input">
-              <a class="apply-btn " href="#">Send</a>
+              <button class="apply-btn" type="submit" onclick="appDialog()">
+                Send
+              </button>
             </div>
           </form>
         </div>

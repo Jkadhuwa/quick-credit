@@ -37,7 +37,7 @@ div.complete-profile.box {
 }
 
 form h3 {
-  font-family: "Verdana" !important;
+  font-family: 'Verdana' !important;
   text-align: center;
   margin-top: 0;
 }
@@ -65,7 +65,7 @@ select {
 
 .input input,
 .input select {
-  font-family: "Circular-Light";
+  font-family: 'Circular-Light';
   font-size: 0.8rem;
   border: 1px solid #c5cfd9;
   background: #ffffff;
@@ -100,7 +100,7 @@ form label {
   line-height: 9px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 10px;
   display: block;
   transition: all 0.5s ease;
@@ -263,6 +263,7 @@ img.user-image {
     margin-left: 3em;
     float: left;
     width: 50%;
+    font-size: 19px;
   }
   .bio-data label {
     text-align: right;
@@ -282,15 +283,16 @@ img.user-image {
     float: right;
     margin-top: -25px;
     width: 50%;
+    font-size: 19px;
   }
   label,
   input {
     display: block;
-	font-size: 18px;
+    font-size: 18px;
   }
   input {
     width: 35%;
-	font-size: 18px;
+    height: 40px;
   }
 
   button .btn-success {

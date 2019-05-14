@@ -161,6 +161,7 @@ div.input a {
   text-decoration: none;
   text-align: center;
   display: inline-block;
+  font-size: 18px;
 }
 .btn-danger {
   background-color: #dc3545;
@@ -235,7 +236,7 @@ div.input a {
     line-height: 9px;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 10px;
     display: block;
     transition: all 0.5s ease;

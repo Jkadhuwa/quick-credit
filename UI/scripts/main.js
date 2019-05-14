@@ -72,18 +72,16 @@ function changeClassName() {
   }
 })();
 
-// function to validate input fields
-/*
-const validate = () => {
-  if (document.login.email.value === '') {
-    alert('Please provide your Email!');
-    document.login.email.focus();
+// function toshow dialog boxes
+
+const appDialog = () => {
+  if (document.loanApp.amount.value == '') {
+    alert('Please provide amount you want to pay!');
+    document.myForm.Name.focus();
     return false;
-  }
-  if (document.login.password.value === '') {
-    alert('Please provide your password!');
-    document.login.password.focus();
-    return false;
+  } else {
+    alert(
+      'Thank you for paying your installment. Finish repaying your loan to secure another one'
+    );
   }
 };
-*/

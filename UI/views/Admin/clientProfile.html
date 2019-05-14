@@ -120,7 +120,7 @@
 
       <main class="main-content">
         <div class="complete-profile client-profile box">
-          <form action="/" method="POST">
+          <form action="./adminDashboard.html" method="POST">
             <div class="form-header">
             <span><h3>User Profile</h3></span>
           </div>
@@ -133,40 +133,22 @@
             <div class="profile bio-data input">
                 <div class="lineBorder"><span>Bio Data</span></div>
               <img class="user-image" src="" id="image"></img>
-              
-              <div class="profile title">
-                <label class="gender " for="gender">Title</label>
-                <select class="profile-Input" name="gender" disabled="true">
-                    <option value="null">Select...</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-              </div>
               <div class="profile fullname">
                 <label class="fullname" for="name">Full Name</label>
-                <input class="profile-Input" type="text" name="name" placeholder="" disabled="true">
+                <input class="profile-Input" type="text" name="name" placeholder="" disabled="true" value="Musinda Kadhuwa">
               </div>
               <div class="profile id">
                   <label class="id" for="id">ID Number</label>
-                  <input class="profile-Input" type="text" name="id" placeholder="" disabled="true">
+                  <input class="profile-Input" type="text" name="id" placeholder="" disabled="true" value="584587996">
               </div>
-              <div class="profile nationality">
-                  <label class="nationality" for="nationality">nationality</label>
-                  <input class="profile-Input" type="text" name="nationality" placeholder="" disabled="true">
-              </div>
-                
-              <div class="profile dob">
-                  <label class="dob" for="dob">D.O.B</label>
-                  <input class="profile-Input" type="date" name="dob" placeholder="" disabled="true">
-              </div>
+
               <div class="profile telephone">
                   <label class="telephone" for="telephone">Telephone</label>
-                  <input class="profile-Input" type="text" name="telephone" placeholder="" disabled="true"> 
+                  <input class="profile-Input" type="text" name="telephone" placeholder="" disabled="true" value="071248596"> 
               </div>
               <div class="profile email">
                   <label class="email" for="email">Email</label>
-                  <input class="profile-Input" type="text" name="email" placeholder="" disabled="true"> 
+                  <input class="profile-Input" type="text" name="email" placeholder="" disabled="true" value="musinda.kadhuwa@gamil.com"> 
               </div>
             </div>
 
@@ -178,18 +160,22 @@
             <div class="profile residence input">
                 <div class="lineBorder"><span>Residence</span></div>
                 <div class="profile curr_address">
+					<div class="profile nationality">
+                  <label class="nationality" for="nationality">Nationality</label>
+                  <input class="profile-Input" type="text" name="nationality" placeholder="" disabled="true" value="Uganda">
+              </div>
                     <label class="curr-address" for="current-address">Current Address</label>
-                    <input class="profile-Input" type="text" name="current-address" placeholder="" disabled="true">
+                    <input class="profile-Input" type="text" name="current-address" placeholder="" disabled="true" value="Nairobi">
                   </div>
                   <div class="profile len_stay">
                       <label class="len_stay" for="length-stay">Length Of Stay</label>
-                      <input class="profile-Input" type="text" name="length-stay" placeholder="" disabled="true">
+                      <input class="profile-Input" type="text" name="length-stay" placeholder="" disabled="true" value="2 years">
                     </div>
                     <div class="profile type_of_residence">
                         <label class="type_of_residence " for="type_res">Type Of Residence</label>
                         <select class="profile-Input" name="type_res" disabled="true">
                           <option value="null">Select...</option>
-                          <option value="rental">Rental</option>
+                          <option value="rental" selected>Rental</option>
                           <option value="owned">Owned</option>
                           <option value="employer-provided">Employer Provided</option>
                           <option value="parental-house">Parents House</option>
@@ -207,7 +193,7 @@
                     <label class="employment-status" for="emp-status">Employment Status</label>
                     <select class="profile-Input" name="type_res" disabled="true">
                         <option value="null">Select...</option>
-                        <option value="employed">Employed</option>
+                        <option value="employed" selected>Employed</option>
                         <option value="self-employed">Self Employed</option>
                         <option value="unemployed">Unemployed</option>
                         
@@ -215,15 +201,15 @@
             </div>
             <div class="profile curr-emp">
                 <label class="curr-emp" for="current-employer">Current Employer</label>
-                <input class="profile-Input" type="text" name="current-employer" placeholder="" disabled="true">
+                <input class="profile-Input" type="text" name="current-employer" placeholder="" disabled="true" value="GOK">
               </div>
               <div class="profile emp-add">
                   <label class="emp-add" for="employer-address">Employer Address</label>
-                  <input class="profile-Input" type="text" name="employer-address" placeholder="" disabled="true">
+                  <input class="profile-Input" type="text" name="employer-address" placeholder="" disabled="true" value="0001">
                 </div>
                 <div class="profile emp-tel">
                     <label class="emp-tel" for="emp-telephone">Employer Telephone</label>
-                    <input class="profile-Input" type="number" name="emp-telephone" placeholder="" disabled="true">
+                    <input class="profile-Input" type="number" name="emp-telephone" placeholder="" disabled="true" value="02055493">
                   </div>
             
             </div>

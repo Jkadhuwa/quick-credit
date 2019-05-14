@@ -20,7 +20,7 @@ form span h3 {
   margin-top: 10px;
 }
 .loan-application {
-  margin-top: 30px;
+  margin-top: 45px;
   width: 350px;
 }
 
@@ -81,23 +81,23 @@ label.lbl-loan {
     position: fixed !important;
   }
   .loan-application {
-    margin-top: 2.5em;
+    margin-top: 4.5em;
     width: 650px;
     height: 490px;
   }
-  .loan input,
-  .loan select {
+  .loan input {
     width: 15em;
     font-family: 'Circular-Light';
     font-size: 18px;
     float: right;
-	margin-top: -0.5em;
+    margin-top: -0.5em;
   }
   label.lbl-loan {
     text-align: right;
     margin-right: 2em;
-    margin-left: 3em;
-	font-size: 18px;
+    margin-left: 2.5em;
+    font-size: 18px;
+   
   }
   .input {
     display: block;

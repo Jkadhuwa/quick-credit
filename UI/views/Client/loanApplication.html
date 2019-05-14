@@ -94,7 +94,7 @@
             </button>
             <div class="settings-container">
               <a href="./completeProfile.html">Complete Profile</a><br /><br />
-              <a href="./userProfile.html">View Profile</a>
+              <a href="./userProfile.html"> Profile</a>
             </div>
           </li>
         </ul>
@@ -109,11 +109,11 @@
 
       <main class="main-content">
         <div class="loan-application box">
-          <form action="/" method="POST">
+          <form action="./clientDashboard.html" method="POST">
             <span><h3>Credit Details</h3></span>
             <div class="lineBorder"></div>
             <div class="loan input">
-              <label class="lbl-loan " for="amount">Amount Required</label>
+              <label class="lbl-loan" for="amount">Amount Required</label>
               <input
                 class="loan1"
                 type="number"
@@ -124,35 +124,20 @@
             </div>
             <div class="loan input">
               <label class="lbl-loan" for="period">Payment Period</label>
-              <select class="loan1" name="period">
-                <option value="null">Select...</option>
-              </select>
-            </div>
-            <div class="loan input">
-              <label class="lbl-loan" for="interest">Interest Rate</label>
               <input
                 class="loan1"
+                name="period"
                 type="number"
-                name="interest"
                 placeholder=""
-                readonly
-              />
-            </div>
-            <div class="loan input">
-              <label class="lbl-loan" for="payableAmount">
-                Payable Amount</label
-              >
-              <input
-                class="loan1"
-                type="number"
-                name="payableAmount"
-                placeholder=""
-                readonly
+                value="12"
+                required
               />
             </div>
 
-            <div>
-              <a class="apply-btn " href="#">Apply</a>
+            <div class="m2 input">
+              <button class="apply-btn" type="submit">
+                Apply
+              </button>
             </div>
           </form>
         </div>

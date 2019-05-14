@@ -114,15 +114,10 @@
 
       <main class="main-content ">
         <div class="loan-application box">
-          <form action="/" method="POST">
+          <form name="loanApp" action="./adminDashboard.html" method="POST">
             <span><h3>Loan Payment</h3></span>
             <div class="lineBorder"></div>
-            <div class="loan input">
-              <label class="loan">Select User</label>
-              <select class="laon1" id="uname-search">
-                <option>Choose </option>
-              </select>
-            </div>
+
             <div class="lineBorder"></div>
             <div class="loan input">
               <label class="loan " for="loanId">Loan ID</label>
@@ -131,7 +126,8 @@
                 type="text"
                 name="loanId"
                 placeholder="Loan ID"
-                readonly
+                value="14"
+                required
               />
             </div>
 
@@ -143,6 +139,7 @@
                 name="totalAmount"
                 placeholder="Total Amount"
                 readonly
+                value="20000"
               />
             </div>
             <div class="loan input">
@@ -153,6 +150,7 @@
                 name="balance"
                 placeholder="Balance"
                 readonly
+                value="15000"
               />
             </div>
             <div class="loan input">
@@ -162,11 +160,14 @@
                 type="number"
                 name="amount"
                 placeholder="Amount You want to pay"
+                required
               />
             </div>
 
             <div class="m2 input">
-              <a class="apply-btn " href="#">Post</a>
+              <button class="apply-btn" type="submit" onclick="appDialog()">
+                Post
+              </button>
             </div>
           </form>
         </div>

@@ -210,7 +210,7 @@ Admin can:
 
 ---
 
-Hello smart people. If you you would like to contribute into this project to make it better please do not hesitate, fork the project and use a feature branch. I will be humbled to receive pull request from you.
+Hello smart people. If you you would like to contribute into this project so as to make it better please do not hesitate, fork the project and use a feature branch. I will be humbled to receive pull request from you.
 
 ### Links
 

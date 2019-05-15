@@ -15,11 +15,11 @@ let adminToken = null;
 before((done) => {
 	const admin = {
 		email: 'joankadzo@gmail.com',
-		password: 'Joankadzo',
+		password: 'Joankadzo1',
 	};
 	const user = {
 		email: 'sam3ziro@gmail.com',
-		password: 'Kadhush',
+		password: 'Kadhush1',
 	};
 	request.post('/api/v1/auth/signin')
 		.send(user)
@@ -34,6 +34,169 @@ before((done) => {
 			adminToken = res.body.data.token;
 			done();
 		});
+});
+
+
+// CREATE /SIGN UP TESTS
+describe('Create new user', () => {
+	it('should return status 201 with data of newly created user', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Stephen',
+				lastName: 'Kalume',
+				email: 'jameskalume@gmail.com',
+				password: 'Joankdzo1',
+				telephone: '0713723191',
+				nationality: 'Tanzanian',
+				workAddress: '12t'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(201);
+				expect(res.body.data).to.be.an('object');
+				expect(res.body.data.id).to.be.a('number');
+				expect(res.body.data)
+					.to.have.property('token')
+					.to.be.a('string');
+				done();
+			});
+	});
+
+	it('should return status 400 with error message Fields can not be empty', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: '',
+				lastName: '',
+				email: '',
+				password: '',
+				telephone: '',
+				workAddress: ''
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
+	it('should return status 409 with error message email already taken', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Stephen',
+				lastName: 'Kalume',
+				email: 'jameskalume@gmail.com',
+				password: 'Joankdzo1',
+				telephone: '0713723191',
+				nationality: 'Tanzanian',
+				workAddress: '12t'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(409);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Email already taken');
+				done();
+			});
+	});
+	it('should return status 400 with error message check email or telephone format', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'Kerin',
+				email: 'kadhuwa.com',
+				password: 'Joankadzo',
+				telephone: '094568698',
+				address: '11th st',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
+});
+
+// SIGN IN TESTS
+
+describe('User sign in', () => {
+	it('should return status 200 with data of the user', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signin')
+			.send({
+				email: 'sam3ziro@gmail.com',
+				password: 'Kadhush1'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.property('data');
+				done();
+			});
+	});
+
+	it('should return status 401 with an error message when either password or email is wrong', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signin')
+			.send({
+				email: 'samzir@gmail.com',
+				password: 'Kdhush'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(401);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
+
+	it('should return status 400 with an error message Check email format', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signin')
+			.send({
+				email: 'samzirogmail.com',
+				password: 'Kadhush'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
+	it('should return status 400 with an error message password should have more than 6 characters', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signin')
+			.send({
+				email: 'samziro@gmail.com',
+				password: 'Kdh'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
+	it('should return status 400 with an error message email or password can can not be empty', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signin')
+			.send({
+				email: '',
+				password: ''
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				done();
+			});
+	});
 });
 
 describe('Admin can mark user as verified', () => {

@@ -1,6 +1,6 @@
-import chai from 'chai';
 import assert from 'assert';
 import helper from '../helpers/helper';
+
 
 describe('Calculate balance ', () => {
 	it('should get the difference of the argument', () => {
@@ -15,11 +15,5 @@ describe('Calculate balance ', () => {
 describe('Calculate totalAmount ', () => {
 	it('should calculate the Total amount payable when user enters loan request', () => {
 		assert.equal(525, helper.totalAmount(500));
-	});
-});
-
-describe('Check phone number format validity ', () => {
-	it('Should chck the phone number if it follows 07xxxxxxxx format', () => {
-		assert.equal(false, helper.isValidTelephone(456738928));
 	});
 });

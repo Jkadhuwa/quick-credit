@@ -1,0 +1,5 @@
+exclude_patterns:
+  - '**/test**'
+  - '**/mock_db**'
+  - '**/node_modules**'
+  - "**/UI"

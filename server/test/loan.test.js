@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 
-
 const request = require('supertest')(app);
 
 const { expect } = chai;
@@ -16,19 +15,21 @@ let adminToken = null;
 before((done) => {
 	const admin = {
 		email: 'joankadzo@gmail.com',
-		password: 'Joankadzo',
+		password: 'Joankadzo1'
 	};
 	const user = {
 		email: 'sam3ziro@gmail.com',
-		password: 'Kadhush',
+		password: 'Kadhush1'
 	};
-	request.post('/api/v1/auth/signin')
+	request
+		.post('/api/v1/auth/signin')
 		.send(user)
 		.end((err, res) => {
 			if (err) throw err;
 			userToken = res.body.data.token;
 		});
-	request.post('/api/v1/auth/signin')
+	request
+		.post('/api/v1/auth/signin')
 		.send(admin)
 		.end((err, res) => {
 			if (err) throw err;
@@ -37,7 +38,7 @@ before((done) => {
 		});
 });
 
-// CREATE /SIGN UP TESTS
+// CREATE /New Loan
 
 describe('User applies a loan', () => {
 	it('Should return status 201 with data of newly created loan application', (done) => {
@@ -219,7 +220,9 @@ describe('User Should be able to create a loan repayment record', () => {
 			.request(app)
 			.post('/api/v1/loans/1/repayments')
 			.set('authorization', 'SBgpaZdIDdWlexc46m')
-			.send()
+			.send({
+				amount: '1000'
+			})
 			.end((err, res) => {
 				expect(res).to.have.status(401);
 				expect(res.body).to.have.property('error');
@@ -232,11 +235,24 @@ describe('User Should be able to create a loan repayment record', () => {
 			.request(app)
 			.post('/api/v1/loans/0/repayments')
 			.set('authorization', adminToken)
-			.send()
+			.send({ amount: '1000' })
 			.end((err, res) => {
 				expect(res).to.have.status(404);
 				expect(res.body).to.have.property('error');
 				expect(res.body.error).to.be.equal('Loan Not Found');
+				done();
+			});
+	});
+	it('Should return status 400 with error message of Amount is required ', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans/1/repayments')
+			.set('authorization', adminToken)
+			.send({ amount: '' })
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Amount is required');
 				done();
 			});
 	});

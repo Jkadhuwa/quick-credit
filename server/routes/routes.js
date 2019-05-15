@@ -1,30 +1,25 @@
 import express from 'express';
 import v1 from './apiv1';
-import authController from '../controllers/authController';
 import loanController from '../controllers/loanController';
 import tokenVer from '../middlewares/middlewares';
 import usersController from '../controllers/usersController';
-import validator from '../helpers/validator';
-// import joi from '@hapi/joi';
+
+import Validation from '../middlewares/validator';
 
 const router = express.Router();
 
 router.use('/', v1);
 
 // Authentication routes
-router.post('/auth/signup', [validator.validate], authController.createUser);
+router.post('/auth/signup', [Validation.validateSignup], usersController.createUser);
 router.post(
 	'/auth/signin',
-	[validator.validateLogin],
-	authController.loginUser
+	[Validation.validateLogin],
+	usersController.loginUser
 );
 
 // Loan routes
-router.post(
-	'/loans',
-	[validator.validateLoan, tokenVer.checkToken],
-	loanController.applyLoan
-);
+router.post('/loans', [Validation.validateApplication, tokenVer.checkToken], loanController.applyLoan);
 router.get(
 	'/loans',
 	[tokenVer.checkToken, tokenVer.checkAdmin],
@@ -42,7 +37,7 @@ router.patch(
 );
 router.post(
 	'/loans/:loanId/repayments',
-	[tokenVer.checkToken, tokenVer.checkAdmin],
+	[Validation.validateRepayment, tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.createRepayments
 );
 router.get(

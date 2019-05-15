@@ -1,9 +1,8 @@
-/* eslint-disable class-methods-use-this */
+
 import jwt from 'jsonwebtoken';
 import data from '../mock_db/database';
 import statusCode from '../helpers/statuses';
 
-// eslint-disable-next-line consistent-return
 const checkToken = (req, res, next) => {
 	const reqToken = req.headers.authorization;
 

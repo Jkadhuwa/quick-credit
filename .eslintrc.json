@@ -14,11 +14,19 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["warn", "tab"],
     "comma-dangle": ["warn", "only-multiline"],
     "no-console": "off",
+    "prefer-arrow-callback": "off",
+    "no-param-reassign": 0,
+    "indent": [2, "tab"],
+    "no-tabs": 0,
+    "no-restricted-syntax": ["error"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "implicit-arrow-linebreak": 0,
+    "consistent-return": 0,
     "no-unused-vars": "off",
-    "no-tabs": "off",
-    "prefer-arrow-callback": "off"
+    "eol-last": ["error", "always"],
+    "class-methods-use-this": "off",
+    "import/named": "off"
   }
 }

@@ -1,32 +1,25 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable import/named */
-
-/* eslint-disable class-methods-use-this */
 import data from '../mock_db/database';
 import statusCode from '../helpers/statuses';
-import {
-	paymentInstallment,
-	currentDate,
-	totalAmount,
-	balance
-} from '../helpers/helper';
+import helpers from '../helpers/helper';
 
 class LoanController {
 	applyLoan(req, res) {
 		for (let i = 0; i < data.users.length; i += 1) {
 			const loan = {
 				loanId: data.loans.length + 1,
-				createdOn: currentDate(),
+				createdOn: helpers.currentDate(),
 				user: data.users[i].email,
 				amount: req.body.amount,
 				tenor: req.body.tenor,
-				paymentInstallment: paymentInstallment(req.body.amount, req.body.tenor),
+				paymentInstallment: helpers.paymentInstallment(
+					req.body.amount,
+					req.body.tenor
+				),
 				status: 'Pending',
 				interest: 5 * (req.body.amount / 100),
-				totalAmount: totalAmount(req.body.amount),
+				totalAmount: helpers.totalAmount(req.body.amount),
 				amountPaid: 0,
-				balance: balance(totalAmount(req.body.amount), 0),
+				balance: helpers.balance(helpers.totalAmount(req.body.amount), 0),
 				repaid: false
 			};
 			const currentTotalLoans = parseInt(data.loans.length, 10);
@@ -131,7 +124,7 @@ class LoanController {
 				const loan = {
 					id: data.repayments.length + 1,
 					loanId: ln.loanId,
-					createdOn: currentDate(),
+					createdOn: helpers.currentDate(),
 					amount: req.body.amount
 				};
 				data.repayments.push(loan);
@@ -144,7 +137,7 @@ class LoanController {
 						amount: ln.totalAmount,
 						monthlyInstallment: ln.monthlyInstallment,
 						paidAmount: loan.amount,
-						balance: balance(ln.balance, req.body.amount)
+						balance: helpers.balance(ln.balance, req.body.amount)
 					}
 				});
 			}
@@ -161,6 +154,7 @@ class LoanController {
 			if (loan.loanId === id) {
 				return parseFloat(loan.paymentInstallment);
 			}
+			return false;
 		});
 
 		data.repayments.forEach((loan) => {

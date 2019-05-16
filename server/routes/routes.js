@@ -19,7 +19,7 @@ router.post(
 );
 
 // Loan routes
-router.post('/loans', [Validation.validateApplication, tokenVer.checkToken], loanController.applyLoan);
+router.post('/loans', [Validation.validateApplication, tokenVer.checkToken, tokenVer.checkUserLoanStatus], loanController.applyLoan);
 router.get(
 	'/loans',
 	[tokenVer.checkToken, tokenVer.checkAdmin],

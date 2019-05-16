@@ -12,15 +12,28 @@ chai.use(chaiHttp);
 
 let userToken = null;
 let adminToken = null;
+let user1Token = null;
+
 before((done) => {
 	const admin = {
 		email: 'joankadzo@gmail.com',
 		password: 'Joankadzo1'
 	};
 	const user = {
-		email: 'sam3ziro@gmail.com',
-		password: 'Kadhush1'
+		email: 'justinemsinda@gmail.com',
+		password: 'Kalume!1'
 	};
+	const user1 = {
+		email: 'kja2aro@gmail.com',
+		password: 'Kalume!1'
+	};
+	request
+		.post('/api/v1/auth/signin')
+		.send(user1)
+		.end((err, res) => {
+			if (err) throw err;
+			user1Token = res.body.data.token;
+		});
 	request
 		.post('/api/v1/auth/signin')
 		.send(user)
@@ -45,7 +58,7 @@ describe('User applies a loan', () => {
 		chai
 			.request(app)
 			.post('/api/v1/loans')
-			.set('authorization', userToken)
+			.set('authorization', user1Token)
 			.send({
 				amount: '150000',
 				tenor: '12'
@@ -53,6 +66,72 @@ describe('User applies a loan', () => {
 			.end((err, res) => {
 				expect(res).to.have.status(201);
 				expect(res.body.data).to.be.an('object');
+				done();
+			});
+	});
+
+	it('Should return status 409 with error message You already have a loan', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans')
+			.set('authorization', userToken)
+			.send({
+				amount: '150000',
+				tenor: '12'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(409);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('You already have a loan');
+				done();
+			});
+	});
+
+	it('Should return status 400 with error message Please ensure all fields are filled', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans')
+			.set('authorization', user1Token)
+			.send({
+				amount: '',
+				tenor: ''
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Please ensure all fields are filled');
+				done();
+			});
+	});
+	it('Should return status 400 with error message Amount only takes Floating or Numeric values', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans')
+			.set('authorization', user1Token)
+			.send({
+				amount: 'helloo',
+				tenor: '11'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Amount only takes Floating or Numeric values');
+				done();
+			});
+	});
+	it('Should return status 400 with error message Amount only takes Takes numbers between 1 - 12', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans')
+			.set('authorization', user1Token)
+			.send({
+				amount: '50000',
+				tenor: '18'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Takes numbers between 1 - 12');
 				done();
 			});
 	});
@@ -253,6 +332,19 @@ describe('User Should be able to create a loan repayment record', () => {
 				expect(res).to.have.status(400);
 				expect(res.body).to.have.property('error');
 				expect(res.body.error).to.be.equal('Amount is required');
+				done();
+			});
+	});
+	it('Should return status 400 with error message of Amount only takes Floating or Numeric values ', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/loans/1/repayments')
+			.set('authorization', adminToken)
+			.send({ amount: 'fgtrdf' })
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Amount only takes Floating or Numeric values');
 				done();
 			});
 	});

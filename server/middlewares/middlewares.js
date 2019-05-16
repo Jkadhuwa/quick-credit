@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken';
 import data from '../mock_db/database';
 import statusCode from '../helpers/statuses';
@@ -44,4 +43,19 @@ const checkAdmin = (req, res, next) => {
 	return false;
 };
 
-export default { checkToken, checkAdmin };
+const checkUserLoanStatus = (req, res, next) => {
+	const reqToken = req.headers.authorization;
+	if (checkToken) {
+		const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
+		data.loans.forEach((loan) => {
+			if (verified.email === loan.user && loan.repaid === false) {
+				res.status(statusCode.CONFLICT).send({
+					status: statusCode.CONFLICT,
+					error: 'You already have a loan'
+				});
+			}
+		});
+		next();
+	}
+};
+export default { checkToken, checkAdmin, checkUserLoanStatus };

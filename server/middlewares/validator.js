@@ -29,7 +29,7 @@ const validateSignup = (req, res, next) => {
 	}
 
 	if (firstName) {
-		regex = /^[a-zA-Z]/;
+		regex = /^[A-Za-z]+$/;
 		if (!regex.test(firstName)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,
@@ -38,7 +38,7 @@ const validateSignup = (req, res, next) => {
 		}
 	}
 	if (lastName) {
-		regex = /^[a-zA-Z]/;
+		regex = /^[A-Za-z]+$/;
 		if (!regex.test(lastName)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,
@@ -87,7 +87,7 @@ const validateSignup = (req, res, next) => {
 		}
 	}
 	if (nationality) {
-		regex = /[a-zA-Z]/;
+		regex = /^[A-Za-z]+$/;
 		if (!regex.test(nationality)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,
@@ -100,7 +100,7 @@ const validateSignup = (req, res, next) => {
 		if (!regex.test(workAddress)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,
-				error: 'Enter a Valid Country name'
+				error: 'Enter a Valid work address'
 			});
 		}
 	}
@@ -148,7 +148,7 @@ const validateApplication = (req, res, next) => {
 		});
 	}
 	if (amount) {
-		regex = /[-+]?[0-9]*\.?[0-9]*./;
+		regex = /([0-9]*[.])?[0-9]+/;
 		if (!regex.test(amount)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,

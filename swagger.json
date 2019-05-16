@@ -521,8 +521,8 @@
   },
 
   "definitions": {
-    "http://localhost:8080/api/v1/auth/signup/Request": {
-      "title": "http://localhost:8080/api/v1/auth/signup/Request",
+    "http://quick-credit-adc.herokuapp.com/api/v1/auth/signup/Request": {
+      "title": "http://quick-credit-adc.herokuapp.com/api/v1/auth/signup/Request",
       "example": {
         "firstName": "joan",
         "lastName": "kadzo",
@@ -566,8 +566,8 @@
         "workAddress"
       ]
     },
-    "http://localhost:8080/api/v1/auth/signin/Request": {
-      "title": "http://localhost:8080/api/v1/auth/signin/Request",
+    "http://quick-credit-adc.herokuapp.com/api/v1/auth/signin/Request": {
+      "title": "http://quick-credit-adc.herokuapp.com/api/v1/auth/signin/Request",
       "example": {
         "email": "sam3iro@gmail.com",
         "password": "Kadhush"
@@ -583,8 +583,8 @@
       },
       "required": ["email", "password"]
     },
-    "http://localhost:8080/api/v1/loansRequest": {
-      "title": "http://localhost:8080/api/v1/loansRequest",
+    "http://quick-credit-adc.herokuapp.com/api/v1/loansRequest": {
+      "title": "http://quick-credit-adc.herokuapp.com/api/v1/loansRequest",
       "example": {
         "amount": "100000",
         "tenor": "10"
@@ -600,8 +600,8 @@
       },
       "required": ["amount", "tenor"]
     },
-    "http://localhost:8080/api/v1/loans/:idRequest": {
-      "title": "http://localhost:8080/api/v1/loans/:idRequest",
+    "http://quick-credit-adc.herokuapp.com/api/v1/loans/:idRequest": {
+      "title": "http://quick-credit-adc.herokuapp.com/api/v1/loans/:idRequest",
       "example": {
         "status": "Rejected"
       },
@@ -613,8 +613,8 @@
       },
       "required": ["status"]
     },
-    "http://localhost:8080/api/v1/loans/:loanId/repaymenstRequest": {
-      "title": "http://localhost:8080/api/v1/loans/:loanId/repaymenstRequest",
+    "http://quick-credit-adc.herokuapp.com/api/v1/loans/:loanId/repaymenstRequest": {
+      "title": "http://quick-credit-adc.herokuapp.com/api/v1/loans/:loanId/repaymenstRequest",
       "example": {
         "amount": 4000
       },

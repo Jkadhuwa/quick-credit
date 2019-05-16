@@ -8,7 +8,7 @@ class UsersController {
 	createUser(req, res) {
 		const userId = data.users.length + 1;
 		const user = {
-			token: generateToken(userId, false),
+			token: generateToken(userId, false, req.body.email),
 			id: userId,
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
@@ -56,7 +56,7 @@ class UsersController {
 					return res.status(statusCode.STATUS_OK).send({
 						status: statusCode.STATUS_OK,
 						data: {
-							token: generateToken(user.id, user.isAdmin),
+							token: generateToken(user.id, user.isAdmin, user.email),
 							id: user.id,
 							firstName: user.firstName,
 							lastName: user.lastName,

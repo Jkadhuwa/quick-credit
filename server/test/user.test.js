@@ -15,19 +15,21 @@ let adminToken = null;
 before((done) => {
 	const admin = {
 		email: 'joankadzo@gmail.com',
-		password: 'Joankadzo1',
+		password: 'Joankadzo1'
 	};
 	const user = {
 		email: 'sam3ziro@gmail.com',
-		password: 'Kadhush1',
+		password: 'Kadhush1'
 	};
-	request.post('/api/v1/auth/signin')
+	request
+		.post('/api/v1/auth/signin')
 		.send(user)
 		.end((err, res) => {
 			if (err) throw err;
 			userToken = res.body.data.token;
 		});
-	request.post('/api/v1/auth/signin')
+	request
+		.post('/api/v1/auth/signin')
 		.send(admin)
 		.end((err, res) => {
 			if (err) throw err;
@@ -35,7 +37,6 @@ before((done) => {
 			done();
 		});
 });
-
 
 // CREATE /SIGN UP TESTS
 describe('Create new user', () => {
@@ -62,8 +63,7 @@ describe('Create new user', () => {
 				done();
 			});
 	});
-
-	it('should return status 400 with error message Fields can not be empty', (done) => {
+	it('should return status 400 with error message Please ensure all fields are filled', (done) => {
 		chai
 			.request(app)
 			.post('/api/v1/auth/signup')
@@ -78,6 +78,49 @@ describe('Create new user', () => {
 			.end((err, res) => {
 				expect(res).to.have.status(400);
 				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal(
+					'Please ensure all fields are filled'
+				);
+				done();
+			});
+	});
+	it('should return status 400 with error message Enter a valid First Name', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'sandra1000',
+				lastName: 'Kerin',
+				email: 'kadhuwa@gmail.com',
+				password: 'Joankadzo1',
+				telephone: '0745686958',
+				nationality: 'kenyan',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a valid First Name');
+				done();
+			});
+	});
+	it('should return status 400 with error message Enter a valid Last Name', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'kerin1000',
+				email: 'kadhuwa@gmail.com',
+				password: 'Joankadzo1',
+				telephone: '0745686958',
+				nationality: 'kenyan',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a valid Last Name');
 				done();
 			});
 	});
@@ -101,7 +144,7 @@ describe('Create new user', () => {
 				done();
 			});
 	});
-	it('should return status 400 with error message check email or telephone format', (done) => {
+	it('should return status 400 with error message Enter a valid Email Address', (done) => {
 		chai
 			.request(app)
 			.post('/api/v1/auth/signup')
@@ -109,14 +152,97 @@ describe('Create new user', () => {
 				firstName: 'Sandrina',
 				lastName: 'Kerin',
 				email: 'kadhuwa.com',
-				password: 'Joankadzo',
-				telephone: '094568698',
-				address: '11th st',
+				password: 'Joankadzo1',
+				telephone: '0745686958',
+				nationality: 'kenyan',
 				workAddress: '12 st'
 			})
 			.end((err, res) => {
 				expect(res).to.have.status(400);
 				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a valid Email Address');
+				done();
+			});
+	});
+
+	it('should return status 400 with error message Enter a valid Phone number', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'Kerin',
+				email: 'kadhuwa@gmail..com',
+				password: 'Joankadzo1',
+				telephone: '024568958',
+				nationality: 'kenyan',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a valid Phone number');
+				done();
+			});
+	});
+	it('should return status 400 with error message Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'Kerin',
+				email: 'kadhu@gmail..com',
+				password: 'joankadzo',
+				telephone: '074568958',
+				nationality: 'kenyan',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters.');
+				done();
+			});
+	});
+
+	it('should return status 400 with error message Enter a Valid Country name', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'Kerin',
+				email: 'kadwa@gmail..com',
+				password: 'Joankadzo1',
+				telephone: '0713723191',
+				nationality: '142gtdd',
+				workAddress: '12 st'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a Valid Country name');
+				done();
+			});
+	});
+	it('should return status 400 with error message Enter a Valid Country name', (done) => {
+		chai
+			.request(app)
+			.post('/api/v1/auth/signup')
+			.send({
+				firstName: 'Sandrina',
+				lastName: 'Kerin',
+				email: 'kawa@gmail..com',
+				password: 'Joankadzo1',
+				telephone: '0713723191',
+				nationality: 'Kenyan',
+				workAddress: '!-4d'
+			})
+			.end((err, res) => {
+				expect(res).to.have.status(400);
+				expect(res.body).to.have.property('error');
+				expect(res.body.error).to.be.equal('Enter a Valid work address');
 				done();
 			});
 	});

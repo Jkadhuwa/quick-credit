@@ -17,7 +17,7 @@ class UsersController {
 			telephone: req.body.telephone,
 			workAddress: req.body.workAddress,
 			status: 'Unverified',
-			isAdmin: false
+			isAdmin: req.body.isAdmin
 		};
 
 		const currentTotalUsers = parseInt(data.users.length, 10);

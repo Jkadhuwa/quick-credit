@@ -4,7 +4,6 @@ import generateToken from '../helpers/auth';
 
 class UsersController {
 // Create Users
-
 	createUser(req, res) {
 		const userId = data.users.length + 1;
 		const user = {
@@ -38,7 +37,8 @@ class UsersController {
 				email: user.email,
 				telephone: user.telephone,
 				nationality: user.nationality,
-				workAddress: user.workAddress
+				workAddress: user.workAddress,
+				isAdmin: user.isAdmin
 			}
 		});
 	}
@@ -64,7 +64,8 @@ class UsersController {
 							nationality: user.nationality,
 							telephone: user.telephone,
 							address: user.address,
-							workAddress: user.workAddress
+							workAddress: user.workAddress,
+							isAdmin: user.isAdmin
 						}
 					});
 				}

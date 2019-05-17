@@ -15,7 +15,7 @@
   },
   "host": "quick-credit-adc.herokuapp.com",
   "basePath": "/api/v1",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "produces": ["application/json"],
 
   "tags": [

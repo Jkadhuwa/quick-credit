@@ -72,7 +72,7 @@ module.exports = {
 			user: 'sam3ziro@gmail.com',
 			createdOn: '12-10-2019',
 			status: 'pending',
-			repaid: false,
+			repaid: true,
 			tenor: 10,
 			amount: 50000,
 			totalAmount: 52500,
@@ -125,7 +125,7 @@ module.exports = {
 			id: 1,
 			createdOn: '13-12-2019',
 			loanId: 1,
-			amount: 5000
+			amount: 5000,
 		},
 		{
 			id: 2,

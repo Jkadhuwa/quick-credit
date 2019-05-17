@@ -27,6 +27,7 @@ const balance = (loan, paidAmount) => {
 	}
 	return blnc;
 };
+
 export default {
 	paymentInstallment,
 	currentDate,

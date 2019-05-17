@@ -383,6 +383,7 @@ describe('Admin can view all users in the system', () => {
 				expect(res).to.have.status(200);
 				expect(res.body).to.be.an('object');
 				expect(res.body).to.have.property('data');
+				expect(res.body.data).to.be.an('array');
 				done();
 			});
 	});

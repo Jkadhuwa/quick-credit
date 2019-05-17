@@ -377,7 +377,56 @@
             "headers": {}
           }
         }
+      }, 
+	 "post": {
+        "description": "Admin post a loan repayment transaction in favour of a client",
+        "summary": "Creates a loan repayment record",
+        "tags": ["Loans"],
+        "operationId": "Loans1RepaymentPost",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "amount",
+            "in": "formData",
+            "description": "",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "headers": {}
+          },
+          "404": {
+            "description": "Loan Not Found",
+            "headers": {}
+          }
+        },
+        "500": {
+          "description": "Internal Server Error",
+          "headers": {}
+        }
       }
+    }
     },
     "/loans/{loanId}": {
       "get": {
@@ -468,58 +517,7 @@
         }
       }
     },
-    "/loans/{loanId}/repayment": {
-      "post": {
-        "description": "Admin post a loan repayment transaction in favour of a client",
-        "summary": "Creates a loan repayment record",
-        "tags": ["Loans"],
-        "operationId": "Loans1RepaymentPost",
-        "deprecated": false,
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": ""
-          },
-          {
-            "name": "loanId",
-            "in": "path",
-            "description": "",
-            "type": "integer",
-            "required": false
-          },
-          {
-            "name": "amount",
-            "in": "formData",
-            "description": "",
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized Access",
-            "headers": {}
-          },
-          "404": {
-            "description": "Loan Not Found",
-            "headers": {}
-          }
-        },
-        "500": {
-          "description": "Internal Server Error",
-          "headers": {}
-        }
-      }
-    }
-  },
-
+    
   "definitions": {
     "http://quick-credit-adc.herokuapp.com/api/v1/auth/signup/Request": {
       "title": "http://quick-credit-adc.herokuapp.com/api/v1/auth/signup/Request",

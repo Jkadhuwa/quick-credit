@@ -356,7 +356,7 @@ describe('Admin Should be able to View a loan repayment history', () => {
 	it('Should return status 200 with data of loan repayment history', (done) => {
 		chai
 			.request(app)
-			.get('/api/v1/loans/2/repayments')
+			.get('/api/v1/loans/1/repayments')
 			.set('authorization', adminToken)
 			.send({})
 			.end((err, res) => {
@@ -449,7 +449,7 @@ describe('User Should be able to View a loan repayment history', () => {
 	it('Should return status 200 with data of loan repayment history', (done) => {
 		chai
 			.request(app)
-			.get('/api/v1/loans/2/repayments')
+			.get('/api/v1/loans/1/repayments')
 			.set('authorization', user1Token)
 			.send({})
 			.end((err, res) => {

@@ -58,4 +58,8 @@ const checkUserLoanStatus = (req, res, next) => {
 		next();
 	}
 };
-export default { checkToken, checkAdmin, checkUserLoanStatus };
+export default {
+	checkToken,
+	checkAdmin,
+	checkUserLoanStatus
+};

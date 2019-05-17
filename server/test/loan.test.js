@@ -279,7 +279,7 @@ describe('Admin should view be able to Approve or Reject loan', () => {
 
 // Create Loan Repayment Record
 
-describe('User Should be able to create a loan repayment record', () => {
+describe('Admin Should be able to create a loan repayment record', () => {
 	it('Should return status 201 with data of loan repayment record', (done) => {
 		chai
 			.request(app)
@@ -309,7 +309,7 @@ describe('User Should be able to create a loan repayment record', () => {
 				done();
 			});
 	});
-	it('Should return status 404 with error message of Loan Found ', (done) => {
+	it('Should return status 404 with error message of Loan Not Found ', (done) => {
 		chai
 			.request(app)
 			.post('/api/v1/loans/0/repayments')
@@ -361,9 +361,7 @@ describe('Admin Should be able to View a loan repayment history', () => {
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(200);
-				expect(res.body).to.have.property('data');
-				expect(res.body.data).to.have.property('loanId');
-				expect(res.body.data.balance).to.be.not.equal(null);
+				expect(res.body.data).to.be.an('array');
 				done();
 			});
 	});
@@ -452,13 +450,12 @@ describe('User Should be able to View a loan repayment history', () => {
 		chai
 			.request(app)
 			.get('/api/v1/loans/2/repayments')
-			.set('authorization', adminToken)
+			.set('authorization', user1Token)
 			.send({})
 			.end((err, res) => {
 				expect(res).to.have.status(200);
 				expect(res.body).to.have.property('data');
-				expect(res.body.data).to.have.property('loanId');
-				expect(res.body.data.balance).to.be.not.equal(null);
+				expect(res.body.data).to.be.an('array');
 				done();
 			});
 	});

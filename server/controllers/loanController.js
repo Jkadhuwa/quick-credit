@@ -149,6 +149,7 @@ class LoanController {
 	}
 
 	getRepaymets(req, res) {
+		const history = [];
 		const id = parseInt(req.params.loanId, 10);
 		const monthlyPayment = data.loans.find((loan) => {
 			if (loan.loanId === id) {
@@ -157,25 +158,30 @@ class LoanController {
 			return false;
 		});
 
-		data.repayments.forEach((loan) => {
-			if (loan.loanId === id) {
-				return res.status(statusCode.STATUS_OK).send({
-					status: statusCode.STATUS_OK,
-					data: {
-						loanId: loan.loanId,
-						createdOn: loan.createdOn,
-						totalAmount: monthlyPayment.totalAmount,
-						monthlyInstallment: monthlyPayment.paymentInstallment,
-						amount: loan.amount
-					}
-				});
+		data.repayments.forEach((repayment) => {
+			if (repayment.loanId === id) {
+				const lnHist = {
+					loanId: repayment.loanId,
+					createdOn: repayment.createdOn,
+					totalAmount: monthlyPayment.totalAmount,
+					monthlyInstallment: monthlyPayment.paymentInstallment,
+					amount: repayment.amount,
+					balance: repayment.balance
+				};
+				return history.push(lnHist);
 			}
-			return true;
 		});
-		return res.status(statusCode.NOT_FOUND).send({
-			status: statusCode.NOT_FOUND,
-			error: 'Loan Not found'
-		});
+		if (history.length !== 0) {
+			res.status(statusCode.STATUS_OK).send({
+				status: statusCode.STATUS_OK,
+				data: history
+			});
+		} else {
+			res.status(statusCode.NOT_FOUND).send({
+				status: statusCode.NOT_FOUND,
+				error: 'Loan Not found'
+			});
+		}
 	}
 }
 

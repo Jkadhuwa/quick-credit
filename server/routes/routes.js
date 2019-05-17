@@ -12,6 +12,7 @@ router.use('/', v1);
 
 // Authentication routes
 router.post('/auth/signup', [Validation.validateSignup], usersController.createUser);
+// router.post('/auth/admin/signup', [Validation.validateSignup], usersController.createAdmin);
 router.post(
 	'/auth/signin',
 	[Validation.validateLogin],
@@ -40,13 +41,17 @@ router.post(
 	[Validation.validateRepayment, tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.createRepayments
 );
+
+// End point for users to view loan repayment
 router.get(
 	'/loans/:loanId/repayments',
-	[tokenVer.checkToken, tokenVer.checkAdmin],
+	[tokenVer.checkToken],
 	loanController.getRepaymets
 );
 
+
 // Users routes
+// End point for Admin to verify users
 router.patch(
 	'/users/:userEmail/verify',
 	[tokenVer.checkToken, tokenVer.checkAdmin],

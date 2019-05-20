@@ -26,7 +26,7 @@ class DatabaseInit {
 			  workAddress VARCHAR(128) NOT NULL,
 			  nationality VARCHAR(128) NOT NULL,
 			  status VARCHAR(128) NOT NULL,
-			  isAdmin VARCHAR(100)  NOT NULL
+			  isAdmin BOOLEAN NOT NULL
 			)`;
 			this.initDb();
 		} catch (err) {

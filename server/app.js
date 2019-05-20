@@ -4,8 +4,8 @@ import bodyPaser from 'body-parser';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import router from './routes/routes';
-
-const swaggerDoc = require('../swagger.json');
+import Db from './db';
+import swaggerDoc from '../swagger.json';
 
 dotenv.config();
 
@@ -19,5 +19,11 @@ app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use('/api/v1', router);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT);
+
+const dbconn = new Db();
+app.listen(PORT, (err) => {
+	if (err) {
+		return (`error at port ${PORT}`);
+	}
+});
 export default app;

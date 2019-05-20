@@ -1,23 +1,22 @@
-import Data from '../db/db';
+import Data from '../db';
 
 class UsersModel {
 	constructor(payload = null) {
 		this.payload = payload;
 		this.result = null;
 	}
-
-	async createUser() {
+     async createUser() {
 		const user = {
-			firstname: this.payload.firstName,
-			lastname: this.payload.lastName,
-			email: this.payload.email,
-			password: this.payload.password,
-			telephone: this.payload.telephone,
-			workAddress: this.payload.workAddress,
-			nationality: this.payload.nationality,
-			status: this.payload.status,
-			isAdmin: this.payload.isAdmin
-		};
+			firstname,  
+			lastname,
+			email,
+			password,
+			telephone,
+			workAddress,
+			nationality,
+			status, 
+			isAdmin,
+		} = this.payload;
 		const values = [
 			user.firstname,
 			user.lastname,
@@ -38,7 +37,7 @@ class UsersModel {
 	static async login(email) {
 		const sql = `SELECT * FROM users WHERE email='${email}';`;
 		const { rows } = await new Data().query(sql);
-		if (rows.length === 0) {
+		if (!rows.length) {
 			return false;
 		}
 		this.result = rows[0];
@@ -58,7 +57,6 @@ class UsersModel {
 	static async getUser(email) {
 		const sql = `SELECT * FROM users WHERE email='${email}';`;
 		const { row } = await new Data().query(sql);
-		console.log(row);
 		if (row) {
 			this.result = row;
 			return this.result;
@@ -70,7 +68,7 @@ class UsersModel {
 		const sql = 'UPDATE users SET status = ($1) WHERE email = $2 returning *;';
 		const values = [status, email];
 		const { rows } = await new Data().query(sql, values);
-		if (rows.length === 0) {
+		if (!rows.length) {
 			return false;
 		}
 		this.result = rows[0];

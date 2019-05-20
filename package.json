@@ -8,8 +8,8 @@
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/eslint ./server/*.js --fix",
     "start": "npm run build && node ./build/app.js",
-    "dev": "cross-env NODE_ENV=dev nodemon server/app.js --exec babel-node --",
-    "test": "cross-env NODE_ENV=test mocha --require babel-register server/test/user.test.js --exit"
+    "dev": "NODE_ENV=dev nodemon server/app.js --exec babel-node --exit",
+    "test": "NODE_ENV=test mocha --require babel-register server/test/user.test.js --exit"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,8 @@
 import { Pool } from 'pg';
 import config from '../config/config';
+import dotenv from 'dotenv';
 
-require('dotenv').config();
+dotenv.config();
 
 const dbConfig = {
 	connectionString: config.db
@@ -13,7 +14,6 @@ class DatabaseInit {
 			this.pool = new Pool(dbConfig);
 			this.connect = async () =>
 				this.pool.on('connect', (err) => {
-					console.log(`connected to ${dbConfig.connectionString}`);
 				});
 
 			this.queryUsers = `CREATE TABLE IF NOT EXISTS users(
@@ -30,21 +30,16 @@ class DatabaseInit {
 			)`;
 			this.initDb();
 		} catch (err) {
-			// console.log(err);
 			return err;
 		}
 	}
 
 	async query(sql, data = []) {
-		console.log('here');
-
 		const conn = await this.connect();
 		try {
 			if (data.length) {
-				console.log('niko');
 				return await conn.query(sql, data);
 			}
-			console.log('niko apa');
 			return await conn.query(sql);
 		} catch (err) {
 			return err;
@@ -54,7 +49,6 @@ class DatabaseInit {
 	async initDb() {
 		try {
 			await this.query(this.queryUsers);
-			console.log('table created');
 		} catch (error) {
 			return error;
 		}

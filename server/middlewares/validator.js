@@ -120,12 +120,7 @@ class Validations {
 			}
 			next();
 		} catch (error) {
-			res
-				.status(statusCodes.SERVER_ERROR)
-				.send({
-					status: statusCodes.SERVER_ERROR,
-					error: 'Internal server error'
-				});
+			return error;
 		}
 	}
 

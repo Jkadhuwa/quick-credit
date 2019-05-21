@@ -89,7 +89,7 @@ class UsersModel {
 			this.result = rows[0];
 			return this.result;
 		} catch (error) {
-			return error
+			return error;
 		}
 	}
 }

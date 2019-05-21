@@ -9,5 +9,5 @@ const router = express.Router();
 
 // Authentication routes
 router.post('/auth/signup', [Validation.validateSignup, Validation.validatenewEmail], usersController.createUser);
-
+router.post('/auth/signin', [Validation.validateLogin], usersController.login);
 export default router;

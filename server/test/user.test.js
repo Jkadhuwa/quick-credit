@@ -58,10 +58,10 @@ describe('', () => {
 		);
 		new Data().query('INSERT INTO users (firstname, lastname, email, password, nationality, telephone, workAddress, status, isAdmin) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9)',
 			[user.firstname, user.lastname, user.email, user.password, user.nationality, user.telephone,
-				user.workAddress, user.status, user.isAdmin]);
+			user.workAddress, user.status, user.isAdmin]);
 		new Data().query('INSERT INTO users (firstname, lastname, email, password,  nationality, telephone, workAddress, status, isAdmin) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9)',
 			[admin.firstname, admin.lastname, admin.email, admin.password, admin.nationality, admin.telephone,
-				admin.workAddress, admin.status, admin.isAdmin]);
+			admin.workAddress, admin.status, admin.isAdmin]);
 		done();
 	});
 
@@ -262,6 +262,52 @@ describe('', () => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a Valid work address');
+				});
+		});
+	});
+
+	// Sign in tests
+	describe('User sign in', () => {
+		it('should return status 400 with an error message Check email format', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'samzirogmail.com',
+					password: 'Kadhush'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('should return status 400 with an error message password should have more than 6 characters', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'samziro@gmail.com',
+					password: 'Kdh'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('should return status 400 with an error message email or password can can not be empty', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: '',
+					password: ''
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
 				});
 		});
 	});

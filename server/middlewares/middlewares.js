@@ -7,8 +7,8 @@ class Verify {
 		const reqToken = req.headers.authorization;
 
 		if (!reqToken) {
-			return res.status(statusCode.FORBIDDEN).send({
-				status: statusCode.FORBIDDEN,
+			return res.status(statusCode.UNAUTHORIZED).send({
+				status: statusCode.UNAUTHORIZED,
 				error: 'Token Required'
 			});
 		}

@@ -50,5 +50,44 @@ class UsersController {
 			return error;
 		}
 	}
+	static async login(req, res) {
+		try {
+			const { email, password } = req.body;
+			const userLogin = await UserModel.login(email);
+			const {
+				firstName,
+				lastName,
+				nationality,
+				telephone,
+				workAddress,
+				isAdmin
+			} = userLogin;
+			if (userLogin) {
+				if (Auth.comparePassword(password, userLogin.password)) {
+					const token = Auth.generateToken(userLogin.isadmin, userLogin.email);
+					return res.status(statusCode.STATUS_OK).send({
+						status: statusCode.STATUS_OK,
+						data: {
+							token,
+							firstName: userLogin.firstname,
+							lastName: userLogin.lastname,
+							email: userLogin.email,
+							telephone: userLogin.telephone,
+							workAddress: userLogin.workaddress,
+							status: userLogin.status,
+							isAdmin: userLogin.isadmin
+
+						}
+					});
+				}
+				return res.status(statusCode.UNAUTHORIZED).send({ status: statusCode.UNAUTHORIZED, error: 'Wrong password or email' });
+			}
+			return res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'User not found' });
+		} catch (error) {
+			return error;
+
+			return error;
+		}
+	}
 }
 export default UsersController;

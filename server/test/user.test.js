@@ -267,48 +267,48 @@ describe('', () => {
 	});
 
 	// Sign in tests
-
-	it('should return status 400 with an error message Check email format', (done) => {
-		chai
-			.request(app)
-			.post('/api/v1/auth/signin')
-			.send({
-				email: 'samzirogmail.com',
-				password: 'Kadhush'
-			})
-			.end((err, res) => {
-				expect(res).to.have.status(400);
-				expect(res.body).to.have.property('error');
-				done();
-			});
+	describe('User sign in', () => {
+		it('should return status 400 with an error message Check email format', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'samzirogmail.com',
+					password: 'Kadhush'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('should return status 400 with an error message password should have more than 6 characters', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'samziro@gmail.com',
+					password: 'Kdh'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('should return status 400 with an error message email or password can can not be empty', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: '',
+					password: ''
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
 	});
-	it('should return status 400 with an error message password should have more than 6 characters', (done) => {
-		chai
-			.request(app)
-			.post('/api/v1/auth/signin')
-			.send({
-				email: 'samziro@gmail.com',
-				password: 'Kdh'
-			})
-			.end((err, res) => {
-				expect(res).to.have.status(400);
-				expect(res.body).to.have.property('error');
-				done();
-			});
-	});
-	it('should return status 400 with an error message email or password can can not be empty', (done) => {
-		chai
-			.request(app)
-			.post('/api/v1/auth/signin')
-			.send({
-				email: '',
-				password: ''
-			})
-			.end((err, res) => {
-				expect(res).to.have.status(400);
-				expect(res.body).to.have.property('error');
-				done();
-			});
-	});
-});
 });

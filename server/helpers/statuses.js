@@ -5,7 +5,7 @@ const UNAUTHORIZED = 401;
 const CONFLICT = 409;
 const FORBIDDEN = 403;
 const NOT_FOUND = 404;
-
+const SERVER_ERROR = 500;
 export default {
 	STATUS_CREATED,
 	STATUS_OK,
@@ -13,5 +13,6 @@ export default {
 	UNAUTHORIZED,
 	CONFLICT,
 	NOT_FOUND,
-	FORBIDDEN
+	FORBIDDEN,
+	SERVER_ERROR
 };

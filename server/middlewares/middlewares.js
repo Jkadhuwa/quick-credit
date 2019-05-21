@@ -1,65 +1,48 @@
 import jwt from 'jsonwebtoken';
-import data from '../mock_db/database';
+import Data from '../db';
 import statusCode from '../helpers/statuses';
 
-const checkToken = (req, res, next) => {
-	const reqToken = req.headers.authorization;
+class Verify {
+	static async checkToken(req, res, next) {
+		const reqToken = req.headers.authorization;
 
-	if (!reqToken) {
-		return res.status(statusCode.FORBIDDEN).send({
-			status: statusCode.FORBIDDEN,
-			error: 'Token Required'
-		});
-	}
-	try {
-		for (let i = 0; i < data.users.length; i += 1) {
-			const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
-			if (data.users[i].id === verified.userId) {
-				next();
-			}
+		if (!reqToken) {
+			return res.status(statusCode.UNAUTHORIZED).send({
+				status: statusCode.UNAUTHORIZED,
+				error: 'Token Required'
+			});
 		}
-	} catch (error) {
-		return res.status(statusCode.UNAUTHORIZED).send({
-			status: statusCode.UNAUTHORIZED,
-			error: 'Invalid Token supplied'
-		});
-	}
-};
+		try {
+			const token = reqToken.split(' ')[1];
+			const verified = jwt.verify(token, process.env.JWT_SECRET);
+			req.userinfo = verified;
 
-const checkAdmin = (req, res, next) => {
-	const reqToken = req.headers.authorization;
-	if (checkToken) {
-		const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
-		for (let i = 0; i < data.users.length; i += 1) {
+			next();
+		} catch (error) {
+			return res.status(statusCode.UNAUTHORIZED).send({
+				status: statusCode.UNAUTHORIZED,
+				error: 'Invalid Token supplied'
+			});
+		}
+	}
+
+	static async checkAdmin(req, res, next) {
+		try {
+			const token = req.headers.authorization.split(' ')[1];
+			const verified = jwt.verify(token, process.env.JWT_SECRET);
+
 			if (verified.isAdmin === true) {
 				next();
-			}
-		}
-		return res.status(statusCode.UNAUTHORIZED).send({
-			status: statusCode.UNAUTHORIZED,
-			error: 'You do not have enough priviledges to continue'
-		});
-	}
-	return false;
-};
-
-const checkUserLoanStatus = (req, res, next) => {
-	const reqToken = req.headers.authorization;
-	if (checkToken) {
-		const verified = jwt.verify(reqToken, process.env.JWT_SECRET);
-		data.loans.forEach((loan) => {
-			if (verified.email === loan.user && loan.repaid === false) {
-				res.status(statusCode.CONFLICT).send({
-					status: statusCode.CONFLICT,
-					error: 'You already have a loan'
+			} else {
+				return res.status(statusCode.UNAUTHORIZED).send({
+					status: statusCode.UNAUTHORIZED,
+					error: 'You do not have enough priviledges to continue'
 				});
 			}
-		});
-		next();
+		} catch (err) {
+			return err;
+		}
 	}
-};
-export default {
-	checkToken,
-	checkAdmin,
-	checkUserLoanStatus
-};
+	
+}
+export default Verify;

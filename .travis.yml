@@ -1,7 +1,6 @@
 sudo: false
 env:
   global:
-    -  PGPORT=5433
     - CC_TEST_REPORTER_ID=024300e222cf872bc641e47ac608f055e21fa74202be6e6cd6217452fabe0c9c
 language: node_js
 
@@ -20,7 +19,7 @@ script:
   - npm run coveralls
 
 after_success:
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
   email: false

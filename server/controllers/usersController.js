@@ -65,17 +65,25 @@ class UsersController {
 			if (userLogin) {
 				if (Auth.comparePassword(password, userLogin.password)) {
 					const token = Auth.generateToken(userLogin.isadmin, userLogin.email);
+					const { firstname,
+						lastname,
+						email,
+						telephone,
+						workaddress,
+						status,
+						isadmin
+					} = userLogin
 					return res.status(statusCode.STATUS_OK).send({
 						status: statusCode.STATUS_OK,
 						data: {
 							token,
-							firstName: userLogin.firstname,
-							lastName: userLogin.lastname,
-							email: userLogin.email,
-							telephone: userLogin.telephone,
-							workAddress: userLogin.workaddress,
-							status: userLogin.status,
-							isAdmin: userLogin.isadmin
+							firstname,
+							lastname,
+							email,
+							telephone,
+							workaddress,
+							status,
+							isadmin
 
 						}
 					});

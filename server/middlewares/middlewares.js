@@ -31,7 +31,7 @@ class Verify {
 			const token = req.headers.authorization.split(' ')[1];
 			const verified = jwt.verify(token, process.env.JWT_SECRET);
 
-			if (verified.isAdmin === 'true') {
+			if (verified.isAdmin === true) {
 				next();
 			} else {
 				return res.status(statusCode.UNAUTHORIZED).send({

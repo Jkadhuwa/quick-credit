@@ -32,7 +32,7 @@ class UsersController {
 					.status(statusCode.CONFLICT)
 					.send({ status: statusCode.CONFLICT, error: 'Email already in use' });
 			}
-			const token = Auth.generateToken(regUser.isadmin, regUser.email, regUser.firstname, regUser.lastname);
+			const token = Auth.generateToken(regUser.isadmin, regUser.email);
 			return res.status(statusCode.STATUS_CREATED).send({
 				status: statusCode.STATUS_CREATED,
 				data: {

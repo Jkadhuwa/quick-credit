@@ -11,13 +11,11 @@ class Auth {
 		return bcrypt.compareSync(password, hashedPassword);
 	}
 
-	static generateToken(isAdmin, email, firstname, lastname) {
+	static generateToken(isAdmin, email) {
 		const token = jwt.sign(
 			{
 				isAdmin,
 				email,
-				firstname,
-				lastname
 			},
 			process.env.JWT_SECRET,
 			{ expiresIn: '1d' }

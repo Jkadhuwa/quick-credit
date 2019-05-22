@@ -8,16 +8,19 @@ class UsersModel {
 
 	async createUser() {
 		try {
+			const {
+				firstname, lastname, email, password, telephone, workaddress, nationality, status, isadmin
+			} = this.payload;
 			const values = [
-				this.payload.firstname,
-				this.payload.lastname,
-				this.payload.email,
-				this.payload.password,
-				this.payload.telephone,
-				this.payload.workaddress,
-				this.payload.nationality,
-				this.payload.status,
-				this.payload.isadmin
+				firstname,
+				lastname,
+				email,
+				password,
+				telephone,
+				workaddress,
+				nationality,
+				status,
+				isadmin
 			];
 
 			const sql = 'INSERT INTO users (firstname, lastname, email, password, telephone, workaddress, nationality, status, isadmin) VALUES($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9) returning *;';

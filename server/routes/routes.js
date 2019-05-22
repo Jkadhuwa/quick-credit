@@ -1,5 +1,4 @@
 import express from 'express';
-import loanController from '../controllers/loanController';
 import tokenVer from '../middlewares/middlewares';
 import usersController from '../controllers/usersController';
 
@@ -10,4 +9,12 @@ const router = express.Router();
 // Authentication routes
 router.post('/auth/signup', [Validation.validateSignup, Validation.validatenewEmail], usersController.createUser);
 router.post('/auth/signin', [Validation.validateLogin], usersController.login);
+
+router.get(
+	'/users',
+	[tokenVer.checkToken, tokenVer.checkAdmin],
+	usersController.getAllUsers
+);
+
+
 export default router;

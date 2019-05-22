@@ -6,26 +6,26 @@ class UsersController {
 	static async createUser(req, res) {
 		try {
 			const {
-				firstName,
-				lastName,
+				firstname,
+				lastname,
 				email,
 				password,
 				nationality,
 				telephone,
-				workAddress,
-				isAdmin
+				workaddress,
+				isadmin
 			} = req.body;
 			const userPassword = Auth.hashPassword(password);
 			const regUser = await new UserModel({
-				firstName,
-				lastName,
+				firstname,
+				lastname,
 				email,
 				password: userPassword,
 				nationality,
 				telephone,
-				workAddress,
+				workaddress,
 				status: 'unverified',
-				isAdmin
+				isadmin
 			});
 			if (!regUser.createUser()) {
 				res
@@ -37,42 +37,35 @@ class UsersController {
 				status: statusCode.STATUS_CREATED,
 				data: {
 					token,
-					firstName: regUser.firstname,
-					lastName: regUser.lastname,
+					firstname: regUser.firstname,
+					lastname: regUser.lastname,
 					email: regUser.email,
 					telephone: regUser.telephone,
-					workAddress: regUser.workaddress,
+					workaddress: regUser.workaddress,
 					status: regUser.status,
-					isAdmin: regUser.isadmin
+					isadmin: regUser.isadmin
 				}
 			});
 		} catch (error) {
 			return error;
 		}
 	}
+
 	static async login(req, res) {
 		try {
 			const { email, password } = req.body;
 			const userLogin = await UserModel.login(email);
-			const {
-				firstName,
-				lastName,
-				nationality,
-				telephone,
-				workAddress,
-				isAdmin
-			} = userLogin;
 			if (userLogin) {
 				if (Auth.comparePassword(password, userLogin.password)) {
 					const token = Auth.generateToken(userLogin.isadmin, userLogin.email);
-					const { firstname,
+					const {
+						firstname,
 						lastname,
-						email,
 						telephone,
 						workaddress,
 						status,
 						isadmin
-					} = userLogin
+					} = userLogin;
 					return res.status(statusCode.STATUS_OK).send({
 						status: statusCode.STATUS_OK,
 						data: {
@@ -93,8 +86,21 @@ class UsersController {
 			return res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'User not found' });
 		} catch (error) {
 			return error;
+		}
+	}
 
-			return error;
+	static async getAllUsers(req, res) {
+		try {
+			const users = await UserModel.getUsers();
+			if (!users) {
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Users not found' });
+			}
+			res.status(statusCode.STATUS_OK).send({
+				status: statusCode.STATUS_OK,
+				data: users
+			});
+		} catch (err) {
+			return err;
 		}
 	}
 }

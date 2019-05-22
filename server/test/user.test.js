@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 import app from '../app';
 import Data from '../db';
 import Auth from '../helpers/auth';
+import userMock from '../mock_db/usermockdb';
 
 const { expect } = chai;
 
@@ -16,15 +18,15 @@ let adminToken;
 describe('', () => {
 	before('gen token', (done) => {
 		const admin = {
-			firstName: 'samuel',
-			lastName: 'ziro',
+			firstname: 'samuel',
+			lastname: 'ziro',
 			email: 'sam3iro@gmail.com',
 			password: Auth.hashPassword('kadhuwaA12'),
 			nationality: 'Kenyan',
 			telephone: '0713723191',
-			workAddress: 'Malindi',
-			statud: 'verified',
-			isAdmin: true
+			workaddress: 'Malindi',
+			status: 'verified',
+			isadmin: true
 		};
 
 		const user = {
@@ -56,31 +58,23 @@ describe('', () => {
 			process.env.JWT_SECRET,
 			{ expiresIn: '1h' }
 		);
-		new Data().query('INSERT INTO users (firstname, lastname, email, password, nationality, telephone, workAddress, status, isAdmin) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9)',
-			[user.firstname, user.lastname, user.email, user.password, user.nationality, user.telephone,
-			user.workAddress, user.status, user.isAdmin]);
-		new Data().query('INSERT INTO users (firstname, lastname, email, password,  nationality, telephone, workAddress, status, isAdmin) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9)',
-			[admin.firstname, admin.lastname, admin.email, admin.password, admin.nationality, admin.telephone,
-			admin.workAddress, admin.status, admin.isAdmin]);
+
+		const { rows } = new Data().query('INSERT INTO users (firstname, lastname, email, password, nationality, telephone, workaddress, status, isadmin) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9) returning *',
+			[user.firstname, user.lastname, user.email, user.password, user.nationality, user.telephone, user.workaddress, user.status, user.isadmin]);
 		done();
 	});
 
+	after('after all test', (done) => {
+		new Data().query('DROP TABLE users');
+		done();
+	});
 
 	describe('Create new user', () => {
 		it('should return status 201 with data of newly created user', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Stephen',
-					lastName: 'Kalume',
-					email: 'jameskalume@gmail.com',
-					password: 'Joankdzo1',
-					telephone: '0713723191',
-					nationality: 'Tanzanian',
-					workAddress: '12t',
-					isAdmin: 'false'
-				})
+				.send(userMock.user1)
 				.end((err, res) => {
 					expect(res).to.have.status(201);
 					expect(res.body.data).to.be.an('object');
@@ -109,76 +103,36 @@ describe('', () => {
 					);
 				});
 		});
+
 		it('should return status 400 with error message Enter a valid First Name', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'sandra1000',
-					lastName: 'Kerin',
-					email: 'kadhuwa@gmail.com',
-					password: 'Joankadzo1',
-					telephone: '0745686958',
-					nationality: 'kenyan',
-					workAddress: '12 st'
-				})
+				.send(userMock.user2)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a valid First Name');
 				});
 		});
+
 		it('should return status 400 with error message Enter a valid Last Name', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'kerin1000',
-					email: 'kadhuwa@gmail.com',
-					password: 'Joankadzo1',
-					telephone: '0745686958',
-					nationality: 'kenyan',
-					workAddress: '12 st'
-				})
+				.send(userMock.user9)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a valid Last Name');
 				});
 		});
-		it('should return status 409 with error message email already taken', () => {
-			chai
-				.request(app)
-				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Stephen',
-					lastName: 'Kalume',
-					email: 'jaymusinda@live.com',
-					password: 'Joankdzo1',
-					telephone: '0713723191',
-					nationality: 'Tanzanian',
-					workAddress: '12t'
-				})
-				.end((err, res) => {
-					expect(res).to.have.status(409);
-					expect(res.body).to.have.property('error');
-					expect(res.body.error).to.be.equal('Email already taken');
-				});
-		});
+
 		it('should return status 400 with error message Enter a valid Email Address', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'Kerin',
-					email: 'kadhuwa.com',
-					password: 'Joankadzo1',
-					telephone: '0745686958',
-					nationality: 'kenyan',
-					workAddress: '12 st'
-				})
+				.send(userMock.user3)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
@@ -190,34 +144,19 @@ describe('', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'Kerin',
-					email: 'kadhuwa@gmail..com',
-					password: 'Joankadzo1',
-					telephone: '04568958',
-					nationality: 'kenyan',
-					workAddress: '12 st'
-				})
+				.send(userMock.user4)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a valid Phone number');
 				});
 		});
+
 		it('should return status 400 with error message Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters', (done) => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'Kerin',
-					email: 'kadhu@gmail..com',
-					password: 'joankadzo',
-					telephone: '074568958',
-					nationality: 'kenyan',
-					workAddress: '12 st'
-				})
+				.send(userMock.user5)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
@@ -230,44 +169,68 @@ describe('', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'Kerin',
-					email: 'kadwa@gmail..com',
-					password: 'Joankadzo1',
-					telephone: '0713723191',
-					nationality: '142gtdd',
-					workAddress: '12 st'
-				})
+				.send(userMock.user6)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a Valid Country name');
 				});
 		});
-		it('should return status 400 with error message Enter a Valid Country name', () => {
+		it('should return status 400 with error message Enter a Valid work address', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signup')
-				.send({
-					firstName: 'Sandrina',
-					lastName: 'Kerin',
-					email: 'kawa@gmail..com',
-					password: 'Joankadzo1',
-					telephone: '0713723191',
-					nationality: 'Kenyan',
-					workAddress: '!-4d'
-				})
+				.send(userMock.user7)
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Enter a Valid work address');
 				});
 		});
+		it('should return status 409 with error message email already taken', () => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signup')
+				.send(userMock.user8)
+				.end((err, res) => {
+					expect(res).to.have.status(409);
+					expect(res.body).to.have.property('error');
+					expect(res.body.error).to.be.equal('Email already in use');
+				});
+		});
 	});
 
 	// Sign in tests
 	describe('User sign in', () => {
+		it('should return status 200 with data of the user', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'sam3ziro@gmail.com',
+					password: 'Kadhush1'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(200);
+					expect(res.body).to.have.property('data');
+					done();
+				});
+		});
+
+		it('should return status 401 with an error message when either password or email is wrong', (done) => {
+			chai
+				.request(app)
+				.post('/api/v1/auth/signin')
+				.send({
+					email: 'sam3ziro@gmail.com',
+					password: 'Kdhush'
+				})
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
 		it('should return status 400 with an error message Check email format', (done) => {
 			chai
 				.request(app)
@@ -306,6 +269,50 @@ describe('', () => {
 				})
 				.end((err, res) => {
 					expect(res).to.have.status(400);
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+	});
+
+	// Admin view users
+	describe('Admin can view all users in the system', () => {
+		it('Should returnr status 200 with a list of all users', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users')
+				.set('authorization', `Bearer ${adminToken}`)
+				.end((err, res) => {
+					expect(res).to.have.status(200);
+					expect(res.body).to.be.an('object');
+					expect(res.body).to.have.property('data');
+					expect(res.body.data).to.be.an('array');
+					done();
+				});
+		});
+
+		it('Should return status 401 with an error message Token error', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users')
+				.set('authorition', `Bearer ${adminToken}`)
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.be.an('object');
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('Should return status 401 with an error message user does not have enough previledges', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users')
+				.set('authorization', `Bearer ${userToken}`)
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
 					done();
 				});

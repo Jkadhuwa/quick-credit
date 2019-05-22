@@ -1,8 +1,7 @@
 import { Pool } from 'pg';
 import config from '../config/config';
-import dotenv from 'dotenv';
 
-dotenv.config();
+require('dotenv').config();
 
 const dbConfig = {
 	connectionString: config.db

@@ -15,7 +15,7 @@ class Auth {
 		const token = jwt.sign(
 			{
 				isAdmin,
-				email
+				email,
 			},
 			process.env.JWT_SECRET,
 			{ expiresIn: '1d' }

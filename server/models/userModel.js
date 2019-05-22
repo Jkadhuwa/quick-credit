@@ -5,39 +5,33 @@ class UsersModel {
 		this.payload = payload;
 		this.result = null;
 	}
+
 	async createUser() {
 		try {
-			const user = {
+			const {
+				firstname, lastname, email, password, telephone, workaddress, nationality, status, isadmin
+			} = this.payload;
+			const values = [
 				firstname,
 				lastname,
 				email,
 				password,
 				telephone,
-				workAddress,
+				workaddress,
 				nationality,
 				status,
-				isAdmin,
-			} = this.payload;
-			const values = [
-				user.firstname,
-				user.lastname,
-				user.email,
-				user.password,
-				user.telephone,
-				user.workAddress,
-				user.nationality,
-				user.status,
-				user.isAdmin
+				isadmin
 			];
-			const sql = 'INSERT INTO users (firstname, lastname, email, password, telephone, workAddress, nationality, status, isAdmin) VALUES($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9) returning *;';
-			const { rows } = await new Data().query(sql, values);
+
+			const sql = 'INSERT INTO users (firstname, lastname, email, password, telephone, workaddress, nationality, status, isadmin) VALUES($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9) returning *;';
+			const rows = await new Data().query(sql, values);
 			this.result = rows;
 			return true;
-		}
-		catch (error) {
+		} catch (error) {
 			return error;
 		}
 	}
+
 	static async login(email) {
 		try {
 			const sql = `SELECT * FROM users WHERE email='${email}';`;
@@ -51,6 +45,7 @@ class UsersModel {
 			return error;
 		}
 	}
+
 	static async getUsers() {
 		try {
 			const sql = 'SELECT * FROM users;';
@@ -78,6 +73,7 @@ class UsersModel {
 			return error;
 		}
 	}
+
 	static async markVerified(email, status) {
 		try {
 			const sql = 'UPDATE users SET status = ($1) WHERE email = $2 returning *;';
@@ -93,4 +89,4 @@ class UsersModel {
 		}
 	}
 }
-	export default UsersModel;
+export default UsersModel;

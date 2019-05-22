@@ -1,113 +1,105 @@
 import statusCodes from '../helpers/statuses';
-import data from '../mock_db/database';
 import Db from '../db';
 
 
 class Validations {
 	static validateSignup(req, res, next) {
-		let regex;
-		const {
-			firstName,
-			lastName,
-			email,
-			password,
-			telephone,
-			nationality,
-			workAddress
-		} = req.body;
-
-		if (
-			!firstName
-      || !lastName
-      || !email
-      || !password
-      || !telephone
-      || !nationality
-      || !workAddress
-		) {
-			res.status(statusCodes.BAD_REQUEST).send({
-				status: statusCodes.BAD_REQUEST,
-				error: 'Please ensure all fields are filled'
-			});
-		}
-
-		if (firstName) {
-			regex = /^[A-Za-z]+$/;
-			if (!regex.test(firstName)) {
+		try {
+			let regex;
+			const {
+				firstname,
+				lastname,
+				email,
+				password,
+				telephone,
+				nationality,
+				workaddress
+			} = req.body;
+			if (!firstname
+				|| !lastname
+				|| !email
+				|| !password
+				|| !telephone
+				|| !nationality
+				|| !workaddress
+			) {
 				res.status(statusCodes.BAD_REQUEST).send({
 					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a valid First Name'
+					error: 'Please ensure all fields are filled'
 				});
 			}
-		}
-		if (lastName) {
-			regex = /^[A-Za-z]+$/;
-			if (!regex.test(lastName)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a valid Last Name'
-				});
-			}
-		}
 
-		if (email) {
-			regex = /\S+@\S+\.\S+/;
-			if (!regex.test(email)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a valid Email Address'
-				});
-			} else {
-				data.users.forEach((user) => {
-					if (email === user.email) {
-						res.status(statusCodes.CONFLICT).send({
-							status: statusCodes.CONFLICT,
-							error: 'Email already taken'
+			if (firstname) {
+				regex = /^[A-Za-z]+$/;
+				if (!regex.test(firstname)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error: 'Enter a valid First Name'
+					});
+				}
+			}
+			if (lastname) {
+				regex = /^[A-Za-z]+$/;
+				if (!regex.test(lastname)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error: 'Enter a valid Last Name'
+					});
+				}
+			}
+
+			if (email) {
+				regex = /\S+@\S+\.\S+/;
+				if (!regex.test(email)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error: 'Enter a valid Email Address'
+					});
+				}
+			}
+
+			if (password) {
+				regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}/;
+				if (!regex.test(password)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error:
+							'Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters.'
+					});
+				}
+			}
+			if (telephone) {
+				regex = /^07(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6}$/;
+
+				if (!regex.test(telephone)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error: 'Enter a valid Phone number'
+					});
+				}
+			}
+			if (nationality) {
+				regex = /^[A-Za-z]+$/;
+				if (!regex.test(nationality)) {
+					res.status(statusCodes.BAD_REQUEST).send({
+						status: statusCodes.BAD_REQUEST,
+						error: 'Enter a Valid Country name'
+					});
+				}
+				if (workaddress) {
+					regex = /^[#.0-9a-zA-Z\s,-]+$/;
+					if (!regex.test(workaddress)) {
+						res.status(statusCodes.BAD_REQUEST).send({
+							status: statusCodes.BAD_REQUEST,
+							error: 'Enter a Valid work address'
 						});
 					}
-				});
+				}
 			}
+			next();
+		} catch (error) {
+			console.log(error);
 		}
-
-		if (password) {
-			regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}/;
-			if (!regex.test(password)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error:
-            'Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters.'
-				});
-			}
-		}
-		if (telephone) {
-			regex = /^07(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6}$/;
-
-			if (!regex.test(telephone)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a valid Phone number'
-				});
-			}
-		}
-		if (nationality) {
-			regex = /^[A-Za-z]+$/;
-			if (!regex.test(nationality)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a Valid Country name'
-				});
-			}
-		}
-		if (workAddress) {
-			regex = /^[#.0-9a-zA-Z\s,-]+$/;
-			if (!regex.test(workAddress)) {
-				res.status(statusCodes.BAD_REQUEST).send({
-					status: statusCodes.BAD_REQUEST,
-					error: 'Enter a Valid work address'
-				});
-			}
-		}
-		next();
 	}
 
 	static async validatenewEmail(req, res, next) {
@@ -148,7 +140,7 @@ class Validations {
 				res.status(statusCodes.BAD_REQUEST).send({
 					status: statusCodes.BAD_REQUEST,
 					error:
-            'Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters.'
+						'Password should include atleast one uppercase, lowercase letters, a number and should have more than 6 characters.'
 				});
 			}
 		}

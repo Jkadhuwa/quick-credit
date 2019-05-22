@@ -1,6 +1,7 @@
 import express from 'express';
 import tokenVer from '../middlewares/middlewares';
 import usersController from '../controllers/usersController';
+import loanController from '../controllers/loanController';
 
 import Validation from '../middlewares/validator';
 
@@ -17,6 +18,12 @@ router.get(
 );
 router.get('/users/:userEmail', [tokenVer.checkToken, tokenVer.checkAdmin],
 	usersController.getUser);
+
+router.patch(
+	'/users/:userEmail/verify',
+	[tokenVer.checkToken, tokenVer.checkAdmin, Validation.validateEmail],
+	usersController.markVerified
+);
 
 
 export default router;

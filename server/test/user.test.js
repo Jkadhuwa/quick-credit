@@ -176,6 +176,7 @@ describe('', () => {
 					expect(res.body.error).to.be.equal('Enter a Valid Country name');
 				});
 		});
+
 		it('should return status 400 with error message Enter a Valid work address', () => {
 			chai
 				.request(app)
@@ -308,7 +309,7 @@ describe('', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
-				.set('authorization', `Bearer ${userToken}`)
+				.set('authorization', `Bearer ewidcbfdierffndvj`)
 				.send()
 				.end((err, res) => {
 					expect(res).to.have.status(401);
@@ -338,7 +339,7 @@ describe('', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
-				.set('authorition', `Bearer ${adminToken}`)
+				.set('authorization', `Bearer $rdghgduscxs`)
 				.send()
 				.end((err, res) => {
 					expect(res).to.have.status(401);
@@ -357,6 +358,22 @@ describe('', () => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+	});
+
+	// Admin can verify user
+	describe('Admin can mark user as verified', () => {
+		it('Should return status 200 with data of of the updated user', (done) => {
+			chai
+				.request(app)
+				.patch('/api/v1/users/sam3ziro@gmail.com/verify')
+				.set('authorization', `Bearer ${adminToken}`)
+				.end((err, res) => {
+					expect(res).to.have.status(200);
+					expect(res.body.data).to.be.an('object');
+					expect(res.body.data.userstatus).to.be.equal('verified');
 					done();
 				});
 		});

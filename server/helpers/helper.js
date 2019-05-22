@@ -1,5 +1,3 @@
-import data from '../mock_db/database';
-
 const paymentInstallment = (amount, tenor) => {
 	const interest = 5 * (amount / 100);
 	return (parseFloat(amount) + parseFloat(interest)) / +tenor;

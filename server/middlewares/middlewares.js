@@ -5,18 +5,16 @@ import statusCode from '../helpers/statuses';
 class Verify {
 	static async checkToken(req, res, next) {
 		const reqToken = req.headers.authorization;
-
-		if (!reqToken) {
-			return res.status(statusCode.UNAUTHORIZED).send({
-				status: statusCode.UNAUTHORIZED,
-				error: 'Token Required'
-			});
-		}
 		try {
+			if (!reqToken) {
+				return res.status(statusCode.UNAUTHORIZED).send({
+					status: statusCode.UNAUTHORIZED,
+					error: 'Token Required'
+				});
+			}
 			const token = reqToken.split(' ')[1];
 			const verified = jwt.verify(token, process.env.JWT_SECRET);
 			req.userinfo = verified;
-
 			next();
 		} catch (error) {
 			return res.status(statusCode.UNAUTHORIZED).send({
@@ -43,6 +41,5 @@ class Verify {
 			return err;
 		}
 	}
-	
 }
 export default Verify;

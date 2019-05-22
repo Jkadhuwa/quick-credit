@@ -4,7 +4,6 @@ import bodyPaser from 'body-parser';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import router from './routes/routes';
-import Db from './db';
 import swaggerDoc from '../swagger.json';
 
 dotenv.config();
@@ -20,7 +19,6 @@ app.use('/api/v1', router);
 
 const PORT = process.env.PORT || 3000;
 
-const dbconn = new Db();
 app.listen(PORT, (err) => {
 	if (err) {
 		return (`error at port ${PORT}`);

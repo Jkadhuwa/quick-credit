@@ -10,7 +10,8 @@
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
+	"parser": "babel-eslint",
     "sourceType": "module"
   },
   "rules": {

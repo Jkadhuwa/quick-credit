@@ -17,6 +17,13 @@ router.get(
 );
 router.get('/users/:userEmail', [tokenVer.checkToken, tokenVer.checkAdmin],
 	usersController.getUser);
+
+router.patch(
+	'/users/:userEmail/verify',
+	[tokenVer.checkToken, tokenVer.checkAdmin, Validation.validateEmail],
+	usersController.markVerified
+);
+
 router.post('/loans', [Validation.validateApplication, tokenVer.checkToken, tokenVer.loanVerifier], loanController.applyLoan);
 
 export default router;

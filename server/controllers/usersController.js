@@ -135,5 +135,39 @@ class UsersController {
 			return error;
 		}
 	}
+
+	static async markVerified(req, res) {
+		try {
+			const status = 'verified';
+			const email = req.params.userEmail;
+			const verifyUser = await UserModel.markVerified(email, status);
+			if (verifyUser) {
+				const {
+					firstname,
+					lastname,
+					telephone,
+					workaddress,
+					isadmin
+				} = verifyUser;
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: {
+						firstname,
+						lastname,
+						email,
+						telephone,
+						workaddress,
+						userstatus: verifyUser.status,
+						isadmin
+
+					}
+				});
+			} else {
+				res.status(statusCode.UNAUTHORIZED).send({ status: statusCode.UNAUTHORIZED, error: 'Token error or You dont have previledges' });
+			}
+		} catch (error) {
+			return error;
+		}
+	}
 }
 export default UsersController;

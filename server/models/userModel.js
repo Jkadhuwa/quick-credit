@@ -88,5 +88,21 @@ class UsersModel {
 			return error;
 		}
 	}
+
+	static async getUserDetails(email) {
+		let result = [];
+		try {
+			const sql = `SELECT * FROM users WHERE email = $1`;
+			const values = [email];
+			const { rows } = await new Data().query(sql, values);
+			result = {
+				firstname: rows[0].firstname,
+				lastname: rows[0].lastname
+			};
+			return result;
+		} catch (error) {
+			return error;
+		}
+	}
 }
 export default UsersModel;

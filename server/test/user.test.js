@@ -318,4 +318,47 @@ describe('', () => {
 				});
 		});
 	});
+	// Admin view single user
+	describe('Admin can view single users in the system', () => {
+		it('Should return status 200 with user details', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users/sam3ziro@gmail.com')
+				.set('authorization', `Bearer ${adminToken}`)
+				.end((err, res) => {
+					expect(res).to.have.status(200);
+					expect(res.body).to.be.an('object');
+					expect(res.body).to.have.property('data');
+					expect(res.body.data).to.be.an('object');
+					done();
+				});
+		});
+
+		it('Should return status 401 with an error message Token error', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users')
+				.set('authorition', `Bearer ${adminToken}`)
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.be.an('object');
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+		it('Should return status 401 with an error message user does not have enough previledges', (done) => {
+			chai
+				.request(app)
+				.get('/api/v1/users')
+				.set('authorization', `Bearer ${userToken}`)
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.be.an('object');
+					expect(res.body).to.have.property('error');
+					done();
+				});
+		});
+	});
 });

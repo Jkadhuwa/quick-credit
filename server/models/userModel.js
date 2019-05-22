@@ -63,9 +63,9 @@ class UsersModel {
 	static async getUser(email) {
 		try {
 			const sql = `SELECT * FROM users WHERE email='${email}';`;
-			const { row } = await new Data().query(sql);
+			const row = await new Data().query(sql);
 			if (row) {
-				this.result = row;
+				this.result = row.rows[0];
 				return this.result;
 			}
 			return false;

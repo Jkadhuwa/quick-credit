@@ -103,5 +103,37 @@ class UsersController {
 			return err;
 		}
 	}
+
+	static async getUser(req, res) {
+		try {
+			const email = req.params.userEmail;
+
+			const user = await UserModel.getUser(email);
+
+			if (user) {
+				const {
+					firstname,
+					lastname,
+					telephone,
+					workaddress,
+					isadmin
+				} = user;
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: {
+						firstname,
+						lastname,
+						email,
+						telephone,
+						workaddress,
+						userstatus: user.status,
+						isadmin
+					}
+				});
+			}
+		} catch (error) {
+			return error;
+		}
+	}
 }
 export default UsersController;

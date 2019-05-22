@@ -197,5 +197,17 @@ class Validations {
 		}
 		next();
 	}
+
+	static validateEmail(req, res, next) {
+		const { userEmail } = req.params;
+		const regex = /\S+@\S+\.\S+/;
+		if (!regex.test(userEmail)) {
+			res.status(statusCodes.BAD_REQUEST).send({
+				status: statusCodes.BAD_REQUEST,
+				error: 'Enter a valid Email Address'
+			});
+		}
+		next();
+	}
 }
 export default Validations;

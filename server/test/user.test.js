@@ -202,8 +202,8 @@ describe('', () => {
 	});
 
 	// Sign in tests
-	describe('User sign in', () => {
-		it('should return status 200 with data of the user', (done) => {
+	describe('User sign in', (done) => {
+		it('should return status 200 with data of the user', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signin')
@@ -214,11 +214,10 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(200);
 					expect(res.body).to.have.property('data');
-					done();
 				});
 		});
 
-		it('should return status 401 with an error message when either password or email is wrong', (done) => {
+		it('should return status 401 with an error message when either password or email is wrong', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signin')
@@ -229,10 +228,9 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
-		it('should return status 400 with an error message Check email format', (done) => {
+		it('should return status 400 with an error message Check email format', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signin')
@@ -243,10 +241,9 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
-		it('should return status 400 with an error message password should have more than 6 characters', (done) => {
+		it('should return status 400 with an error message password should have more than 6 characters', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signin')
@@ -257,10 +254,9 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
-		it('should return status 400 with an error message email or password can can not be empty', (done) => {
+		it('should return status 400 with an error message email or password can can not be empty', () => {
 			chai
 				.request(app)
 				.post('/api/v1/auth/signin')
@@ -271,14 +267,13 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
 	});
 
 	// Admin view users
-	describe('Admin can view all users in the system', () => {
-		it('Should returnr status 200 with a list of all users', (done) => {
+	describe('Admin can view all users in the system', (done) => {
+		it('Should returnr status 200 with a list of all users', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
@@ -288,11 +283,10 @@ describe('', () => {
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('data');
 					expect(res.body.data).to.be.an('array');
-					done();
 				});
 		});
 
-		it('Should return status 401 with an error message Token error', (done) => {
+		it('Should return status 401 with an error message Token error', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
@@ -302,10 +296,9 @@ describe('', () => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
-		it('Should return status 401 with an error message user does not have enough previledges', (done) => {
+		it('Should return status 401 with an error message user does not have enough previledges', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
@@ -315,13 +308,12 @@ describe('', () => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
 	});
 	// Admin view single user
-	describe('Admin can view single users in the system', () => {
-		it('Should return status 200 with user details', (done) => {
+	describe('Admin can view single users in the system', (done) => {
+		it('Should return status 200 with user details', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users/sam3ziro@gmail.com')
@@ -331,11 +323,10 @@ describe('', () => {
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('data');
 					expect(res.body.data).to.be.an('object');
-					done();
 				});
 		});
 
-		it('Should return status 401 with an error message Token error', (done) => {
+		it('Should return status 401 with an error message Token error', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
@@ -345,10 +336,9 @@ describe('', () => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
-		it('Should return status 401 with an error message user does not have enough previledges', (done) => {
+		it('Should return status 401 with an error message user does not have enough previledges', () => {
 			chai
 				.request(app)
 				.get('/api/v1/users')
@@ -358,7 +348,6 @@ describe('', () => {
 					expect(res).to.have.status(401);
 					expect(res.body).to.be.an('object');
 					expect(res.body).to.have.property('error');
-					done();
 				});
 		});
 	});

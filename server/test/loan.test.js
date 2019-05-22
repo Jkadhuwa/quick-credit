@@ -13,7 +13,6 @@ chai.use(chaiHttp);
 
 let userToken = null;
 let adminToken = null;
-const user1Token = null;
 describe('', () => {
 	before('gen token', (done) => {
 		const admin = {
@@ -69,8 +68,8 @@ describe('', () => {
 	});
 	// CREATE /New Loan
 
-	describe('User applies a loan', () => {
-		it('Should return status 201 with data of newly created loan application', (done) => {
+	describe('User applies a loan', (done) => {
+		it('Should return status 201 with data of newly created loan application', () => {
 			chai
 				.request(app)
 				.post('/api/v1/loans')
@@ -82,11 +81,10 @@ describe('', () => {
 				.end((err, res) => {
 					expect(res).to.have.status(201);
 					expect(res.body.data).to.be.an('object');
-					done();
 				});
 		});
 
-		it('Should return status 409 with error message You already have a loan', (done) => {
+		it('Should return status 409 with error message You already have a loan', () => {
 			chai
 				.request(app)
 				.post('/api/v1/loans')
@@ -99,11 +97,10 @@ describe('', () => {
 					expect(res).to.have.status(409);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('You already have a loan');
-					done();
 				});
 		});
 
-		it('Should return status 400 with error message Please ensure all fields are filled', (done) => {
+		it('Should return status 400 with error message Please ensure all fields are filled', () => {
 			chai
 				.request(app)
 				.post('/api/v1/loans')
@@ -116,10 +113,9 @@ describe('', () => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Please ensure all fields are filled');
-					done();
 				});
 		});
-		it('Should return status 400 with error message Amount only takes Floating or Numeric values', (done) => {
+		it('Should return status 400 with error message Amount only takes Floating or Numeric values', () => {
 			chai
 				.request(app)
 				.post('/api/v1/loans')
@@ -132,10 +128,9 @@ describe('', () => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Amount only takes Floating or Numeric values');
-					done();
 				});
 		});
-		it('Should return status 400 with error message Amount only takes Takes numbers between 1 - 12', (done) => {
+		it('Should return status 400 with error message Amount only takes Takes numbers between 1 - 12', () => {
 			chai
 				.request(app)
 				.post('/api/v1/loans')
@@ -148,7 +143,6 @@ describe('', () => {
 					expect(res).to.have.status(400);
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Takes numbers between 1 - 12');
-					done();
 				});
 		});
 	});

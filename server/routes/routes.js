@@ -15,6 +15,8 @@ router.get(
 	[tokenVer.checkToken, tokenVer.checkAdmin],
 	usersController.getAllUsers
 );
+router.get('/users/:userEmail', [tokenVer.checkToken, tokenVer.checkAdmin],
+	usersController.getUser);
 
 
 export default router;

@@ -16,16 +16,28 @@ class DatabaseInit {
 				});
 
 			this.queryUsers = `CREATE TABLE IF NOT EXISTS users(
-			  id serial PRIMARY KEY,
+			  id serial,
 			  firstName VARCHAR(128) NOT NULL,
 			  lastName VARCHAR(128) NOT NULL,
-			  email VARCHAR(128) NOT NULL,
+			  email VARCHAR(128) NOT NULL  PRIMARY KEY,
 			  password VARCHAR(128) NOT NULL,
 		  	  telephone VARCHAR(128) NOT NULL,
 			  workAddress VARCHAR(128) NOT NULL,
 			  nationality VARCHAR(128) NOT NULL,
 			  status VARCHAR(128) NOT NULL,
 			  isAdmin BOOLEAN NOT NULL
+			)`;
+			this.queryLoans = `CREATE TABLE IF NOT EXISTS loans(
+			  id serial PRIMARY KEY,
+			  createdOn VARCHAR(128) NOT NULL,
+			  useremail VARCHAR(128) NOT NULL,
+		  	  amount INT NOT NULL,
+			  tenor INT NOT NULL,
+			  paymentInstallment INT NOT NULL,
+			  status VARCHAR(128) NOT NULL,
+			  interest INT  NOT NULL,
+			  balance INT NOT NULL,
+			  repaid BOOLEAN NOT NULL
 			)`;
 			this.initDb();
 		} catch (err) {
@@ -48,6 +60,7 @@ class DatabaseInit {
 	async initDb() {
 		try {
 			await this.query(this.queryUsers);
+			await this.query(this.queryLoans);
 		} catch (error) {
 			return error;
 		}

@@ -41,5 +41,21 @@ class Verify {
 			return err;
 		}
 	}
+
+	static async loanVerifier(req, res, next) {
+		try {
+			const token = req.headers.authorization.split(' ')[1];
+			const decoded = jwt.verify(token, process.env.JWT_SECRET);
+			const { email } = decoded;
+			const sql = `SELECT * FROM loans WHERE useremail='${email}'`;
+			const { rows } = await new Data().query(sql);
+			if ((rows.length > 0) && (rows[0].repaid === false)) {
+				return res.status(statusCode.CONFLICT).send({ status: statusCode.CONFLICT, error: 'You already have a loan' });
+			}
+			next();
+		} catch (error) {
+			return error;
+		}
+	}
 }
 export default Verify;

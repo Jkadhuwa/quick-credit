@@ -37,13 +37,13 @@ class UsersController {
 				status: statusCode.STATUS_CREATED,
 				data: {
 					token,
-					firstname: regUser.firstname,
-					lastname: regUser.lastname,
-					email: regUser.email,
-					telephone: regUser.telephone,
-					workaddress: regUser.workaddress,
+					firstname,
+					lastname,
+					email,
+					telephone,
+					workaddress,
 					status: regUser.status,
-					isadmin: regUser.isadmin
+					isadmin
 				}
 			});
 		} catch (error) {

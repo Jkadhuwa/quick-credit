@@ -97,7 +97,8 @@ class UsersModel {
 			const { rows } = await new Data().query(sql, values);
 			result = {
 				firstname: rows[0].firstname,
-				lastname: rows[0].lastname
+				lastname: rows[0].lastname,
+				userStatus: rows[0].status
 			};
 			return result;
 		} catch (error) {

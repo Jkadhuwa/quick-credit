@@ -30,4 +30,9 @@ router.patch(
 	[tokenVer.checkToken, tokenVer.checkAdmin],
 	loanController.approveOrReject
 );
+router.get(
+	'/loans',
+	[tokenVer.checkToken, tokenVer.checkAdmin],
+	loanController.getAllLoans
+);
 export default router;

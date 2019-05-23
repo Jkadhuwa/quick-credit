@@ -63,7 +63,7 @@ describe('', () => {
 	});
 
 	after('after all test', (done) => {
-		new Data().query('DROP TABLE users');
+		new Data().query('TRUNCATE TABLE loans;');
 		done();
 	});
 	// CREATE /New Loan

@@ -49,7 +49,7 @@ class Validations {
 			}
 
 			if (email) {
-				regex = /\S+@\S+\.\S+/;
+				regex = /(^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-z]+$)/;
 				if (!regex.test(email)) {
 					res.status(statusCodes.BAD_REQUEST).send({
 						status: statusCodes.BAD_REQUEST,
@@ -98,7 +98,7 @@ class Validations {
 			}
 			next();
 		} catch (error) {
-			console.log(error);
+			return error;
 		}
 	}
 

@@ -49,6 +49,21 @@ class LoansModel {
 			return error;
 		}
 	}
+
+	static async getAllLoans() {
+		try {
+			const sql = 'SELECT * FROM loans;';
+			const { rows } = await new Data().query(sql);
+			if (rows) {
+				this.result = rows;
+				return this.result;
+			}
+			return false;
+		} catch (error) {
+			return error;
+		}
+	}
 }
+
 
 export default LoansModel;

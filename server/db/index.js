@@ -39,6 +39,13 @@ class DatabaseInit {
 			  balance INT NOT NULL,
 			  repaid BOOLEAN NOT NULL
 			)`;
+			this.queryRepayments = `CREATE TABLE IF NOT EXISTS loans(
+			  id serial,
+			  createdOn VARCHAR(128) NOT NULL,
+			  loanid serial PRIMARY KEY,
+		  	  amount INT NOT NULL,
+			  balance INT
+			)`;
 			this.initDb();
 		} catch (err) {
 			return err;
@@ -61,6 +68,7 @@ class DatabaseInit {
 		try {
 			await this.query(this.queryUsers);
 			await this.query(this.queryLoans);
+			await this.query(this.queryRepayments);
 		} catch (error) {
 			return error;
 		}

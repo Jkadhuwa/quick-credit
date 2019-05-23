@@ -39,8 +39,10 @@ class LoanController {
 			} = reqLoan.payload;
 			const {
 				firstname,
-				lastname
+				lastname,
+				userStatus
 			} = getUserdeatails;
+
 			return res.status(statusCode.STATUS_CREATED).send({
 				status: statusCode.STATUS_CREATED,
 				data: {
@@ -92,7 +94,21 @@ class LoanController {
 			return error;
 		}
 	}
-}
 
+	static async getAllLoans(req, res) {
+		try {
+			const loans = await LoanModel.getAllLoans();
+			if (!loans) {
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+			}
+			res.status(statusCode.STATUS_OK).send({
+				status: statusCode.STATUS_OK,
+				data: loans
+			});
+		} catch (err) {
+			return err;
+		}
+	}
+}
 
 export default LoanController;

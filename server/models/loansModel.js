@@ -33,6 +33,22 @@ class LoansModel {
 			return error;
 		}
 	}
+
+	static async approved(loanId, status) {
+		try {
+			const sql = 'UPDATE loans SET status = ($1) WHERE loanid = $2 returning *;';
+			const values = [status, loanId];
+			const { rows } = await new Data().query(sql, values);
+			if (!rows.length) {
+				return false;
+			}
+			this.result = rows[0];
+
+			return this.result;
+		} catch (error) {
+			return error;
+		}
+	}
 }
 
 export default LoansModel;

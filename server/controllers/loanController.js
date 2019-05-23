@@ -60,6 +60,38 @@ class LoanController {
 			return error;
 		}
 	}
+
+	static async approveOrReject(req, res) {
+		try {
+			const { status } = req.body;
+			const { loanId } = req.params;
+			const approved = await LoanModel.approved(loanId, status);
+			if (approved) {
+				const {
+					amount,
+					tenor,
+					monthlyInstallment,
+					interest
+				} = approved;
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: {
+						loanId,
+						loanAmount: amount,
+						tenor,
+						status,
+						monthlyInstallment,
+						interest
+
+					}
+				});
+			} else {
+				res.status(statusCode.UNAUTHORIZED).send({ status: statusCode.UNAUTHORIZED, error: 'Token error or You dont have previledges' });
+			}
+		} catch (error) {
+			return error;
+		}
+	}
 }
 
 

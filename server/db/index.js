@@ -28,7 +28,7 @@ class DatabaseInit {
 			  isAdmin BOOLEAN NOT NULL
 			)`;
 			this.queryLoans = `CREATE TABLE IF NOT EXISTS loans(
-			  id serial PRIMARY KEY,
+			  loanid serial PRIMARY KEY,
 			  createdOn VARCHAR(128) NOT NULL,
 			  useremail VARCHAR(128) NOT NULL,
 		  	  amount INT NOT NULL,

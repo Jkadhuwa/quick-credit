@@ -84,22 +84,6 @@ describe('', () => {
 				});
 		});
 
-		it('Should return status 409 with error message You already have a loan', () => {
-			chai
-				.request(app)
-				.post('/api/v1/loans')
-				.set('authorization', `Bearer ${userToken}`)
-				.send({
-					amount: '150000',
-					tenor: '12'
-				})
-				.end((err, res) => {
-					expect(res).to.have.status(409);
-					expect(res.body).to.have.property('error');
-					expect(res.body.error).to.be.equal('You already have a loan');
-				});
-		});
-
 		it('Should return status 400 with error message Please ensure all fields are filled', () => {
 			chai
 				.request(app)
@@ -144,6 +128,35 @@ describe('', () => {
 					expect(res.body).to.have.property('error');
 					expect(res.body.error).to.be.equal('Takes numbers between 1 - 12');
 				});
+		});
+
+		describe('Admin should view be able to Approve or Reject loan', () => {
+			it('Should return status 401 with error Wrong token ', () => {
+				chai
+					.request(app)
+					.patch('/api/v1/loans/1')
+					.set('authorization', `Bearer SBgpaZdIDdWlHUexc6m`)
+					.send()
+					.end((err, res) => {
+						expect(res).to.have.status(401);
+						expect(res.body).to.have.property('error');
+						expect(res.body).to.have.property('status');
+						expect(res.body.error).to.be.equal('Invalid Token supplied');
+					});
+			});
+
+			it('Should return status 401 with error dont have enough user previledge ', () => {
+				chai
+					.request(app)
+					.patch('/api/v1/loans/1')
+					.set('authorization', `Bearer ${userToken}`)
+					.send()
+					.end((err, res) => {
+						expect(res).to.have.status(401);
+						expect(res.body).to.have.property('error');
+						expect(res.body).to.have.property('status');
+					});
+			});
 		});
 	});
 });

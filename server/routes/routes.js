@@ -25,5 +25,9 @@ router.patch(
 );
 
 router.post('/loans', [Validation.validateApplication, tokenVer.checkToken, tokenVer.loanVerifier], loanController.applyLoan);
-
+router.patch(
+	'/loans/:loanId',
+	[tokenVer.checkToken, tokenVer.checkAdmin],
+	loanController.approveOrReject
+);
 export default router;

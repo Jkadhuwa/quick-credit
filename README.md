@@ -55,15 +55,13 @@ Admin can:
 - `View all loans`
 - `View specific loan`
 
-
 #### API End Points
 
 ---
 
+Used to serve the front end pages
 
-   Used to serve the front end pages
-
-2) `POST /api/v1/auth/signup`
+1. `POST /api/v1/auth/signup`
 
    used to create a new user
 
@@ -79,7 +77,7 @@ Admin can:
     isadmin                    // Boolean
    ```
 
-3) `POST /api/v1/signin`
+2. `POST /api/v1/signin`
 
    Used by user to access their accounts
 
@@ -88,7 +86,7 @@ Admin can:
    password: qwertyu     // string
    ```
 
-4) `GET /api/v1/users`
+3. `GET /api/v1/users`
 
    Used by administrator to view all users
 
@@ -97,29 +95,35 @@ Admin can:
    and set it in headers in postman with authorization key.
 
    authorization | < token >
-
-
    ```
 
-5) `PATCH /api/v1/users/:userEmail/verify`
+```
+
+4) `GET /api/v1/users/:userEmail`
+Used by administartor to to view specific user ussing their email address
+```
+
+-Get the token supplied during login or signup and set it in headers with authorization key.
+
+- In the url path set the user email
+
+  /api/v1/users/kenyamoja@gmail.com //string
+
+  ```
+
+  ```
+
+5. `PATCH /api/v1/users/:userEmail/verify`
    Used by administartor to change the status of a user from unverified to verified
-   ```
-   -Get the token supplied during login or signup and set it in headers with authorization key.
 
-   -  In the url path set the user email
-
-     /api/v1/users/kenyamoja@gmail.com/verify   //string
-
-6) `PATCH /api/v1/users/:userEmail/verify`
-   Used by administartor to change the status of a user from unverified to verified
    ```
    -Get the token supplied during login or signup and set it in headers with authorization key.
 
    -  In the url path set the user email
 
     /api/v1/users/kenyamoja@gmail.com/verify   //string
-	```
-
+   `
+   ```
 
 6) `GET /api/v1/loans`
 
@@ -143,7 +147,7 @@ Admin can:
    tenor:  12           //number(int) between 1 nad 12
    ```
 
-8. `GET /api/v1/loans/:loanId`
+8) `GET /api/v1/loans/:loanId`
 
    - Used byt admin to view a specific user
 
@@ -154,17 +158,19 @@ Admin can:
    /api/v1/loans/1
    ```
 
-9. `PATCH /api/v1/loans/:loanId`
-    - used by admin to change the loan status from pending to either approved or rejected
-    ```
-    Login as an admin and copy the token supplied .
-    Set the token in the postman headers with key as authorization
-    supply a string value of either approved or rejected.
+9) `PATCH /api/v1/loans/:loanId`
 
-    /api/v1/loans/2
+   - used by admin to change the loan status from pending to either approved or rejected
 
-    status: 'approved'          //string
-    ```
+   ```
+   Login as an admin and copy the token supplied .
+   Set the token in the postman headers with key as authorization
+   supply a string value of either approved or rejected.
+
+   /api/v1/loans/2
+
+   status: 'approved'          //string
+   ```
 
 #### Contributing
 

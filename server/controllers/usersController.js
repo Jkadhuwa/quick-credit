@@ -32,7 +32,7 @@ class UsersController {
 					.status(statusCode.CONFLICT)
 					.send({ status: statusCode.CONFLICT, error: 'Email already in use' });
 			}
-			const token = Auth.generateToken(regUser.isadmin, regUser.email);
+			const token = Auth.generateToken(isadmin, email);
 			return res.status(statusCode.STATUS_CREATED).send({
 				status: statusCode.STATUS_CREATED,
 				data: {
@@ -130,6 +130,8 @@ class UsersController {
 						isadmin
 					}
 				});
+			} else {
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'User not found' });
 			}
 		} catch (error) {
 			return error;
@@ -163,7 +165,7 @@ class UsersController {
 					}
 				});
 			} else {
-				res.status(statusCode.UNAUTHORIZED).send({ status: statusCode.UNAUTHORIZED, error: 'Token error or You dont have previledges' });
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'User not found' });
 			}
 		} catch (error) {
 			return error;

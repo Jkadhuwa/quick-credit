@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import statusCode from '../helpers/statuses';
 import helpers from '../helpers/helper';
-import LoanModel from '../models/loansModel';
 import UserModel from '../models/userModel';
+import LoanModel from '../models/loansModel';
 
 class LoanController {
 	static async applyLoan(req, res) {
@@ -18,7 +18,13 @@ class LoanController {
 			const date = helpers.currentDate();
 			const rate = 5 * (amount / 100);
 			const installment = helpers.paymentInstallment(amount, tenor);
+			const {
+				firstname,
+				lastname,
+				userid
+			} = getUserdeatails;
 			const reqLoan = await new LoanModel({
+				userid,
 				createdon: date,
 				user: email,
 				amount,
@@ -29,6 +35,7 @@ class LoanController {
 				interest: rate,
 				repaid: false
 			});
+
 			if (!reqLoan.createLoan()) {
 				res
 					.status(statusCode.SERVER_ERROR)
@@ -37,12 +44,6 @@ class LoanController {
 			const {
 				createdon, user, paymentInstallment, status, interest, repaid
 			} = reqLoan.payload;
-			const {
-				firstname,
-				lastname,
-				userStatus
-			} = getUserdeatails;
-
 			return res.status(statusCode.STATUS_CREATED).send({
 				status: statusCode.STATUS_CREATED,
 				data: {
@@ -72,7 +73,7 @@ class LoanController {
 				const {
 					amount,
 					tenor,
-					monthlyInstallment,
+					paymentinstallment,
 					interest
 				} = approved;
 				res.status(statusCode.STATUS_OK).send({
@@ -82,13 +83,13 @@ class LoanController {
 						loanAmount: amount,
 						tenor,
 						status,
-						monthlyInstallment,
+						monthlyInstallment: paymentinstallment,
 						interest
 
 					}
 				});
 			} else {
-				res.status(statusCode.UNAUTHORIZED).send({ status: statusCode.UNAUTHORIZED, error: 'Token error or You dont have previledges' });
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loan not found' });
 			}
 		} catch (error) {
 			return error;
@@ -97,18 +98,102 @@ class LoanController {
 
 	static async getAllLoans(req, res) {
 		try {
-			const loans = await LoanModel.getAllLoans();
-			if (!loans) {
-				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+			if (!Object.keys(req.query).length) {
+				const loans = await LoanModel.getAllLoans();
+				if (!loans.length) {
+					res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+				}
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: loans
+				});
+			} else if (req.query.repaid === 'false') {
+				const status = 'approved';
+				const repaid = false;
+				const loans = await LoanModel.getAllLoansString(status, repaid);
+				if (!loans.length) {
+					res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+				}
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: loans
+				});
+			} else if (req.query.repaid === 'true') {
+				const status = 'approved';
+				const repaid = true;
+				const loans = await LoanModel.getAllLoansString(status, repaid);
+				if (!loans.length) {
+					res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+				}
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: loans
+				});
 			}
-			res.status(statusCode.STATUS_OK).send({
-				status: statusCode.STATUS_OK,
-				data: loans
-			});
 		} catch (err) {
 			return err;
 		}
 	}
-}
 
+	static async getLoan(req, res) {
+		try {
+			const { loanId } = req.params;
+
+			const loan = await LoanModel.getLoan(loanId);
+			if (loan) {
+				const {
+					loanid,
+					useremail,
+					createdon,
+					status,
+					repaid,
+					tenor,
+					amount,
+					paymentinstallment,
+					balance,
+					interest
+				} = loan;
+
+				res.status(statusCode.STATUS_OK).send({
+					status: statusCode.STATUS_OK,
+					data: {
+						loanid,
+						user: useremail,
+						createdon,
+						status,
+						repaid,
+						tenor,
+						amount,
+						paymentinstallment,
+						balance,
+						interest
+					}
+				});
+			} else {
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loans not found' });
+			}
+		} catch (error) {
+			console.log(error);
+			return error;
+		}
+	}
+
+	static async repayLoan(req, res) {
+		try {
+			const {
+				amount
+			} = req.body;
+			const { loanId } = req.params;
+			console.log(amount);
+			const repayment = await LoanModel.repayLoan(loanId, amount);
+
+
+			if (!repayment) {
+				res.status(statusCode.NOT_FOUND).send({ status: statusCode.NOT_FOUND, error: 'Loan not found' });
+			}
+		} catch (error) {
+			return error;
+		}
+	}
+}
 export default LoanController;

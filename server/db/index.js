@@ -16,10 +16,10 @@ class DatabaseInit {
 				});
 
 			this.queryUsers = `CREATE TABLE IF NOT EXISTS users(
-			  id serial,
+			  id serial PRIMARY KEY,
 			  firstName VARCHAR(128) NOT NULL,
 			  lastName VARCHAR(128) NOT NULL,
-			  email VARCHAR(128) NOT NULL  PRIMARY KEY,
+			  email VARCHAR(128) NOT NULL,
 			  password VARCHAR(128) NOT NULL,
 		  	  telephone VARCHAR(128) NOT NULL,
 			  workAddress VARCHAR(128) NOT NULL,
@@ -29,22 +29,23 @@ class DatabaseInit {
 			)`;
 			this.queryLoans = `CREATE TABLE IF NOT EXISTS loans(
 			  loanid serial PRIMARY KEY,
+			  userid INT NOT NULL REFERENCES users(id),
 			  createdOn VARCHAR(128) NOT NULL,
 			  useremail VARCHAR(128) NOT NULL,
-		  	  amount INT NOT NULL,
+		  	  amount NUMERIC NOT NULL,
 			  tenor INT NOT NULL,
-			  paymentInstallment INT NOT NULL,
+			  totalAmount NUMERIC NOT NULL,
+			  paymentInstallment NUMERIC NOT NULL,
 			  status VARCHAR(128) NOT NULL,
-			  interest INT  NOT NULL,
-			  balance INT NOT NULL,
+			  interest NUMERIC  NOT NULL,
+			  balance NUMERIC NOT NULL,
 			  repaid BOOLEAN NOT NULL
 			)`;
-			this.queryRepayments = `CREATE TABLE IF NOT EXISTS loans(
-			  id serial,
+			this.queryRepayments = `CREATE TABLE IF NOT EXISTS repayments(
+			  id serial PRIMARY KEY,
+			  loan_id INT NOT NULL REFERENCES loans(loanid),
 			  createdOn VARCHAR(128) NOT NULL,
-			  loanid serial PRIMARY KEY,
-		  	  amount INT NOT NULL,
-			  balance INT
+		  	  amount NUMERIC NOT NULL
 			)`;
 			this.initDb();
 		} catch (err) {

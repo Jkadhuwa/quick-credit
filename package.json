@@ -4,6 +4,10 @@
   "description": "Andela-Kigali Developer Challenge Cycle 6 Bootcamp",
   "main": "app.js",
   "scripts": {
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d ./build ./server -s",
+    "clean": "rm -rf build && mkdir build",
+    "heroku-postbuild": "npm run build",
     "coverage": "nyc --reporter=html --reporter=text npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/eslint ./server/*.js --fix",

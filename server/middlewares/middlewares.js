@@ -32,8 +32,8 @@ class Verify {
 			if (verified.isAdmin === true) {
 				next();
 			} else {
-				return res.status(statusCode.UNAUTHORIZED).send({
-					status: statusCode.UNAUTHORIZED,
+				return res.status(statusCode.FORBIDDEN).send({
+					status: statusCode.FORBIDDEN,
 					error: 'You do not have enough priviledges to continue'
 				});
 			}
@@ -42,17 +42,38 @@ class Verify {
 		}
 	}
 
+
 	static async loanVerifier(req, res, next) {
 		try {
 			const token = req.headers.authorization.split(' ')[1];
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 			const { email } = decoded;
-			const sql = `SELECT * FROM loans WHERE useremail='${email}'`;
+			const sql = `SELECT users.status, loans.repaid FROM users FULL JOIN loans ON users.id = loans.userid WHERE  users.email = '${email}'`;
 			const { rows } = await new Data().query(sql);
-			if ((rows.length > 0) && (rows[0].repaid === false)) {
-				return res.status(statusCode.CONFLICT).send({ status: statusCode.CONFLICT, error: 'You already have a loan' });
+
+			if ((rows.length > 0) && (rows[0].status === 'unverified')) {
+				res.status(statusCode.FORBIDDEN).send({ status: statusCode.FORBIDDEN, error: 'You can not apply for a loan at the moment. Please contact Admin' });
+			} else if ((rows.length > 0) && (rows[0].repaid === false)) {
+				return res.status(statusCode.CONFLICT).send({ status: statusCode.CONFLICT, error: 'You can not access another loan.' });
 			}
 			next();
+		} catch (error) {
+			return error;
+		}
+	}
+
+	static async repaymentVerifier(req, res, next) {
+		try {
+			const { loanId } = req.params;
+
+			const sql = `SELECT * FROM loans  WHERE  loanid= '${loanId}'`;
+			const { rows } = await new Data().query(sql);
+			console.log(rows);
+			if (rows[0].status === 'approved') {
+				next();
+			} else if ((rows.length > 0) && (rows[0].repaid === false)) {
+				return res.status(statusCode.FORBIDDEN).send({ status: statusCode.FORBIDDEN, error: 'You can not make repayment transaction. Loan is not approved .' });
+			}
 		} catch (error) {
 			return error;
 		}

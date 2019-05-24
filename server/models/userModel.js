@@ -22,7 +22,6 @@ class UsersModel {
 				status,
 				isadmin
 			];
-
 			const sql = 'INSERT INTO users (firstname, lastname, email, password, telephone, workaddress, nationality, status, isadmin) VALUES($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9) returning *;';
 			const rows = await new Data().query(sql, values);
 			this.result = rows;
@@ -98,7 +97,7 @@ class UsersModel {
 			result = {
 				firstname: rows[0].firstname,
 				lastname: rows[0].lastname,
-				userStatus: rows[0].status
+				userid: rows[0].id
 			};
 			return result;
 		} catch (error) {

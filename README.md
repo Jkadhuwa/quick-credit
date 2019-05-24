@@ -45,29 +45,23 @@ This projecct enable the Client and Admin to carry out the following tasks:
 Clients can :
 
 - `apply for a loan`
-- `make loan payment`
-- `view loan repayment history`
 
 Admin can:
 
 - `Mark users as verified`
 - `Approve or reject loan application`
 - `View all users`
+- `View single users`
 - `View all loans`
-- `View all current loans`
-- `View all repaid loans`
-- `Post a loan repayment in favour of a specific client`
-- `View loan repayment history`
+- `View specific loan`
 
 #### API End Points
 
 ---
 
-1. `/`
+Used to serve the front end pages
 
-   Used to serve the front end pages
-
-2) `POST /api/v1/auth/signup`
+1. `POST /api/v1/auth/signup`
 
    used to create a new user
 
@@ -80,10 +74,10 @@ Admin can:
     telephone: 0713723191      //int
     nationality: Kenyan        //string
     workAddress: Kigali        //string
-
+    isadmin                    // Boolean
    ```
 
-3) `POST /api/v1/signin`
+2. `POST /api/v1/signin`
 
    Used by user to access their accounts
 
@@ -92,7 +86,7 @@ Admin can:
    password: qwertyu     // string
    ```
 
-4) `GET /api/v1/users`
+3. `GET /api/v1/users`
 
    Used by administrator to view all users
 
@@ -101,20 +95,36 @@ Admin can:
    and set it in headers in postman with authorization key.
 
    authorization | < token >
-
-
    ```
 
-5) `PATCH /api/v1/users/:userEmail/verify`
+```
+
+4) `GET /api/v1/users/:userEmail`
+Used by administartor to to view specific user ussing their email address
+```
+
+-Get the token supplied during login or signup and set it in headers with authorization key.
+
+- In the url path set the user email
+
+  /api/v1/users/kenyamoja@gmail.com //string
+
+  ```
+
+  ```
+
+5. `PATCH /api/v1/users/:userEmail/verify`
    Used by administartor to change the status of a user from unverified to verified
+
    ```
    -Get the token supplied during login or signup and set it in headers with authorization key.
 
    -  In the url path set the user email
 
-     /api/v1/users/kenyamoja@gmail.com/verify   //string
-
+    /api/v1/users/kenyamoja@gmail.com/verify   //string
+   `
    ```
+
 6) `GET /api/v1/loans`
 
    Used by administartor to view all loans.
@@ -137,7 +147,7 @@ Admin can:
    tenor:  12           //number(int) between 1 nad 12
    ```
 
-8. `GET /api/v1/loans/:loanId`
+8) `GET /api/v1/loans/:loanId`
 
    - Used byt admin to view a specific user
 
@@ -148,63 +158,19 @@ Admin can:
    /api/v1/loans/1
    ```
 
-9) `GET /api/v1/loans?status='approved'&repaid=false`
+9) `PATCH /api/v1/loans/:loanId`
 
-   - Used by admin to view the current loans
+   - used by admin to change the loan status from pending to either approved or rejected
 
    ```
-   Login as an administartor and copy the token supplied
-   Set the token in postman headers with the key authorization
+   Login as an admin and copy the token supplied .
+   Set the token in the postman headers with key as authorization
+   supply a string value of either approved or rejected.
 
-   /api/v1/loans?status='approved'&repaid=false
+   /api/v1/loans/2
+
+   status: 'approved'          //string
    ```
-
-10) `GET /api/v1/loans?status='approved'&repaid=true`
-
-- used by admin to view all repaid loans
-
-  ```
-  Login as an admin and copy the token supplied.
-  Set the token in the postman headers with the authorization key.
-
-  /api/v1/loans?status='approved'&repaid=false
-  ```
-
-11. `PATCH /api/v1/loans/:loanId`
-    - used by admin to change the loan status from pending to either approved or rejected
-    ```
-    Login as an admin and copy the token supplied .
-    Set the token in the postman headers with key as authorization
-    supply a string value of either approved or rejected.
-
-    /api/v1/loans/2
-
-    status: 'approved'          //string
-    ```
-
-12) `POST /api/v1/loans/:loanId/repayments`
-    - Used the admin to post a loan repayment transaction of a specific user
-    ```
-     - Login as an admin and copy the token provided.
-     - Set the key in the postman headers with the key authorization.
-     - Supply the amount to be repaid (as a float or a integer
-
-     /api/v1/loans/3/repayments
-
-     amount: 40000    //float
-    ```
-
-13. `GET /api/v1/loans/:loanId/repayments`
-
-    - Used by admin to view repayment history of a specific loan
-
-    ```
-    Login as an admin and copy the token provided
-    set the token in headers in postman with key authorization
-    set the loanId in th url path
-
-    /api/v1/loans/5/repayments         // integer
-    ```
 
 #### Contributing
 

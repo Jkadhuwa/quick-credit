@@ -13,7 +13,8 @@ class Validations {
 				password,
 				telephone,
 				nationality,
-				workaddress
+				workaddress,
+				isadmin
 			} = req.body;
 			if (!firstname
 				|| !lastname
@@ -22,6 +23,7 @@ class Validations {
 				|| !telephone
 				|| !nationality
 				|| !workaddress
+				|| !isadmin
 			) {
 				res.status(statusCodes.BAD_REQUEST).send({
 					status: statusCodes.BAD_REQUEST,
@@ -95,6 +97,13 @@ class Validations {
 						});
 					}
 				}
+				if (isadmin) {
+					if ((isadmin === true) || (isadmin === false)) {
+						next();
+					} else {
+						res.status(statusCodes.BAD_REQUEST).send({ status: statusCodes.BAD_REQUEST, error: 'Please enter a valid isadmin value' });
+					}
+				}
 			}
 			next();
 		} catch (error) {
@@ -127,7 +136,7 @@ class Validations {
 		}
 
 		if (email) {
-			regex = /\S+@\S+\.\S+/;
+			regex = /(^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-z]+$)/;
 			if (!regex.test(email)) {
 				res.status(statusCodes.BAD_REQUEST).send({
 					status: statusCodes.BAD_REQUEST,
@@ -166,8 +175,8 @@ class Validations {
 			}
 		}
 		if (tenor) {
-			regex = /^([1-9]|1[012])$/;
-			if (!regex.test(tenor)) {
+			regex = /([1-9]|1[012])$/;
+			if ((!regex.test(tenor)) || (tenor === 0)) {
 				res.status(statusCodes.BAD_REQUEST).send({
 					status: statusCodes.BAD_REQUEST,
 					error: 'Takes numbers between 1 - 12'
@@ -200,7 +209,7 @@ class Validations {
 
 	static validateEmail(req, res, next) {
 		const { userEmail } = req.params;
-		const regex = /\S+@\S+\.\S+/;
+		const regex = /(^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-z]+$)/;
 		if (!regex.test(userEmail)) {
 			res.status(statusCodes.BAD_REQUEST).send({
 				status: statusCodes.BAD_REQUEST,
@@ -208,6 +217,27 @@ class Validations {
 			});
 		}
 		next();
+	}
+
+	static validateId(req, res, next) {
+		const { loanId } = req.params;
+		const regex = /([0-9])$/;
+		if (!regex.test(loanId)) {
+			res.status(statusCodes.BAD_REQUEST).send({
+				status: statusCodes.BAD_REQUEST,
+				error: 'LoanId takes numerical values only'
+			});
+		}
+		next();
+	}
+
+	static verifyloanStatus(req, res, next) {
+		const { status } = req.body;
+		if ((status === 'approved') || (status === 'rejected')) {
+			next();
+		} else {
+			res.status(statusCodes.BAD_REQUEST).send({ status: statusCodes.BAD_REQUEST, error: 'Please enter a valid status string' });
+		}
 	}
 }
 export default Validations;

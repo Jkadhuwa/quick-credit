@@ -75,8 +75,8 @@ describe('', () => {
 				.post('/api/v1/loans')
 				.set('authorization', `Bearer ${userToken}`)
 				.send({
-					amount: '150000',
-					tenor: '12'
+					amount: 150000,
+					tenor: 12
 				})
 				.end((err, res) => {
 					expect(res).to.have.status(201);
@@ -121,7 +121,7 @@ describe('', () => {
 				.set('authorization', `Bearer ${userToken}`)
 				.send({
 					amount: '50000',
-					tenor: '18'
+					tenor: 'hugyvtyvn'
 				})
 				.end((err, res) => {
 					expect(res).to.have.status(400);
@@ -150,13 +150,41 @@ describe('', () => {
 					.request(app)
 					.patch('/api/v1/loans/1')
 					.set('authorization', `Bearer ${userToken}`)
-					.send()
+					.send({ status: 'approved' })
 					.end((err, res) => {
-						expect(res).to.have.status(401);
+						expect(res).to.have.status(403);
 						expect(res.body).to.have.property('error');
 						expect(res.body).to.have.property('status');
 					});
 			});
+		});
+
+		it('Should return status 404 if no loan with the specied id is found', () => {
+			chai
+				.request(app)
+				.get('/api/v1/loans/0')
+				.set('authorization', `Bearer ${adminToken}`)
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(404);
+					expect(res.body).to.have.property('error');
+					expect(res.body.error).to.be.equal('Loans not found');
+				});
+		});
+	});
+	describe('Admin should view be able to Approve or Reject loan', () => {
+		it('Should return status 401 with error Wrong token ', () => {
+			chai
+				.request(app)
+				.patch('/api/v1/loans/1')
+				.set('authorization', 'Bearer SBgpaZdIDdWlHUexc6m')
+				.send()
+				.end((err, res) => {
+					expect(res).to.have.status(401);
+					expect(res.body).to.have.property('error');
+					expect(res.body).to.have.property('status');
+					expect(res.body.error).to.be.equal('Invalid Token supplied');
+				});
 		});
 	});
 });
